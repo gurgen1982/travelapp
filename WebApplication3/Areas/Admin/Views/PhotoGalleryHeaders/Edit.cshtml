@@ -1,0 +1,69 @@
+﻿@model Travel.Models.PhotoGalleryHeader
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>PhotoGalleryHeader</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.GalleryID)
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InternalUse, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.InternalUse)
+                            @Html.ValidationMessageFor(model => model.InternalUse, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.GalleryCommonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.GalleryCommonName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.GalleryCommonName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                @foreach (var item in ViewBag.Localized as IEnumerable<Travel.Models.PhotoGalleryLocalizedHeader>)
+                {
+                    <div class="form-group">
+                        @item.Language.Name 
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => item.GalleryName, new { htmlAttributes = new { @class = "form-control", @data_id=item.ID, data_gid = item.GalleryID, @data_lid = item.LangID} })
+                            @Html.ValidationMessageFor(model => item.GalleryName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

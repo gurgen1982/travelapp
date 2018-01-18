@@ -1,0 +1,51 @@
+﻿@model Travel.Models.Video
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Video</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowAsMain)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowAsMain)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowInOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowInOrder)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

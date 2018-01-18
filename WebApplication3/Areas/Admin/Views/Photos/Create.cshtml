@@ -1,0 +1,141 @@
+﻿@model Travel.Models.Photo
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.material.min.css" />
+<link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.material.mobile.min.css" />
+
+@*<form action='@Url.Action("SaveGallery")' method="post" id="frmPhotos">*@
+
+
+<div id="example">
+    <div>
+        <div class="demo-section k-content">
+            <input name="files" id="files" type="file" accept="image/x-png,image/jpeg,image/jpg" />
+            @Html.AntiForgeryToken()
+        </div>
+    </div>
+</div>
+
+<input type="button" value="Save" id="btnSaveGallery" />
+<input class="text-danger" id="badMessage" value="Failed to save titles!" style="display:none"/>
+@*</form>*@
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#files").kendoUpload({
+                async: {
+                    saveUrl: "save",
+                    removeUrl: "remove",
+                    autoUpload: true
+                },
+                validation: {
+                    allowedExtensions: [".jpg", ".jpeg", ".png"]
+                },
+                @*upload: function (e) {
+                    e.data = { galId: @ViewBag.GalleryID, __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()};
+                },*@
+                @*remove: function(e){
+                    e.data = { galId: @ViewBag.GalleryID, __RequestVerificationToken: $("[name='__RequestVerificationToken']").val()};
+                },*@
+                complete: function (e, r, h) {
+
+                },
+                select: function (e) {
+                    var wrapper = this.wrapper;
+
+                    setTimeout(function () {
+                        for (var i = 0; i < e.files.length; i++) {
+                            var fileInfo = e.files[i];
+                            addPreview(fileInfo, wrapper, i);
+                        }
+                    });
+                },
+                success: function (e) {
+                    for (var i = 0; i < e.files.length; i++) {
+                        var file = e.files[i];
+                        var input = '<input type="text" class="image-title" data-filename="' + file.name + '">';
+                        $(".k-upload").find(".k-file[data-uid='" + file.uid + "'] .k-file-name-size-wrapper")
+                          .after(input);
+                    }
+
+                },
+
+            });
+        });
+
+        function addPreview(file, wrapper, i) {
+            var raw = file.rawFile;
+            var reader = new FileReader();
+
+            if (raw) {
+                reader.onloadend = function () {
+                    var preview = $("<img class='image-preview'>").attr("src", this.result);
+
+                    wrapper.find(".k-file[data-uid='" + file.uid + "'] .k-file-extension-wrapper")
+                      .replaceWith(preview);
+
+                };
+
+                reader.readAsDataURL(raw);
+            }
+        }
+
+        $("#btnSaveGallery").click(function () {
+
+            var inputs = $(".k-upload").find("input.image-title");
+            var data = {
+                __RequestVerificationToken: $("[name='__RequestVerificationToken']").val(),
+                files: [],
+            };
+            $.each(inputs, function (i, d) {
+                data.files[i] = {name: $(d).data("filename"), val:  $(d).val() };
+            });
+
+            $.post('@Url.Action("SaveGallery")', data, function (d) {
+                if (d == true) {
+                    window.location.href = '@Url.Action("Details", controllerName: "PhotoGalleryHeaders", routeValues: new { id = ViewBag.GalleryID })';
+                } else {
+                    $("badMessage").show();
+                }
+            });
+
+        });
+    </script>
+}
+<style>
+    .image-preview {
+        position: relative;
+        vertical-align: top;
+        height: 45px;
+    }
+
+    .image-title {
+        height: 20px;
+        width: 70%;
+        max-width: 600px;
+        margin-right: 50px;
+        float: right;
+    }
+
+    .k-file {
+        overflow-y: auto;
+    }
+</style>

@@ -1,0 +1,9 @@
+﻿@model Travel.ViewModels.HomeIndexViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+@Styles.Render("~/Content/index")
+@Html.Partial("_MainCarousel", Model.MainCarouselList)
+@Html.Partial("_MainVideoBox", Model.VideoBox)
+@Html.Partial("_Subscribe", new Travel.Models.Subscription())
+@Html.Partial("_Contact", new Travel.Models.ContactMail())

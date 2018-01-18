@@ -1,0 +1,43 @@
+﻿@model Travel.Models.PhotoGalleryLocalizedHeader
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PhotoGalleryLocalizedHeader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LangID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LangID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GalleryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GalleryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GalleryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GalleryName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

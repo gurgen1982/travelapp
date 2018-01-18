@@ -1,0 +1,90 @@
+﻿body {
+    /*padding: 5px 5px 20px 5px;*/
+    background-color: #f1f1f1 !important;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    /*padding-left: 15px;
+    padding-right: 15px;*/
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+
+
+
+.videobox-container{
+    min-height:300px;
+}
+.video-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 99%;
+    height: 99%;
+}
+.videobox-container > .col-md-6 {
+    padding: 0;
+    margin: 0;
+    min-height:300px;
+}
+
+.videobox-container > .col-md-6 > .col-md-6 {
+    padding: 0;
+    margin: 0;
+    min-height:150px;
+}
+
+.videobox-container .col-md-6 > .video-title {
+    z-index: 1000;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width:99%;
+    background-color: black;
+    opacity: 0.5;
+    padding: 5px;
+    /*border-radius:10px;*/
+    margin-left:auto;
+    margin-right:auto;
+    text-align:center;
+    font-weight:bold;
+}
+.videobox-container .col-md-6 > .video-title:hover {
+    opacity: 1;
+}
+
+.navbar-collapse > .navbar-nav{
+    float:right;
+}
+
+.search-box{
+    width:0;
+    display:none;
+    height:51px;
+    margin-top:1px;
+    font-size:larger;
+    max-width:600px !important;
+}
+
+
+@media screen and (max-width: 992px){
+.videobox-container > .col-md-6 > .col-md-6 {
+    min-height:300px;
+}
+}

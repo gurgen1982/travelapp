@@ -1,0 +1,32 @@
+﻿@model Travel.Models.Subscription
+@using Resources
+
+<div class="container">
+    <div class="container black-box">
+        <h2>@Common.GetBestOffers</h2>
+
+        @using (Ajax.BeginForm("Subscribe", controllerName: "Mails", routeValues: null, ajaxOptions: new AjaxOptions { OnComplete = "index.onSubScribed", OnBegin = "" }, htmlAttributes: new { id = "frmSubscription" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeHolder = Common.Email } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <input type="submit" id="btnSubscribeSumbit" value="@Common.SubScribe" class="btn btn-danger" />
+                        <span id="ajaxSubScriptionMessage"></span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<script>
+    var subscriptionMessage = '@Common.SubscriptionMessage';
+    var failedSubscriptionMessage = '@Common.FailedSubscriptionMessage';
+</script>

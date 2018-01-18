@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Travel.Models.Photo>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Add New", "Create", new { id = ViewBag.GalleryID })
+</p>
+
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <img src="@item.Path" width="300" />
+        @Html.DisplayFor(modelItem => item.Title)
+
+        @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
+        @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })
+    </div>
+}
+

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<Travel.Models.Video>
+
+@foreach (var video in Model)
+{
+    <div class="col-md-6">
+        <div class="video-title">
+            @video.Title
+        </div>
+        <iframe class="video-frame"
+                src="https://www.youtube.com/embed/@(video.Url)?rel=0&amp;controls=0&amp;showinfo=0"
+                frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+}

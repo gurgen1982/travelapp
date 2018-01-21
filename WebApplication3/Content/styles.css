@@ -6,3 +6,76 @@
     .main-carousel-slide-container:hover {
         text-decoration: none;
     }
+
+
+
+
+.photo-index-img {
+    /*width: 300px;
+    height: 300px;*/
+    width: 100%;
+    height: auto;
+    /*margin-top: -28px;*/
+    display: inline;
+}
+
+.photo-index-list {
+     position: relative;
+    display: inline-block;
+    width: 333px;
+    height: 333px;
+    margin: .5px;
+    overflow: hidden;
+}
+
+.photo-img-thumb {
+    width: 280px;
+    height: auto;
+}
+    .photo-index-list:hover .photo-index-actions,
+    .photo-index-list:hover .photo-index-title {
+        display: inline-block;
+    }
+
+.photo-index-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    /*margin-left: 15px;*/
+    width: 100%;
+    background-color: black;
+    color: white;
+    opacity: 0.5;
+    display: none;
+    text-align:center;
+}
+
+    .photo-index-title:hover {
+        opacity: 1;
+    }
+
+.photo-index-actions {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    background-color: black;
+    opacity: 0.5;
+    text-align: center;
+    width: 100%;
+}
+
+    .photo-index-actions:hover {
+        opacity: 1;
+    }
+
+    .photo-index-actions a {
+        text-decoration: none;
+        color: white;
+        margin: auto;
+    }
+
+        .photo-index-actions a:hover {
+            text-decoration: none;
+            font-weight: bold;
+        }

@@ -111,7 +111,7 @@
 
             $.post('@Url.Action("SaveGallery")', data, function (d) {
                 if (d == true) {
-                    window.location.href = '@Url.Action("Details", controllerName: "PhotoGalleryHeaders", routeValues: new { id = ViewBag.GalleryID })';
+                    window.location.href = '@Url.Action("Index", controllerName: "Photos", routeValues: new { id = ViewBag.GalleryID })';
                 } else {
                     $("badMessage").show();
                 }

@@ -1,26 +1,84 @@
-﻿@model IEnumerable<Travel.Models.Photo>
+﻿@model Travel.Models.PhotoGalleryHeader
+
+@*IEnumerable<Travel.Models.Photo>*@
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    //var gallery = ViewBag.Gallery as Travel.Models.PhotoGalleryHeader;
 }
 
-<h2>Index</h2>
+<h2>Gallery <b>@Model.GalleryCommonName</b></h2>
 
 <p>
-    @Html.ActionLink("Add New", "Create", new { id = ViewBag.GalleryID })
+    @Html.ActionLink("Add New", "Create", new { id = Model.GalleryID })
 </p>
+<hr />
 
+<div class="k-content wide">
+    <div id="photoList"></div>
+    <div id="pager" class="k-pager-wrap"></div>
+</div>
+@Html.ActionLink("Back to List", "Index", controllerName: "PhotoGallery")
 
-@foreach (var item in Model)
-{
-    <div class="col-md-3">
-        <img src="@item.Path" width="300" />
-        @Html.DisplayFor(modelItem => item.Title)
+@section Scripts {
+    <script>
+        function MyStyle (w, h) {
+            var leftMargin = 0;
+            var topMargin = 0;
+            var st = "";
+            var coef = w/333;
+            if(w > h){
+                leftMargin = -((w-h)/2)/coef;
+                return "margin-left: "+leftMargin+"px; height:333px; width:auto";
+            }else{
+                topMargin = -((h-w)/2)/coef;
+                return "margin-top: "+topMargin+"px; width:333px; height:auto";
+            } 
+        }
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        @*width: 100%; height: auto; margin-top: -69px; display: inline;*@
+        <div class="photo-index-list">
+            <img src="/Uploads/#= GalleryID #/#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
+            # if( Title != null ) { # <span class="photo-index-title">#:Title#</span># }#
+            <div class="photo-index-actions">
+                <a href="@Url.Action("Edit")/#= PhotoID #">Edit</a> |
+                <a href="@Url.Action("Delete")/#= PhotoID #">Delete</a>
+            </div>
+        </div>
+    </script>
 
-        @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })
-    </div>
+    <script>
+        var dataSource = new kendo.data.DataSource({
+            transport:{
+                read: {
+                    url:'@Url.Action("GetPhotoList")',
+                    dataType: "json",
+                    data: function() {
+                        @*var lst = $("#photoList").data('kendoListView');
+                        if(lst==null || lst == undefined)
+                            return { galleryID: @Model.GalleryID };*@
+
+                        return {
+                            //page: lst.dataSource.page(),
+                            //pageSize: lst.dataSource.pageSize(),
+                            galleryID: @Model.GalleryID,
+                        };
+                    }
+                },
+            },
+            //     data: @@Html.Raw(Json.Encode(Model)),
+            pageSize: 20
+        });
+
+        $("#pager").kendoPager({
+            dataSource: dataSource
+        });
+        $("#photoList").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#template").html()),
+      //      autoBind: true,
+        });
+    </script>
 }
-

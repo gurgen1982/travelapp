@@ -15,5 +15,8 @@ namespace Travel.Models
         public string Path { get; set; }
         [StringLength(maximumLength:100, MinimumLength = 0)]
         public string Title { get; set; }
+        public virtual PhotoGalleryHeader PhotoGallery { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
     }
 }

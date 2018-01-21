@@ -13,7 +13,7 @@ namespace Travel.Areas.Admin.Controllers
 {
     public class PhotosController : Controller
     {
-        private const string UploadedImagePath = "~/Uploads/";
+        public const string UploadedImagePath = "~/Uploads/";
         private DbEntity db = new DbEntity();
 
         public class FileNames
@@ -29,13 +29,33 @@ namespace Travel.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            if (!db.PhotoGalleryHeaders.Any(x => x.GalleryID.Equals(id)))
+            var photoGallery = db.PhotoGalleryHeaders.Find((int)id);
+            if (photoGallery == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.NotFound);
+                return HttpNotFound();
             }
-            ViewBag.GalleryID = id;
-            return View(db.Photos.Where(x => x.GalleryID.Equals(id)).ToList());
+            return View(photoGallery);
+        }
+
+        public ActionResult GetPhotoList(int? galleryID/*, int page=0, int pageSize=20*/)
+        {
+            //var l = db.Photos.Where(x => x.GalleryID.Equals((int)galleryID)).ToList();
+
+            //l.Select(x => new Photo
+            //{
+            //    GalleryID = x.GalleryID,
+            //    Path = x.Path,
+            //    PhotoGallery = null,
+            //    PhotoID = x.PhotoID,
+            //    Title = x.Title
+            //})
+            //  if (page > 0) page--;
+            var galId = (int)galleryID;
+            db.Configuration.ProxyCreationEnabled = false;
+            var l = db.Photos.Where(x => x.GalleryID.Equals(galId)).OrderByDescending(x => x.PhotoID).ToList();
+            //var ll = l;//.Skip(page * pageSize).Take(pageSize);
+
+            return Json(l, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Admin/Photos/Details/5
@@ -110,7 +130,9 @@ namespace Travel.Areas.Admin.Controllers
 
                     file.SaveAs(physicalPath);
 
-                    db.Photos.Add(new Photo { GalleryID = Convert.ToInt32(galId), Path = uid, Title = "" });
+                    System.Drawing.Image img = System.Drawing.Image.FromFile(physicalPath);
+                    db.Photos.Add(new Photo { GalleryID = Convert.ToInt32(galId), Path = uid, Title = "", Width = img.Width, Height = img.Height });
+                    img.Dispose();
                     db.SaveChanges();
                 }
             }
@@ -128,7 +150,7 @@ namespace Travel.Areas.Admin.Controllers
                 TempData.Keep("galid");
                 if (!string.IsNullOrEmpty(uid))
                 {
-                    var physicalPath = Path.Combine(Server.MapPath(UploadedImagePath+ galId), uid);
+                    var physicalPath = Path.Combine(Server.MapPath(UploadedImagePath + galId), uid);
                     try
                     {
                         var photo = db.Photos.First(x => x.Path.Equals(uid));
@@ -223,7 +245,7 @@ namespace Travel.Areas.Admin.Controllers
             {
                 db.Entry(photo).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new { id = photo.GalleryID });
             }
             return View(photo);
         }
@@ -251,7 +273,15 @@ namespace Travel.Areas.Admin.Controllers
             Photo photo = db.Photos.Find(id);
             db.Photos.Remove(photo);
             db.SaveChanges();
-            return RedirectToAction("Index");
+
+            string path = Server.MapPath(UploadedImagePath + photo.GalleryID + "/" + photo.Path);
+
+            try
+            {
+                System.IO.File.Delete(path);
+            }
+            catch { }
+            return RedirectToAction("Index", new { id = photo.GalleryID });
         }
 
         protected override void Dispose(bool disposing)

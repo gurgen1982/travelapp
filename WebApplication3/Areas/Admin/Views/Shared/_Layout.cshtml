@@ -6,6 +6,11 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+
+    <link href="http://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.common-material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.material.min.css" />
+    <link rel="stylesheet" href="https://kendo.cdn.telerik.com/2017.3.1026/styles/kendo.material.mobile.min.css" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -22,9 +27,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Main Carousel", "Index", "MainCarousels", new { area = "Admin" }, new { })</li>
                     <li>@Html.ActionLink("Videos", "Index", "Videos", new { area = "Admin" }, new { })</li>
-                    <li>@Html.ActionLink("Photo Gallery", "Index", "PhotoGalleryHeaders", new { area = "Admin" }, new { })</li>
-                    <li>@Html.ActionLink("Photo Gallery Localized", "Index", "PhotoGalleryLocalizedHeaders", new { area = "Admin" }, new { })</li>
-                    <li>@Html.ActionLink("Photos", "Index", "Photos", new { area = "Admin" }, new { })</li>
+                    <li>@Html.ActionLink("Photo Gallery", "Index", "PhotoGallery", new { area = "Admin" }, new { })</li>
+                    @*<li>@Html.ActionLink("Photo Gallery Localized", "Index", "PhotoGalleryLocalizedHeaders", new { area = "Admin" }, new { })</li>
+                    <li>@Html.ActionLink("Photos", "Index", "Photos", new { area = "Admin" }, new { })</li>*@
                     
                 </ul>
             </div>
@@ -32,6 +37,8 @@
     </div>
 
     <div class="container body-content">
+        <hr />
+        <br />
         @RenderBody()
         <hr />
         <footer>
@@ -41,6 +48,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="http://kendo.cdn.telerik.com/2017.3.1026/js/kendo.all.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

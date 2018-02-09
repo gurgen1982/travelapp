@@ -24,6 +24,7 @@ namespace Travel.Models
         public DbSet<CountryLocalizedDetail> CountryDetails { get; set; }
         public DbSet<TourHeader> TourHeaders { get; set; }
         public DbSet<TourLocalizedDetail> TourDetails { get; set; }
+        public DbSet<TourPhoto> TourPhotos { get; set; }
         public DbSet<PhotoGalleryHeader> PhotoGalleryHeaders { get; set; }
         public DbSet<PhotoGalleryLocalizedHeader> PhotoGalleryLocalizedHeaders { get; set; }
         public DbSet<Photo> Photos { get; set; }

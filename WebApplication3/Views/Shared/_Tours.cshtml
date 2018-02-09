@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Travel.ViewModels.TourViewModel>
+
+@using Travel.Helper
+
+<div class="container">
+
+
+    <hr />
+    <br />
+
+    <div class="owl-carousel owl-theme">
+        @foreach (var tour in Model)
+        {
+            <div class="item">
+                <a href="@Url.Action("details", "Tour", new { id = tour.Tour.TourID })">
+                    <img src="@Images.GetThumbPath(tour.PhotoPath)" width="300" />
+                    <div><h4>@tour.TourDetail.Title</h4></div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

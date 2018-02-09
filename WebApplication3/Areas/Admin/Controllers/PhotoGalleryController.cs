@@ -14,7 +14,7 @@ namespace Travel.Areas.Admin.Controllers
     public class PhotoGalleryController : Controller
     {
         private DbEntity db = new DbEntity();
-
+        
         // GET: Admin/PhotoGalleryHeaders
         public ActionResult Index()
         {
@@ -149,13 +149,14 @@ namespace Travel.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
+            var UploadedImagePath= "~/" + HttpContext.Application["ImagePath"].ToString() + "/";
             PhotoGalleryHeader photoGalleryHeader = db.PhotoGalleryHeaders.Find(id);
 
             db.PhotoGalleryHeaders.Remove(photoGalleryHeader);
             db.SaveChanges();
             try
-            {
-                string path = Server.MapPath(PhotosController.UploadedImagePath + photoGalleryHeader.GalleryID);
+            {/// TODO: is Photo table deleted too ????
+                string path = Server.MapPath(UploadedImagePath + photoGalleryHeader.GalleryID);
                 System.IO.Directory.Delete(path,true);
             }
             catch{ }

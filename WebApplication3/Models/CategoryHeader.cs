@@ -11,7 +11,7 @@ namespace Travel.Models
         [Key]
         public int CategoryID { get; set; }
         public int ParentCategoryID { get; set; }
-        public string CategoryCommonName { get; set; }
+        public string CommonName { get; set; }
 
         public virtual ICollection<CategoryLocalizedDetail> CategoryDetail { get; set; }
         public virtual ICollection<TourHeader> TourHeader { get; set; }

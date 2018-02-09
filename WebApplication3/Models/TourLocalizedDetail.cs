@@ -20,6 +20,9 @@ namespace Travel.Models
         public string SubTitle { get; set; }
         [AllowHtml]
         public string Description { get; set; }
-        
+
+        public virtual Language Language { get; set; }
+        public virtual TourHeader TourHeader { get; set; }
+
     }
 }

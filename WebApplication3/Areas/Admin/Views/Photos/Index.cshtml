@@ -40,7 +40,7 @@
     <script type="text/x-kendo-template" id="template">
         @*width: 100%; height: auto; margin-top: -69px; display: inline;*@
         <div class="photo-index-list">
-            <img src="/Uploads/#= GalleryID #/#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
+            <img src="#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
             # if( Title != null ) { # <span class="photo-index-title">#:Title#</span># }#
             <div class="photo-index-actions">
                 <a href="@Url.Action("Edit")/#= PhotoID #">Edit</a> |

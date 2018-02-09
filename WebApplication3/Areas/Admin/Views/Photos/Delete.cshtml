@@ -1,5 +1,7 @@
 ﻿@model Travel.Models.Photo
 
+@using Travel.Helper
+
 @{
     ViewBag.Title = "Delete";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -12,7 +14,7 @@
     <hr />
     <dl class="dl-horizontal">
         <dd>
-            <img src="/Uploads/@Model.GalleryID/@Model.Path" class="photo-img-thumb" />
+            <img src="@Images.GetThumbFullPath(Model.Path, Model.GalleryID)" class="photo-img-thumb" />
         </dd>
         <dd>
             @Html.DisplayFor(model => model.Title)

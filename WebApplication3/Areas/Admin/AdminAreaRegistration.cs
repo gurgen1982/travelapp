@@ -16,8 +16,8 @@ namespace Travel.Areas.Admin
         {
             context.MapRoute(
                 "Admin_default",
-                "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                "Admin/{controller}/{action}/{id}/{id2}/{id3}",
+                new { action = "Index", id = UrlParameter.Optional, id2=UrlParameter.Optional, id3 = UrlParameter.Optional }
             );
         }
     }

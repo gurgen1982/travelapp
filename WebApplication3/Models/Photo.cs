@@ -1,8 +1,6 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace Travel.Models
 {
@@ -18,5 +16,7 @@ namespace Travel.Models
         public virtual PhotoGalleryHeader PhotoGallery { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
+
+        public ICollection<TourPhoto> TourPhoto { get; set; }
     }
 }

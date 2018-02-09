@@ -1,0 +1,72 @@
+﻿@model Travel.Models.TourHeader
+@using Travel.Helper
+@{
+    ViewBag.Title = "Details";
+    var LangID = (int)ViewBag.LangID;
+    var tourDetail = Model.TourDetail.Where(x => x.LangID == LangID).First();
+}
+<div class="container">
+
+    <h2>Details</h2>
+
+    <div>
+        <h2>
+            @Html.DisplayFor(model => model.Country.Countries.Where(x => x.LangID == LangID).First().CountryName) / @Html.DisplayFor(model => model.Category.CategoryDetail.Where(x => x.LangID == LangID).First().CategoryName)
+        </h2>
+        <h3>
+            @Html.DisplayFor(model => tourDetail.Title)
+        </h3>
+        <h4>
+            @Html.DisplayFor(model => tourDetail.SubTitle)
+            ( @Html.DisplayFor(model => model.Price) )
+        </h4>
+        <hr />
+        <p>
+            @Html.Raw(tourDetail.Description)
+        </p>
+    </div>
+
+
+    <div class="demo-gallery">
+        <ul id="lightgallery" class="list-unstyled row">
+            @foreach (var photo in Model.TourPhoto)
+            {
+                var path =Images.GetThumbFullPath( photo.Photo);
+
+                <li class="col-xs-6 col-sm-4 col-md-3"
+                    data-responsive="@path 375, @path 480, @path 800"
+                    data-src="@Images.GetPath( photo.Photo.Path, photo.Photo.GalleryID)"
+                    data-sub-html="<h4>@photo.Photo.Title</h4>"
+                    data-pinterest-text="Pin it1"
+                    data-tweet-text="share on twitter 1">
+                    <a href="">
+                        <img class="img-responsive" src="@path" alt="Thumb-1">
+                    </a>
+                </li>
+            }
+        
+        </ul>
+    </div>
+
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+</div>
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+
+
+    <script>
+        lightGallery(document.getElementById('lightgallery'));
+    </script>
+
+}

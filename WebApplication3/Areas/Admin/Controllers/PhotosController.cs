@@ -7,19 +7,28 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
     public class PhotosController : Controller
     {
-        public const string UploadedImagePath = "~/Uploads/";
+        private string UploadedImagePath { get; set; }
+        private string ImageThumbPrefix { get; set; }
         private DbEntity db = new DbEntity();
 
         public class FileNames
         {
             public string name { get; set; }
             public string val { get; set; }
+        }
+
+        protected override void Initialize(RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+            UploadedImagePath = "~/" + HttpContext.Application["ImagePath"].ToString() + "/";
+            ImageThumbPrefix = HttpContext.Application["ImageThumb"].ToString();
         }
 
         // GET: Admin/Photos
@@ -53,6 +62,10 @@ namespace Travel.Areas.Admin.Controllers
             var galId = (int)galleryID;
             db.Configuration.ProxyCreationEnabled = false;
             var l = db.Photos.Where(x => x.GalleryID.Equals(galId)).OrderByDescending(x => x.PhotoID).ToList();
+            foreach (var item in l)
+            {
+                item.Path = Helper.Images.GetThumbFullPath(item);
+            }
             //var ll = l;//.Skip(page * pageSize).Take(pageSize);
 
             return Json(l, JsonRequestBehavior.AllowGet);
@@ -76,6 +89,7 @@ namespace Travel.Areas.Admin.Controllers
         // GET: Admin/Photos/Create
         public ActionResult Create(int? id)
         {
+            TempData.Clear();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -127,12 +141,24 @@ namespace Travel.Areas.Admin.Controllers
                     TempData.Keep();
 
                     var physicalPath = Path.Combine(path, uid);
-
+                    var thumbPhysPath = Path.Combine(path, ImageThumbPrefix + uid);
                     file.SaveAs(physicalPath);
 
-                    System.Drawing.Image img = System.Drawing.Image.FromFile(physicalPath);
-                    db.Photos.Add(new Photo { GalleryID = Convert.ToInt32(galId), Path = uid, Title = "", Width = img.Width, Height = img.Height });
-                    img.Dispose();
+                    //System.Drawing.Image img = System.Drawing.Image.FromFile(physicalPath);
+                    //db.Photos.Add(new Photo { GalleryID = Convert.ToInt32(galId), Path = uid, Title = "", Width = img.Width, Height = img.Height });
+                    //var coef = 400 / img.Width;
+
+                    //var thumb = img.GetThumbnailImage(img.Width * coef, img.Height * coef, null, IntPtr.Zero);
+                    //thumb.Save(thumbPhysPath);
+                    //img.Dispose();
+
+                    var imageOrigin = new ImageResizer.ImageJob(file, null);
+                    imageOrigin.Build();
+                    var coef = 400 / (float)imageOrigin.SourceWidth;
+                    var imageThumb = new ImageResizer.ImageJob(file, thumbPhysPath, new ImageResizer.Instructions($"width={coef * imageOrigin.SourceWidth};height={coef * imageOrigin.SourceHeight};format=jpg;mode=max"));
+                    imageThumb.CreateParentDirectory = true;
+                    imageThumb.Build();
+                    db.Photos.Add(new Photo { GalleryID = Convert.ToInt32(galId), Path = uid, Title = "", Width = imageOrigin.SourceWidth.Value, Height = imageOrigin.SourceHeight.Value });
                     db.SaveChanges();
                 }
             }
@@ -210,7 +236,7 @@ namespace Travel.Areas.Admin.Controllers
                             db.SaveChanges();
                         }
                     }
-                    catch
+                    catch (Exception ex)
                     {
                         return Json(false, JsonRequestBehavior.AllowGet);
                     }
@@ -243,7 +269,9 @@ namespace Travel.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(photo).State = EntityState.Modified;
+                var dbPhoto = db.Photos.Find(photo.PhotoID);
+                dbPhoto.Title = photo.Title;
+                db.Entry(dbPhoto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index", new { id = photo.GalleryID });
             }
@@ -270,18 +298,18 @@ namespace Travel.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Photo photo = db.Photos.Find(id);
-            db.Photos.Remove(photo);
-            db.SaveChanges();
-
-            string path = Server.MapPath(UploadedImagePath + photo.GalleryID + "/" + photo.Path);
-
             try
             {
-                System.IO.File.Delete(path);
+                Photo photo = db.Photos.Find(id);
+                db.Photos.Remove(photo);
+                db.SaveChanges();
+
+                System.IO.File.Delete(Server.MapPath(Helper.Images.GetPath(photo.Path, photo.GalleryID)));
+                System.IO.File.Delete(Server.MapPath(Helper.Images.GetThumbFullPath(photo.Path, photo.GalleryID)));
+                return RedirectToAction("Index", new { id = photo.GalleryID });
             }
-            catch { }
-            return RedirectToAction("Index", new { id = photo.GalleryID });
+            catch(Exception ex) { }
+            return RedirectToAction("Delete", new { id = id });
         }
 
         protected override void Dispose(bool disposing)

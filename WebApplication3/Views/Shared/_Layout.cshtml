@@ -6,6 +6,10 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+    
+    <link href="~/Externals/owl/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Externals/owl/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -50,6 +54,8 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/layout")
+    
+    <script src="~/Externals/owl/owlcarousel/owl.carousel.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

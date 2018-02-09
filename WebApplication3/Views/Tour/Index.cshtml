@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Travel.ViewModels.TourViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    var LangID = (int)ViewBag.LangID;
+}
+
+<hr />
+<br />
+<h2>Index</h2>
+
+
+
+
+@Html.Partial("_Tours", Model)
+
+@section scripts{
+    <script>
+        $(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            })
+        })
+</script>
+    }
+@*@{return;}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.CommonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country.CommonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Category.CategoryDetail.Where(x=>x.LangID == LangID).First().CategoryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country.Countries.Where(x => x.LangID == LangID).First().CountryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TourDetail.Where(x => x.LangID == LangID).First().Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.TourID })
+        </td>
+    </tr>
+}
+
+</table>*@

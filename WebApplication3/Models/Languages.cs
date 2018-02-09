@@ -11,6 +11,7 @@ namespace Travel.Models
         [Key]
         public short LangID { get; set; }
         public string Name { get; set; }
+        public string CommonName { get; set; }
         public string Locale { get; set; }
 
         public virtual ICollection<TourLocalizedDetail> TourDetails { get; set; }

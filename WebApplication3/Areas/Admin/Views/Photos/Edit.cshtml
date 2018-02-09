@@ -1,5 +1,7 @@
 ﻿@model Travel.Models.Photo
 
+@using Travel.Helper;
+
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
@@ -21,7 +23,7 @@
         @Html.HiddenFor(model => model.Path)
 
         <div class="form-group">
-            <img src="/Uploads/@Model.GalleryID/@Model.Path" class="photo-img-thumb" />
+            <img src="@Images.GetThumbFullPath(Model.Path, Model.GalleryID)" class="photo-img-thumb" />
             @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
         </div>

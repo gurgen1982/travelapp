@@ -10,7 +10,7 @@ namespace Travel.Models
     {
         [Key]
         public int CountryID { get; set; }
-        public string CountryCommonName { get; set; }
+        public string CommonName { get; set; }
         
         public virtual ICollection<CountryLocalizedDetail> Countries { get; set; }
         public virtual ICollection<TourHeader> TourHeader { get; set; }

@@ -21,13 +21,15 @@ namespace Travel
 
             //Database.SetInitializer(new DAL.StudentInitializer());
 
-            Application.Add("SupportedLanguages", new string[] { "hy", "en" });
+            Application["SupportedLanguages"] = new string[] { "hy", "en" };
+            Application["ImagePath"] = "uploads";
+            Application["ImageThumb"] = "thumb_";
         }
 
         protected void Application_Error()
         {
             var ex = Server.GetLastError();
-            Response.Redirect("/");
+          //  Response.Redirect("/");
         }
     }
 }

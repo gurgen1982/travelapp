@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 
@@ -14,10 +15,16 @@ namespace Travel.Models
         [Required]
         public int CategoryID { get; set; }
         [Required]
-        [DataType(DataType.Currency)]
+        [StringLength(maximumLength: 255, MinimumLength = 5)]
+        public string CommonName { get; set; }
+        [Required]
+        [DisplayName("Price (AMD)")]
         public decimal Price { get; set; }
+        public virtual CountryHeader Country { get; set; }
+        public virtual CategoryHeader Category { get; set; }
 
         public virtual ICollection<TourLocalizedDetail> TourDetail { get; set; }
-        
+
+        public virtual ICollection<TourPhoto> TourPhoto { get; set; }
     }
 }

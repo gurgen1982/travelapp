@@ -3,7 +3,48 @@
     ViewBag.Title = "Home Page";
 }
 @Styles.Render("~/Content/index")
+
+
 @Html.Partial("_MainCarousel", Model.MainCarouselList)
+@Html.Partial("_Tours", Model.Tours)
+@Html.Partial("_PhotoGallery", Model.PhotoGallery)
 @Html.Partial("_MainVideoBox", Model.VideoBox)
 @Html.Partial("_Subscribe", new Travel.Models.Subscription())
 @Html.Partial("_Contact", new Travel.Models.ContactMail())
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+
+
+    <script>
+        lightGallery(document.getElementById('lightgallery'));
+    </script>
+
+    <script>
+        $(function () {
+            $('.owl-carousel').owlCarousel({
+                loop: false,
+                margin: 10,
+                nav: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 3
+                    },
+                    1000: {
+                        items: 5
+                    }
+                }
+            })
+        })
+    </script>
+}

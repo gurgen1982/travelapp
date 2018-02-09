@@ -1,31 +1,7 @@
 ﻿@model IEnumerable<Travel.Models.Video>
 
 <div class="container videobox-container">
-    @*<div class="col-md-6">
-        @{
-            var firstVideo = Model.First();
-        }
-        <div class="video-title">
-            @firstVideo.Title
-        </div>
-        <iframe class="video-frame"
-                src="https://www.youtube.com/embed/@(firstVideo.Url)?rel=0&amp;controls=0&amp;showinfo=0"
-                frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-    </div>
-    
-    <div class="col-md-6">
-        @foreach (var video in Model.Skip(1).Take(4))
-        {
-            <div class="col-md-6">
-                <div class="video-title">
-                    @video.Title
-                </div>
-                <iframe class="video-frame"
-                        src="https://www.youtube.com/embed/@(video.Url)?rel=0&amp;controls=0&amp;showinfo=0"
-                        frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-            </div>
-        }
-    </div>*@
+   
     @Html.Partial("_VideoBox", Model)
     @Html.ActionLink(Resources.Common.FindMoreVideos, "Index", "VideoGallery", null, htmlAttributes: new { @class = "btn btn-info" })
 </div>

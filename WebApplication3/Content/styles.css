@@ -7,9 +7,6 @@
         text-decoration: none;
     }
 
-
-
-
 .photo-index-img {
     /*width: 300px;
     height: 300px;*/
@@ -19,8 +16,40 @@
     display: inline;
 }
 
+.tour-photo-list {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    height: 200px;
+    margin: .5px;
+    overflow: hidden;
+}
+
+    .tour-photo-list:hover .photo-index-actions,
+    .tour-photo-list:hover .tour-photo-title {
+        display: inline-block;
+    }
+
+.tour-photo-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    opacity: 0.5;
+    display: none;
+    text-align: center;
+    font-size: xx-small;
+}
+
+    .tour-photo-title:hover {
+        opacity: 1;
+    }
+
 .photo-index-list {
-     position: relative;
+    position: relative;
     display: inline-block;
     width: 333px;
     height: 333px;
@@ -28,14 +57,17 @@
     overflow: hidden;
 }
 
+
+
 .photo-img-thumb {
     width: 280px;
     height: auto;
 }
-    .photo-index-list:hover .photo-index-actions,
-    .photo-index-list:hover .photo-index-title {
-        display: inline-block;
-    }
+
+.photo-index-list:hover .photo-index-actions,
+.photo-index-list:hover .photo-index-title {
+    display: inline-block;
+}
 
 .photo-index-title {
     position: absolute;
@@ -48,7 +80,7 @@
     color: white;
     opacity: 0.5;
     display: none;
-    text-align:center;
+    text-align: center;
 }
 
     .photo-index-title:hover {
@@ -79,3 +111,29 @@
             text-decoration: none;
             font-weight: bold;
         }
+
+
+.gallery-tree-folder .k-sprite {
+    background-image: url("/Images/coloricons-sprite.png");
+}
+
+
+.root-folder {
+    background-position: 0 0;
+}
+
+.folder {
+    background-position: 0 -16px;
+}
+
+.pdf {
+    background-position: 0 -32px;
+}
+
+.html {
+    background-position: 0 -48px;
+}
+
+.image {
+    background-position: 0 -64px;
+}

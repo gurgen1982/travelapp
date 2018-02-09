@@ -1,0 +1,256 @@
+﻿@model Travel.Models.TourHeader
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <h4>TourHeader</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-horizontal">
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.TourID)
+                @Html.Hidden("PhotoList")
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CountryID", null, "-select country-", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("CategoryID", null, "-select category-", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CommonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CommonName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.CommonName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md=4">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @if (Model.TourID > 0)
+                    {
+                    <ul class="nav navbar-nav">
+                        @if (Model.TourDetail != null && Model.TourDetail.Count > 0)
+                            {
+                                foreach (var item in Model?.TourDetail)
+                                {
+                            <li class="btn-success">
+                                @Html.ActionLink(item.Language.Name, "ItemDetail", new { id = item.ID, id2 = 0, id3 = 0 })
+                            </li>
+                                }
+                            }
+                        @foreach (var lang in ViewBag.Languages as IEnumerable<Travel.Models.Language>)
+                            {
+                                if (Model.TourDetail == null || !Model.TourDetail.Any(x => x.LangID.Equals(lang.LangID)))
+                                {
+                            <li class="btn-default">
+                                @Html.ActionLink(lang.Name, "ItemDetail", new { id = 0, id2 = lang.LangID, id3 = Model.TourID })
+                            </li>
+                                }
+                            }
+
+                    </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<h4>Tour Photo Gallery</h4>
+<hr />
+@*@if (Model.TourID > 0)
+{*@
+    <div class="row">
+        <div class="k-content wide">
+            <div id="tourPhotoList"></div>
+            <div id="tourPager" class="k-pager-wrap"></div>
+        </div>
+    </div>
+
+    <h4>Browse Photo Galleries</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="demo-section k-content">
+                <ul id="galleryTree" class="gallery-tree-folder">
+                    @foreach (var item in ViewBag.Gallery as IEnumerable<Travel.Models.PhotoGalleryHeader>)
+            {
+                <li data-expanded="true" data-id="@item.GalleryID">
+                    <span class="k-sprite folder"></span>
+                    @item.GalleryCommonName
+                </li>
+
+            }
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-9">
+            <div class="k-content wide">
+                <div id="photoList"></div>
+                <div id="pager" class="k-pager-wrap"></div>
+            </div>
+        </div>
+    </div>
+    @*}*@
+<hr />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var galId = 0;
+        $(document).ready(function () {
+            $("#galleryTree").kendoTreeView({
+                select: function (e) {
+                    galId = $(e.node).data("id");
+                    dataSource.read();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function MyStyle(w, h) {
+            var leftMargin = 0;
+            var topMargin = 0;
+            var st = "";
+            var coef = w / 200;
+            if (w > h) {
+                leftMargin = -((w - h) / 2) / coef;
+                return "margin-left: " + leftMargin + "px; height:200px; width:auto";
+            } else {
+                topMargin = -((h - w) / 2) / coef;
+                return "margin-top: " + topMargin + "px; width:200px; height:auto";
+            }
+        }
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="tour-photo-list">
+            <img src="#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
+            # if( Title != null ) { # <span class="tour-photo-title">#:Title#</span># }#
+        </div>
+    </script>
+
+    <script>
+
+        ///// common
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetPhotoList", controllerName: "Photos")',
+                    dataType: "json",
+                    data: function () {
+                        return {
+                            galleryID: galId,
+                        };
+                    }
+                },
+            },
+            pageSize: 20
+        });
+
+        $("#pager").kendoPager({
+            dataSource: dataSource
+        });
+        $("#photoList").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#template").html()),
+            //      autoBind: true,
+            selectable: true,
+        });
+
+        $("#photoList").on("dblclick", ".tour-photo-list", function () {
+            var list = $("#photoList").data('kendoListView');
+            var index = list.select().index();
+            var selectedIem = list.dataSource.view()[index];
+            tourDataSource.add(selectedIem);
+            var path = "/uploads/" + selectedIem.GalleryID + "/" + selectedIem.Path;
+            console.log(path);
+        });
+        //// end of common
+
+
+        /// tour related list
+        var tourDataSource = new kendo.data.DataSource({
+            data: @(Html.Raw( Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Photos))),
+            @*transport: {
+                read: {
+                    url: '@Url.Action("GetPhotoList", controllerName: "Photos")',
+                    dataType: "json",
+                    data: function () {
+                        return {
+                            galleryID: galId,
+                        };
+                    }
+                },
+            },*@
+            pageSize: 20
+        });
+
+        $("#tourPager").kendoPager({
+            dataSource: tourDataSource
+        });
+        $("#tourPhotoList").kendoListView({
+            dataSource: tourDataSource,
+            template: kendo.template($("#template").html()),
+            //      autoBind: true,
+            selectable: true,
+        });
+        $("#tourPhotoList").on("dblclick", ".tour-photo-list", function () {
+            var list = $("#tourPhotoList").data('kendoListView');
+            var index = list.select().index();
+            var selectedIem = list.dataSource.view()[index];
+            list.dataSource.remove(selectedIem);
+            /// remove from datasource.....
+        });
+        /// end of tour related list
+
+        $('form').on('submit', function(){
+            var list = $("#tourPhotoList").data('kendoListView');
+            var index = list.select().index();
+            if(index==-1) index=0;
+            var selectedIem = tourDataSource.view()[index];
+            if(selectedIem!= undefined){
+                selectedIem["Width"] = 1; // temp use ov prop
+            }
+            $("#PhotoList").val(JSON.stringify( tourDataSource.data()));
+        });
+    </script>
+}

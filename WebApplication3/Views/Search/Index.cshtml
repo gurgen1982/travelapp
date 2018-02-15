@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Travel.Models.TourLocalizedDetail>
+
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .highlight {
+        background-color: yellow;
+    }
+</style>
+
+<div class="container">
+    <hr />
+    <br />
+    <h2>Searching</h2>
+    @using (Html.BeginForm("Index", "Search", FormMethod.Get))
+    {
+        @Html.TextBox("q", ViewBag.Search as string, new { @class = "", @placeholder = "Search" })
+        <input type="submit" style="display:none" />
+    }
+
+    @if ((bool)ViewBag.Empty == true)
+    {
+        <span>Empty search condition</span>
+    }
+    else
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Language.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TourHeader.CommonName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SubTitle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Language.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TourHeader.CommonName)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubTitle)
+                    </td>
+                    <td>
+                        @Html.Raw(item.Description)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</div>
+
+@section scripts{
+    
+}

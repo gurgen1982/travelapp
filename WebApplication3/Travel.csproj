@@ -148,6 +148,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\VideoGalleryController.cs" />
     <Compile Include="DAL\StudentInitializer.cs" />
@@ -1169,6 +1170,7 @@
     <Content Include="Views\Shared\_Tours.cshtml" />
     <Content Include="Views\Tour\Details.cshtml" />
     <Content Include="Views\Tour\Index.cshtml" />
+    <Content Include="Views\Search\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

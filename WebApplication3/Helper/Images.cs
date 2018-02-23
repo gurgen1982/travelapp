@@ -16,6 +16,7 @@ namespace Travel.Helper
 
         public static string GetThumbFullPath(Models.Photo photo)
         {
+            if (photo == null) return "";
             return GetThumbFullPath(photo.Path, photo.GalleryID);
         }
         public static string GetThumbFullPath(string filePath, int galId)

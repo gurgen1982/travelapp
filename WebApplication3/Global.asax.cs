@@ -20,8 +20,10 @@ namespace Travel
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             //Database.SetInitializer(new DAL.StudentInitializer());
+            var db = new DbEntity();
+            var languages = db.Languages.ToList();
 
-            Application["SupportedLanguages"] = new string[] { "hy", "en" };
+            Application["SupportedLanguages"] = languages;// new string[] { "hy", "en" };
             Application["ImagePath"] = "uploads";
             Application["ImageThumb"] = "thumb_";
         }

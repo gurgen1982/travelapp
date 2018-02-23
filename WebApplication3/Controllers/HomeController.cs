@@ -54,5 +54,9 @@ namespace Travel.Controllers
             return View(model);
         }
 
+        public ActionResult About()
+        {
+            return View();
+        }
     }
 }

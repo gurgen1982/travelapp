@@ -28,7 +28,9 @@ namespace Travel.Models
         public DbSet<PhotoGalleryHeader> PhotoGalleryHeaders { get; set; }
         public DbSet<PhotoGalleryLocalizedHeader> PhotoGalleryLocalizedHeaders { get; set; }
         public DbSet<Photo> Photos { get; set; }
-        
+        public DbSet<NewsHeader> NewsHeaders { get; set; }
+        public DbSet<NewsLocalizedDetail> NewsDetails { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

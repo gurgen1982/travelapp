@@ -1,0 +1,28 @@
+﻿@model Travel.Models.NewsLocalizedDetail
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="container">
+
+    <h2>Details</h2>
+
+    <div>
+        <h3>
+            @Html.DisplayFor(model => model.Title)
+        </h3>
+        <hr />
+        <img src="@ViewBag.MainPhotoPath" width="300" />
+
+        <p>
+            @Html.Raw(Model.Description)
+        </p>
+    </div>
+    <p>
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+
+</div>
+
+@section scripts{
+}

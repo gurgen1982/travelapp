@@ -67,11 +67,15 @@ namespace Travel.Controllers
             {
                 return HttpNotFound();
             }
-
+            var lang = RouteData.Values["lang"] as string;
+            if (tourHeader.TourDetail.FirstOrDefault(x => x.Language.Locale.Equals(lang)) == null)
+            {
+                return Redirect("/");
+            }
             SetViewBag();
             return View(tourHeader);
         }
-        
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -34,31 +34,8 @@ namespace Travel.Areas.Admin.Controllers
             }
             return View(tourHeader);
         }
-
-        //// GET: Admin/Tours/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: Admin/Tours/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "TourID,CountryID,CategoryID,Price")] TourHeader tourHeader)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.TourHeaders.Add(tourHeader);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    return View(tourHeader);
-        //}
-
-        // GET: Admin/Tours/Edit/5
+        
+        // GET: Admin/Tours/Item/5
         public ActionResult Item(int? id)
         {
             if (id == null)
@@ -72,17 +49,11 @@ namespace Travel.Areas.Admin.Controllers
                 return HttpNotFound();
             }
             SetViewBagForItem(tourHeader);
-
-            //db.TourHeaders.Where(x=>x.TourID.Equals(id)).Include(x=>x.ga)
-            //foreach (var photo in tourHeader.TourPhoto)
-            //{
-
-            //    photo.TourHeader = null;
-            //}
+            
             return View(tourHeader);
         }
 
-        // POST: Admin/Tours/Edit/5
+        // POST: Admin/Tours/Item/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]

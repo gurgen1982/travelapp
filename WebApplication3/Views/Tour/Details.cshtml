@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Details";
     var LangID = (int)ViewBag.LangID;
-    var tourDetail = Model.TourDetail.Where(x => x.LangID == LangID).First();
+    var tourDetail = Model.TourDetail.FirstOrDefault(x => x.LangID == LangID);
+    
 }
 <div class="container">
 

@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Մեր Մասին</value>
+    <comment>About Us</comment>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Երևան, Հայաստան, Հերացի 18, 0025</value>
     <comment>Yerevan, Armenia, Heratsi 18, 0025</comment>

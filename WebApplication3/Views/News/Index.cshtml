@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Travel.ViewModels.NewsViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+<hr />
+<div class="container">
+
+    <h2>Index</h2>
+
+    <table class="table">
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details", new { id= item.News.NewsID })">
+                        @Html.DisplayFor(modelItem => item.News.CommonName)
+                        <img src="@item.PhotoPath" width="100" />
+                    </a>
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</div>

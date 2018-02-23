@@ -1,0 +1,28 @@
+﻿@model Travel.Models.NewsHeader
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>NewsHeader</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonName)
+        </dd>
+        <dd>
+            <img src="@ViewBag.MainPhotoPath" width="300" />
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Item", new { id = Model.NewsID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

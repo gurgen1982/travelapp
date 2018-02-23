@@ -1,6 +1,6 @@
 ﻿$(function () {
     $(".search-box-btn").click(function () {
-        var wdth = window.innerWidth > 600 ? 600 : window.innerWidth-30;
+        var wdth = window.innerWidth > 600 ? 600 : window.innerWidth - 30;
         $(".search-box").text("");
         $(".search-box").show();
         $(".search-box").animate({ width: wdth }, 800);
@@ -15,3 +15,8 @@
         });
     });
 });
+
+var reloadPage = function (data) {
+    window.location = data.responseJSON;
+//    window.location.reload();
+};

@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainCarouselsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NewsListController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryLocalizedHeadersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotosController.cs" />
@@ -146,8 +147,10 @@
     <Compile Include="Areas\Admin\Models\PhotoGalleryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PhotoViewModel.cs" />
     <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\VideoGalleryController.cs" />
@@ -244,6 +247,18 @@
     <Compile Include="Migrations\201802040958395_header_rel1.Designer.cs">
       <DependentUpon>201802040958395_header_rel1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802161945361_news.cs" />
+    <Compile Include="Migrations\201802161945361_news.Designer.cs">
+      <DependentUpon>201802161945361_news.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802162009271_lang_cult.cs" />
+    <Compile Include="Migrations\201802162009271_lang_cult.Designer.cs">
+      <DependentUpon>201802162009271_lang_cult.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802180021047_news_photo.cs" />
+    <Compile Include="Migrations\201802180021047_news_photo.Designer.cs">
+      <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CategoryLocalizedDetail.cs" />
     <Compile Include="Models\CategoryHeader.cs" />
@@ -257,12 +272,15 @@
     <Compile Include="Models\Photo.cs" />
     <Compile Include="Models\SendContactMail.cs" />
     <Compile Include="Models\Subscription.cs" />
+    <Compile Include="Models\NewsHeader.cs" />
+    <Compile Include="Models\NewsLocalizedDetail.cs" />
     <Compile Include="Models\TourLocalizedDetail.cs" />
     <Compile Include="Models\TourHeader.cs" />
     <Compile Include="Models\TourPhoto.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
+    <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\TourViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -389,6 +407,12 @@
     <Content Include="Areas\Admin\Views\Tours\ItemDetail.cshtml" />
     <Content Include="Externals\owl\owlcarousel\README.md" />
     <Content Include="Externals\owl\vendors\jquery.min.map" />
+    <Content Include="Areas\Admin\Views\NewsList\z-Create.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsList\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsList\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsList\Item.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsList\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NewsList\ItemDetail.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\IndexBehaviour.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1171,11 +1195,17 @@
     <Content Include="Views\Tour\Details.cshtml" />
     <Content Include="Views\Tour\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Shared\_aboutEng.cshtml" />
+    <Content Include="Views\Shared\_aboutHy.cshtml" />
+    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\Enum\" />
     <Folder Include="Views\Image\" />
+    <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1254,6 +1284,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802040958395_header_rel1.resx">
       <DependentUpon>201802040958395_header_rel1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802161945361_news.resx">
+      <DependentUpon>201802161945361_news.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802162009271_lang_cult.resx">
+      <DependentUpon>201802162009271_lang_cult.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802180021047_news_photo.resx">
+      <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

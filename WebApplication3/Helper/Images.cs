@@ -27,6 +27,23 @@ namespace Travel.Helper
         {
             return "/" + HttpContext.Current.Application["ImagePath"].ToString() + "/" + galId + "/" + filePath;
         }
-
+        public static string GetStyle(Models.Photo photo, int width)
+        {
+            var w = photo.Width;
+            var h = photo.Height;
+            var leftMargin = 0;
+            var topMargin = 0;
+            var coef = w / width;
+            if (w > h)
+            {
+                leftMargin = -((w - h) / 2) / coef;
+                return $"margin-left: {leftMargin}px; height:{width}px; width:auto";
+            }
+            else
+            {
+                topMargin = -((h - w) / 2) / coef;
+                return $"margin-top: {topMargin} px; width:{width}px; height:auto";
+            }
+        }
     }
 }

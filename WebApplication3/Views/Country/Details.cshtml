@@ -1,0 +1,24 @@
+﻿@model Travel.Models.CountryHeader
+
+@{
+    ViewBag.Title = "Details";
+    var detail = Model.Countries.First(x => x.LangID == ViewBag.LangID);
+    ViewBag.Path = Travel.Helper.Images.GetThumbFullPath(Model.Photo);
+}
+<div class="container">
+    <div class="country-detail-title">
+        @detail.CountryName
+    </div>
+    <div class="country-detail-desc">
+        <p>
+            @Html.Raw(detail.Description)
+        </p>
+    </div>
+</div>
+<div class="country-tour-list">
+    @Html.Action("TourList", "Tour", new { countryId = Model.CountryID })
+</div>
+<div class="theme-button-container">
+    @Html.ActionLink("VIEW ALL TOURS", "index", controllerName: "tour", routeValues: null,
+            htmlAttributes: new { @class = "theme-button" })
+</div>

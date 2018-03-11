@@ -38,6 +38,7 @@ namespace Travel.Areas.Admin.Controllers
         // GET: Admin/MainCarousels/Create
         public ActionResult Create()
         {
+            SetViewBag();
             return View();
         }
 
@@ -54,13 +55,14 @@ namespace Travel.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
+            SetViewBag();
             return View(mainCarousel);
         }
 
         // GET: Admin/MainCarousels/Edit/5
         public ActionResult Edit(int? id)
         {
+            SetViewBag();
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -86,6 +88,7 @@ namespace Travel.Areas.Admin.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            SetViewBag();
             return View(mainCarousel);
         }
 
@@ -122,6 +125,10 @@ namespace Travel.Areas.Admin.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+        private void SetViewBag()
+        {
+            ViewBag.LangID = new SelectList(db.Languages, "LangID", "Name");
         }
     }
 }

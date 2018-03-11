@@ -1,0 +1,82 @@
+﻿@model Travel.Models.Request
+@using System.Globalization
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Request</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TourID)
+        </dt>
+
+        <dd>
+            @ViewBag.TourCommonName
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OtherContacts)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OtherContacts)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CountOfTourist)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CountOfTourist)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TourDate)
+        </dt>
+
+        <dd>
+            @(Model.TourDate.Value.ToString("dd MMMM yyyy", CultureInfo.InvariantCulture))
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

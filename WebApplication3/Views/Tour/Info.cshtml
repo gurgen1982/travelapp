@@ -1,0 +1,155 @@
+﻿@model Travel.Models.TourHeader
+@using Travel.Helper
+
+@{
+    var LangID = (int)ViewBag.LangID;
+    var tourDetail = Model.TourDetail.FirstOrDefault(x => x.LangID == LangID);
+    ViewBag.Title = tourDetail.Title;
+}
+
+<link href="http://kendo.cdn.telerik.com/2017.3.913/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://kendo.cdn.telerik.com/2017.3.913/styles/kendo.nova.min.css" rel="stylesheet" />
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col-md-9">
+                    <h4 class="tour-predescription">
+                        @Html.DisplayFor(model => model.Country.Countries.Where(x => x.LangID == LangID).First().CountryName)
+                        | @Html.DisplayFor(model => model.Category.CategoryDetail.Where(x => x.LangID == LangID).First().CategoryName)
+                        | @Html.DisplayFor(model => tourDetail.SubTitle)
+                    </h4>
+                    <h2 class="tour-title">
+                        @Html.DisplayFor(model => tourDetail.Title)
+                    </h2>
+                </div>
+                <div class="col-md-3">
+                    <h3 class="tour-price theme-color">
+                        $@Html.DisplayFor(model => model.Price)
+                    </h3>
+                    <div class="theme-button-container">
+                        <a class = "theme-button" id = "requestTour">REQUEST NOW</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row tour-body">
+                <p>
+                    @Html.Raw(tourDetail.Description)
+                </p>
+            </div>
+            <div class="row theme-button-container">
+                <a class="theme-button" id="requestTourBottom">REQUEST NOW</a>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <ul id="lightgallery" class="list-unstyled row">
+                @foreach (var photo in Model.TourPhoto)
+                {
+                    var path = Images.GetPath(photo.Photo.Path, photo.Photo.GalleryID); // "/uploads/" + photo.GalleryID + "/" + photo.Path;
+
+                    <li class="col-md-12 col-sm-6 col-xs-6 col-xxs-12"
+                        data-responsive="@path 375, @path 480, @path 800"
+                        data-src="@path"
+                        data-sub-html="<h4>@photo.Photo.Title</h4>"
+                        data-pinterest-text="Pin it1"
+                        data-tweet-text="share on twitter 1">
+                        <div class="tour-photo-container">
+                            <a href="">
+                                <div class="tour-photo" style="background-image:url(@Images.GetThumbFullPath(photo.Photo))"></div>
+                            </a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <span class="theme-backcolor theme-info-title">
+            @Resources.Common.RelatedTours
+        </span>
+    </div>
+    <div class="row">
+        @Html.Action("RelatedTours", new { Tour = Model })
+    </div>
+
+</div>
+<div id="divRequest" style="display:none">
+    @Html.Action("index", controllerName: "Request", routeValues: new { id = Model.TourID })
+</div>
+
+<div id="snackbar">Request Sent!</div>
+
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/js/lightgallery.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-pager.js/master/dist/lg-pager.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-autoplay.js/master/dist/lg-autoplay.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-fullscreen.js/master/dist/lg-fullscreen.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-zoom.js/master/dist/lg-zoom.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-hash.js/master/dist/lg-hash.js"></script>
+    <script src="https://cdn.rawgit.com/sachinchoolur/lg-share.js/master/dist/lg-share.js"></script>
+
+    <script type="text/javascript" src="http://kendo.cdn.telerik.com/2017.3.913/js/kendo.all.min.js"></script>
+
+    <script>
+        $(function () {
+            lightGallery(document.getElementById('lightgallery'));
+
+            var $TourDate = $("#TourDate");
+            $TourDate.kendoMaskedTextBox({
+                mask: "00/00/0000"
+            });
+
+            // set date picker
+            $TourDate.kendoDatePicker({
+                //min: minDate,
+                //max: maxDate,
+                format: "MM/dd/yyyy",
+            });
+            // adjust classes to show fiel correctly
+            $TourDate.closest(".k-datepicker").add($TourDate).removeClass("k-textbox");
+
+            $("#divRequest").kendoWindow({
+                width: 350,
+                height: 600,
+                title: "Request a tour",
+                resizable:false,
+            });
+
+            $("#requestTour, #requestTourBottom").click(function () {
+                var wnd = $("#divRequest").data("kendoWindow");
+                if (wnd) {
+                    var frm = $("#divRequest").find("form");
+                    if (frm.length > 0) {
+                        frm[0].reset();
+                    }
+                    wnd.open().center();
+                }
+            });
+        });
+
+        function showSnack() {
+            var wnd = $("#divRequest").data("kendoWindow");
+            if (wnd) {
+                wnd.close();
+            }
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar")
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+        }
+        //TODO : thumbnail
+        //$(function () {
+        //    $("#lightgallery").lightGallery({
+        //        thumbnail: true
+        //    });
+        //})
+    </script>
+
+}

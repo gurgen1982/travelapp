@@ -30,6 +30,8 @@ namespace Travel.Models
         public DbSet<Photo> Photos { get; set; }
         public DbSet<NewsHeader> NewsHeaders { get; set; }
         public DbSet<NewsLocalizedDetail> NewsDetails { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Settings> Settings { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

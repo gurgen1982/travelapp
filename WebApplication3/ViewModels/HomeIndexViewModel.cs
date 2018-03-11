@@ -12,5 +12,6 @@ namespace Travel.ViewModels
         public IEnumerable<Video> VideoBox { get; set; }
         public IEnumerable<Photo> PhotoGallery { get; set; }
         public IEnumerable<TourViewModel> Tours { get; set; }
+        public IEnumerable<CountryHeader> Countries { get; set; }
     }
 }

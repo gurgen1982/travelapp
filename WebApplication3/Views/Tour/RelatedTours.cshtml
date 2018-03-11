@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Travel.ViewModels.TourViewModel>
+@using Travel.Helper
+
+<div class="row">
+    @foreach (var tour in Model)
+    {
+        <div class="col-md-6 col-sm-6 col-lg-4">
+            <div class="tour">
+                <a href="@Url.Action("info", "tour", new { id = tour.Tour.TourID })">
+                    <div class="tour-img" style="background-image:url(@Images.GetThumbFullPath(tour.Photo))"></div>
+                    <div class="tour-container">
+                        <h4><b>@tour.TourDetail.Title</b></h4>
+                        <p>@tour.TourDetail.SubTitle</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>

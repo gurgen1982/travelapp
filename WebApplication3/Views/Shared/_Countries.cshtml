@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Travel.Models.CountryHeader>
+
+<div class="container">
+
+    <div class="row country-container">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 country">
+                <a href="@Url.Action("Details", "Country", new { id = item.CommonName})">
+                    <div class="country-img" style="background-image:url(@Travel.Helper.Images.GetThumbFullPath(item.Photo))">
+                    </div>
+                    <div class="country-text">
+                        @item.Countries.FirstOrDefault(x => x.LangID == ViewBag.LangID).CountryName
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+
+</div>

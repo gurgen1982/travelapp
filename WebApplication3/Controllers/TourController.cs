@@ -20,23 +20,37 @@ namespace Travel.Controllers
         {
             SetViewBag();
             var LangID = (int)ViewBag.LangID;
-            //var tourHeaders = db.TourHeaders.Include(t => t.Category).Include(t => t.Country);
-            //return View(tourHeaders.ToList());
-
-
+            return View();
+        }
+        
+        public virtual ActionResult TourList(int? countryId, int? categoryId, int pageNumber =0)
+        {
+            var pageSize = db.Settings.FirstOrDefault().PageSize;
+            var lang = RouteData.Values["lang"] as string;
+            var LangID = db.Languages.Where(x => x.Locale.Equals(lang))?.First()?.LangID;
 
             // tours
             var tours = new List<TourViewModel>();
-
 
             var tourHeaders = (from h in db.TourHeaders.Where(x => x.TourPhoto.Count > 0)
                                join d in db.TourDetails on h.TourID equals d.TourID
                                where d.LangID == LangID
                                select new { h, d }).ToList();
 
+            if (countryId != null && countryId > 0)
+            {
+                tourHeaders = tourHeaders.Where(x => x.h.CountryID.Equals(countryId)).ToList();
+            }
+            if (categoryId != null && categoryId > 0)
+            {
+                tourHeaders = tourHeaders.Where(x => x.h.CategoryID.Equals(categoryId)).ToList();
+            }
+            tourHeaders = tourHeaders.OrderByDescending(x=>x.h.TourID).Skip(pageNumber * pageSize).Take(pageSize).ToList();
 
-            ////var tourHeaders = db.TourHeaders.Where(x => x.TourPhoto.Count > 0 && x.TourDetail.Any(xx=>xx.LangID.Equals(LangID))).OrderByDescending(x => x.TourID).Take(10);
-            //    .Join(xx=>xx.Photos,tt=>tt.TourPhoto.PhotoID, gg=>gg.PhotoID, (h, d)=>new {h.CommonName });
+            if(tourHeaders.Count == 0)
+            {
+                return PartialView("_NoTourFound");
+            }
             foreach (var tour in tourHeaders)
             {
                 var tourViewModel = new TourViewModel();
@@ -47,16 +61,16 @@ namespace Travel.Controllers
                 var photo = db.Photos.Find(phId);
                 if (photo != null)
                 {
-                    tourViewModel.PhotoPath = Helper.Images.GetPath(photo.Path, photo.GalleryID);
+                    tourViewModel.Photo = photo;
                 }
                 tours.Add(tourViewModel);
             }
 
-            return View(tours);
+            return PartialView("_Tours", tours);
         }
 
         // GET: Tour/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Info(int? id)
         {
             if (id == null)
             {
@@ -76,6 +90,44 @@ namespace Travel.Controllers
             return View(tourHeader);
         }
 
+        [ChildActionOnly]
+        public ActionResult RelatedTours(TourHeader Tour)
+        {
+            var lang = RouteData.Values["lang"] as string;
+            var LangID = db.Languages.Where(x => x.Locale.Equals(lang))?.First()?.LangID;
+
+            var headers = db.TourHeaders.Where(x => x.TourPhoto.Count > 0 && x.TourID != Tour.TourID);
+            var headersByCountry = headers.Where(x => x.CountryID == Tour.CountryID);
+            var headersByCategory = headers.Where(x => x.CategoryID == Tour.CategoryID && !headersByCountry.Any(y => y.TourID == x.TourID));
+            headers = headersByCountry.Concat(headersByCategory);
+
+            if (headers.Count() == 0) return null;
+
+            var tours = new List<TourViewModel>();
+
+            var tourHeaders = (from h in headers
+                               join d in db.TourDetails on h.TourID equals d.TourID
+                               where d.LangID == LangID
+                               select new { h, d }).ToList();
+
+            foreach (var tour in tourHeaders)
+            {
+                var tourViewModel = new TourViewModel();
+                tourViewModel.Tour = tour.h;
+                tourViewModel.TourDetail = tour.d;
+
+                var phId = tour.h.TourPhoto.Where(x => x.ShowAsMain).First().PhotoID;
+                var photo = db.Photos.Find(phId);
+                if (photo != null)
+                {
+                    tourViewModel.Photo = photo;
+                }
+                tours.Add(tourViewModel);
+            }
+
+            return PartialView("_Tours", tours);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -89,6 +141,10 @@ namespace Travel.Controllers
         {
             var lang = RouteData.Values["lang"] as string;
             var LangID = db.Languages.Where(x => x.Locale.Equals(lang))?.First()?.LangID;
+            ViewBag.Countries = new SelectList(db.CountryDetails.Where(x => x.LangID == LangID), "CountryID", "CountryName");
+            ViewBag.Categories = new SelectList(db.CategoryDetails.Where(x => x.LangID == LangID), "CategoryID", "CategoryName");
+
+            ViewBag.CountriesInfo = db.CountryHeaders.ToList();
 
             ViewBag.LangID = LangID;
         }

@@ -2,15 +2,8 @@
 @using Resources
 
 <div class="container">
-    <h2>@Common.ContactPage</h2>
+    @*<h2>@Common.ContactPage</h2>*@
     <h3>@Common.LetsBook</h3>
-
-    <address>
-        @Common.AgencyName<br />
-        <span class="text-info glyphicon glyphicon-map-marker"></span>&emsp;@Common.Address<br />
-        <span class="text-info glyphicon glyphicon-phone"></span>&emsp;+374 99 14 94 00<br />
-        <span class="text-info glyphicon glyphicon-envelope"></span>&emsp;<a href="mailto:info@travel.com">Info@travel.com</a><br />
-    </address>
     
     @using (Ajax.BeginForm("Send", controllerName: "Mails", routeValues: null, ajaxOptions: new AjaxOptions { OnComplete = "index.onComplete", OnBegin="index.onBegin" }, htmlAttributes: new { id="frmSendContactMail"}))
     {

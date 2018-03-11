@@ -18,6 +18,10 @@ namespace Travel.Models
         [StringLength(maximumLength: 255, MinimumLength = 5)]
         public string CommonName { get; set; }
         [Required]
+        [Range(1, 1000)]
+        public int NightCount { get; set; }
+        public bool BestOffer { get; set; }
+        [Required]
         [DisplayName("Price (AMD)")]
         public decimal Price { get; set; }
         public virtual CountryHeader Country { get; set; }

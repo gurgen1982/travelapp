@@ -44,6 +44,9 @@
             //context.CategoryDetails.AddOrUpdate(new CategoryLocalizedDetail { LangID = 1, CategoryID = 2, CategoryName = "Ժայռամագլցում" });
             //context.CategoryDetails.AddOrUpdate(new CategoryLocalizedDetail { LangID = 2, CategoryID = 2, CategoryName = "Hiking" });
 
+
+            //context.Settings.Add(new Settings { PageSize = 30 });
+
             context.SaveChanges();
         }
     }

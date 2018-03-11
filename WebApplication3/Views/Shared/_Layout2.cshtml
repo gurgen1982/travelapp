@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Chilli Travel Club</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/Layout/index.css" rel="stylesheet" />
+
+    <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
+
+    <link href="~/Externals/owl/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <link href="~/Externals/owl/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet" />
+    
+    @if (ViewBag.Path != null)
+    {
+        <style>
+            .parallax-img11 {
+                background-image: url("@(ViewBag.Path)"); @*dynamically load related image if set*@
+                min-height:400px;
+            }
+        </style>
+    }
+</head>
+<body>
+    @{
+        var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+
+        var langIsEng = culture.Name.ToLower().Contains("en-us");
+
+        var hyClass = langIsEng ? "" : "lang-highlighted";
+        var enClass = langIsEng ? "lang-highlighted" : "";
+    }
+    <div class="bar-top-info">
+        <div>
+            <ul class="nav navbar-nav info-bar">
+                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span> 099 149400</li>
+                <li><span class="glyphicon glyphicon-envelope theme-color"></span> info@chilli.travel</li>
+                <li><span class="glyphicon glyphicon-map-marker theme-color"></span> Hrachya Kochar 4</li>
+            </ul>
+            <ul class="nav navbar-nav search-ul">
+                <li class="search-bar">
+                    <form method="get" action="@Url.Action("Index", "Search", null)">
+                        @Html.TextBox("q", null, new { @class = "search-box", @placeholder = "Search" })
+                        <input type="submit" style="display:none" />
+                    </form>
+                </li>
+                @*<li><a class="btn btn-default search-box-btn"><span class="glyphicon glyphicon-search"></span></a></li>*@
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="navbar navbar-default navbar-fixed-top">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
+                <span class="glyphicon glyphicon-map-marker"></span>Logo
+            </a>
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    @Html.ActionLink("HOME", "index", controllerName: "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("ABOUT US", "About", controllerName: "Home")
+                </li>
+                <li>
+                    @Html.ActionLink("TOURS", "index", controllerName: "Tour")
+                </li>
+                <li>
+                    @Html.ActionLink("GALLERY", "index", controllerName: "Gallery")
+                </li>
+                <li>
+                    @Html.ActionLink("BLOG", "index", controllerName: "News")
+                </li>
+                <li>
+                    @Ajax.ActionLink("Հայ", "Set",
+                        controllerName: "Language",
+                        routeValues: new { lang = "hy" },
+                        ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                        htmlAttributes: new { @class = hyClass })
+                </li>
+                <li>
+                    @Ajax.ActionLink("Eng", "Set",
+                        controllerName: "Language",
+                        routeValues: new { lang = "en" },
+                        ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                        htmlAttributes: new { @class = enClass })
+                </li>
+            </ul>
+        </div>
+        @*<div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                </ul>
+            </div>*@
+
+    </div>
+
+    <div class="parallax-container parallax-img11">
+    </div>
+    <div class="body-content">
+        @RenderBody()
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/layout")
+
+    @*@Styles.Render("~/Content/Index")*@
+
+    <script src="~/Externals/owl/owlcarousel/owl.carousel.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

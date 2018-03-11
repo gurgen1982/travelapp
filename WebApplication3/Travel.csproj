@@ -135,22 +135,27 @@
     <Compile Include="App_Start\NullRefExceptionHandler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainCarouselsController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsListController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryLocalizedHeadersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotosController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RequestsController.cs" />
     <Compile Include="Areas\Admin\Controllers\ToursController.cs" />
     <Compile Include="Areas\Admin\Controllers\VideosController.cs" />
     <Compile Include="Areas\Admin\Models\LPhotoGalleryName.cs" />
     <Compile Include="Areas\Admin\Models\PhotoGalleryViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\CountryViewModel.cs" />
     <Compile Include="Areas\Admin\Models\PhotoViewModel.cs" />
+    <Compile Include="Controllers\CountryController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\MailsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\TourController.cs" />
     <Compile Include="Controllers\VideoGalleryController.cs" />
@@ -259,7 +264,41 @@
     <Compile Include="Migrations\201802180021047_news_photo.Designer.cs">
       <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201803090808556_request.cs" />
+    <Compile Include="Migrations\201803090808556_request.Designer.cs">
+      <DependentUpon>201803090808556_request.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803091959255_nightCount.cs" />
+    <Compile Include="Migrations\201803091959255_nightCount.Designer.cs">
+      <DependentUpon>201803091959255_nightCount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803100752420_settings.cs" />
+    <Compile Include="Migrations\201803100752420_settings.Designer.cs">
+      <DependentUpon>201803100752420_settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803101007062_bestoffer.cs" />
+    <Compile Include="Migrations\201803101007062_bestoffer.Designer.cs">
+      <DependentUpon>201803101007062_bestoffer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803101141544_country_desc.cs" />
+    <Compile Include="Migrations\201803101141544_country_desc.Designer.cs">
+      <DependentUpon>201803101141544_country_desc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803101206343_country_photo.cs" />
+    <Compile Include="Migrations\201803101206343_country_photo.Designer.cs">
+      <DependentUpon>201803101206343_country_photo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803102253207_show_country.cs" />
+    <Compile Include="Migrations\201803102253207_show_country.Designer.cs">
+      <DependentUpon>201803102253207_show_country.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803110034301_country_tagline.cs" />
+    <Compile Include="Migrations\201803110034301_country_tagline.Designer.cs">
+      <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Settings.cs" />
+    <Compile Include="Models\Request.cs" />
     <Compile Include="Models\CategoryLocalizedDetail.cs" />
     <Compile Include="Models\CategoryHeader.cs" />
     <Compile Include="Models\CountryLocalizedDetail.cs" />
@@ -287,6 +326,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\index.css" />
+    <Content Include="Content\Layout\index.css" />
     <Content Include="Content\social.css" />
     <Content Include="Content\styles.css" />
     <Content Include="Externals\owl\css\animate.css" />
@@ -413,6 +453,16 @@
     <Content Include="Areas\Admin\Views\NewsList\Item.cshtml" />
     <Content Include="Areas\Admin\Views\NewsList\Index.cshtml" />
     <Content Include="Areas\Admin\Views\NewsList\ItemDetail.cshtml" />
+    <Content Include="Areas\Admin\Views\Requests\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Requests\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Requests\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Countries\EditLocal.cshtml" />
+    <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\IndexBehaviour.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
@@ -1192,7 +1242,7 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\_PhotoGallery.cshtml" />
     <Content Include="Views\Shared\_Tours.cshtml" />
-    <Content Include="Views\Tour\Details.cshtml" />
+    <Content Include="Views\Tour\Info.cshtml" />
     <Content Include="Views\Tour\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
@@ -1200,10 +1250,20 @@
     <Content Include="Views\Shared\_aboutHy.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Tour\_ViewStart.cshtml" />
+    <Content Include="Views\Tour\RelatedTours.cshtml" />
+    <Content Include="Views\Request\Create.cshtml" />
+    <Content Include="Views\Tour\_NoTourFound.cshtml" />
+    <Content Include="Views\Country\Details.cshtml" />
+    <Content Include="Views\Country\Index.cshtml" />
+    <Content Include="Views\Country\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Countries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\Enum\" />
+    <Folder Include="Models\Enums\" />
     <Folder Include="Views\Image\" />
     <Folder Include="Views\Language\" />
   </ItemGroup>
@@ -1293,6 +1353,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802180021047_news_photo.resx">
       <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803090808556_request.resx">
+      <DependentUpon>201803090808556_request.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803091959255_nightCount.resx">
+      <DependentUpon>201803091959255_nightCount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803100752420_settings.resx">
+      <DependentUpon>201803100752420_settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803101007062_bestoffer.resx">
+      <DependentUpon>201803101007062_bestoffer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803101141544_country_desc.resx">
+      <DependentUpon>201803101141544_country_desc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803101206343_country_photo.resx">
+      <DependentUpon>201803101206343_country_photo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803102253207_show_country.resx">
+      <DependentUpon>201803102253207_show_country.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803110034301_country_tagline.resx">
+      <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

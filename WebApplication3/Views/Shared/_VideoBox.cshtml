@@ -1,13 +1,47 @@
 ﻿@model IEnumerable<Travel.Models.Video>
 
-@foreach (var video in Model)
-{
-    <div class="col-md-6">
-        <div class="video-title">
-            @video.Title
+@*@foreach (var video in Model)
+    {
+        <div class="col-md-6">
+            <div class="video-title">
+                @video.Title
+            </div>
+
+            <img src="http://img.youtube.com/vi/@(video.Url)/mqdefault.jpg" width="99%" />
         </div>
-        <iframe class="video-frame"
-                src="https://www.youtube.com/embed/@(video.Url)?rel=0&amp;controls=0&amp;showinfo=0"
-                frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
-    </div>
-}
+    }*@
+
+
+<div class="owl-carousel owl-theme">
+
+    @foreach (var video in Model)
+    {
+        <div class="video-slider-item" data-merge="1"><a class="owl-video" href="https://www.youtube.com/watch?v=@(video.Url)"></a></div>
+    }
+</div>
+
+
+@*@section scripts{
+    <script>
+        $(function () {
+            $('.owl-carousel').owlCarousel({
+                items: 1,
+                merge: true,
+                loop: true,
+                margin: 10,
+                video: true,
+                lazyLoad: true,
+                center: true,
+                responsive: {
+                    480: {
+                        items: 2
+                    },
+                    600: {
+                        items: 4
+                    }
+                }
+            });
+        });
+
+    </script>
+}*@

@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewBag.Title = Resources.Common.AboutUs;
+    Layout = "~/Views/Shared/_Layout2.cshtml";
 }
 
 <h2>@Resources.Common.AboutUs</h2>
@@ -9,6 +10,6 @@
     var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
     var langIsEng = culture.Name.ToLower().Contains("en-us");
 }
-<div style="text-align: justify;line-height: 1.5;font-size:large">
+<div style="text-align: justify;line-height: 1.5;font-size:large;min-height:500px">
     @Html.Partial(langIsEng ? "_aboutEng" : "_aboutHy")
 </div>

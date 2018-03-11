@@ -1,0 +1,202 @@
+﻿@model Travel.Areas.Admin.Models.CountryViewModel
+@using Newtonsoft.Json;
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@*@{
+        var mdl = JsonConvert.SerializeObject(Model, new JsonSerializerSettings
+        {
+            PreserveReferencesHandling = PreserveReferencesHandling.Objects
+        });
+    }*@
+
+<div class="row">
+    <div class="col-md-8">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal" ng-app="chilliApp" ng-controller="chilliCtrl">
+                <h4>Country Header</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.CountryHeader.CountryID, new { @name = "CountryID" })
+                @Html.HiddenFor(model => model.CountryHeader.PhotoID, new { @name = "PhotoID" })
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.CommonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CountryHeader.CommonName, new
+                   {
+                       htmlAttributes = new
+                       {
+                           @class = "form-control",
+                           @name = "CommonName" @*, @ng_disabled = "isEditMode"*@ }
+                   })
+                        @Html.ValidationMessageFor(model => model.CountryHeader.CommonName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.ShowInHomePage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.CountryHeader.ShowInHomePage, new { htmlAttributes = new { @class = "form-control", @name = "ShowInHomePage" } })
+                        @Html.ValidationMessageFor(model => model.CountryHeader.ShowInHomePage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.PhotoID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.CountryHeader.PhotoID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CountryHeader.PhotoID, "", new { @class = "text-danger" })*@
+                        <img id="imgNewsPhotoPreview" src="@Travel.Helper.Images.GetThumbFullPath(Model.CountryHeader.Photo)" class="tour-photo-list" style="height:auto !important" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-md-4">
+        @foreach (var item in Model.CountryHeader.Countries)
+        {
+            @Html.ActionLink(item.Language.Name, "EditLocal", new { id = item.ID }, new { @class = "btn btn-default" })
+        }
+    </div>
+</div>
+
+<h4>Browse Photo Galleries</h4>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <div class="demo-section k-content">
+            <ul id="galleryTree" class="gallery-tree-folder">
+                @foreach (var item in ViewBag.Gallery as IEnumerable<Travel.Models.PhotoGalleryHeader>)
+            {
+                    <li data-expanded="true" data-id="@item.GalleryID">
+                        <span class="k-sprite folder"></span>
+                        @item.GalleryCommonName
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="k-content wide">
+            <div id="photoList"></div>
+            <div id="pager" class="k-pager-wrap"></div>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+    <script>
+        var app = angular.module('chilliApp', []);
+        app.controller('chilliCtrl', function($scope) {
+            $scope.isEditMode = @(Model.IsEditMode.ToString().ToLower());
+        });
+
+        function getScope() {
+            var sel = 'div[ng-controller="chilliCtrl"]';
+            return angular.element(sel).scope();
+        }
+    </script>
+
+    <script>
+        var galId = 0;
+        $(document).ready(function () {
+            $("#galleryTree").kendoTreeView({
+                select: function (e) {
+                    galId = $(e.node).data("id");
+                    dataSource.read();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function MyStyle(w, h) {
+            var leftMargin = 0;
+            var topMargin = 0;
+            var st = "";
+            var coef = w / 200;
+            if (w > h) {
+                leftMargin = -((w - h) / 2) / coef;
+                return "margin-left: " + leftMargin + "px; height:200px; width:auto";
+            } else {
+                topMargin = -((h - w) / 2) / coef;
+                return "margin-top: " + topMargin + "px; width:200px; height:auto";
+            }
+        }
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="tour-photo-list">
+            <img src="#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
+            # if( Title != null ) { # <span class="tour-photo-title">#:Title#</span># }#
+        </div>
+    </script>
+
+    <script>
+
+        ///// common
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetPhotoList", controllerName: "Photos")',
+                    dataType: "json",
+                    data: function () {
+                        return {
+                            galleryID: galId,
+                        };
+                    }
+                },
+            },
+            pageSize: 20
+        });
+
+        $("#pager").kendoPager({
+            dataSource: dataSource
+        });
+        $("#photoList").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#template").html()),
+            //      autoBind: true,
+            selectable: true,
+        });
+
+        $("#photoList").on("dblclick", ".tour-photo-list", function () {
+            var list = $("#photoList").data('kendoListView');
+            var index = list.select().index();
+            var selectedIem = list.dataSource.view()[index];
+            var path = "/uploads/" + selectedIem.GalleryID + "/" + selectedIem.Path;
+            $("#imgNewsPhotoPreview").attr("src", selectedIem.Path);
+            $("#CountryHeader_PhotoID").val(selectedIem.PhotoID);
+        });
+        //// end of common
+
+        $("#imgNewsPhotoPreview").on("dblclick", function () {
+            $("#imgNewsPhotoPreview").attr("src", "");
+            $("#CountryHeader_PhotoID").val("0");
+        });
+        //$("form").on('submit', function () {
+        //    var sc = getScope();
+        //    sc.isEditMode=false;
+        //});
+    </script>
+}

@@ -1,17 +1,28 @@
-﻿<hr />
-<footer class="text-center">
-    <h3>@Resources.Common.FindUsOn</h3>
+﻿@using Resources
 
-    <div class="sc">
-        <a class="sca" href="#">
-            <div class="sprite_face">
-            </div>
-        </a>
-        <a class="sca" href="#">
-            <div class="sprite_twitter">
-            </div>
-        </a>
-        @*<a href="#">
+<footer class="footer">
+    <div class="row">
+        <div class="col-md-5 info">
+            <address>
+                @Common.AgencyName<br />
+                <span class="theme-color glyphicon glyphicon-map-marker"></span>&emsp;@Common.Address<br />
+                <span class="theme-color glyphicon glyphicon-phone"></span>&emsp;+374 99 14 94 00<br />
+                <span class="theme-color glyphicon glyphicon-envelope"></span>&emsp;<a href="mailto:info@chilli.travel">Info@chilli.travel</a><br />
+            </address>
+            <p>@Html.ActionLink(Common.AboutUs, "About")</p>
+        </div>
+        <div class="col-md-5">
+            <p>@Common.FindUsOn</p>
+            <div class="sc">
+                <a class="sca" href="#">
+                    <div class="sprite_face">
+                    </div>
+                </a>
+                <a class="sca" href="#">
+                    <div class="sprite_twitter">
+                    </div>
+                </a>
+                @*<a href="#">
                 <div class="sprite_rss">
                 </div>
             </a>
@@ -19,19 +30,21 @@
                 <div class="sprite_linked">
                 </div>
             </a>*@
-        <a class="sca" href="#">
-            <div class="sprite_pint">
-            </div>
-        </a>
-        @*<a href="#">
+                <a class="sca" href="#">
+                    <div class="sprite_pint">
+                    </div>
+                </a>
+                @*<a href="#">
                 <div class="sprite_share">
                 </div>
             </a>*@
-        <a class="sca" href="#">
-            <div class="sprite_youtube">
+                <a class="sca" href="#">
+                    <div class="sprite_youtube">
+                    </div>
+                </a>
             </div>
-        </a>
+        </div>
     </div>
-    <p>@Html.ActionLink(Resources.Common.AboutUs, "About")</p>
+
     <p>&copy; @DateTime.Now.Year - Chilli Travel Club</p>
 </footer>

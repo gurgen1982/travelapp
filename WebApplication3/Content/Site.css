@@ -76,14 +76,7 @@ textarea {
     float: right;
 }
 
-.search-box {
-    width: 0;
-    display: none;
-    height: 51px;
-    margin-top: 1px;
-    font-size: larger;
-    max-width: 600px !important;
-}
+
 
 @media screen and (max-width: 992px) {
     .videobox-container > .col-md-6 > .col-md-6 {

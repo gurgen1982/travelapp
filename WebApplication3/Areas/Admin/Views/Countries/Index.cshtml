@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Travel.Models.CountryHeader>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PhotoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommonName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShowInHomePage)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img src="@Travel.Helper.Images.GetThumbFullPath(item.Photo)" height="100" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommonName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShowInHomePage)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CountryID })
+            @* | @Html.ActionLink("Details", "Details", new { id=item.CountryID }) |*@
+            @*@Html.ActionLink("Delete", "Delete", new { id=item.CountryID })*@
+        </td>
+    </tr>
+}
+
+</table>

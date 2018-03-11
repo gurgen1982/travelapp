@@ -30,6 +30,8 @@ namespace Travel
                       "~/Content/styles.css",
                       "~/Content/social.css"));
 
+            bundles.Add(new StyleBundle("~/Content/Index").Include("~/Content/Layout/index.css"));
+
             bundles.Add(new ScriptBundle("~/bundles/homeIndex").Include("~/Scripts/Home/IndexBehaviour.js"));
             bundles.Add(new ScriptBundle("~/bundles/layout").Include("~/Scripts/Layout/LayoutBehaviour.js"));
 

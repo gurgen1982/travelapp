@@ -6,11 +6,63 @@
 
 
 @Html.Partial("_MainCarousel", Model.MainCarouselList)
+
+<div class="container text-center">
+    <h3 class="heading-title">Best Offers</h3>
+    <p class="heading-subtitle">Check out our top-rated tours</p>
+</div>
+
 @Html.Partial("_Tours", Model.Tours)
-@Html.Partial("_PhotoGallery", Model.PhotoGallery)
+<div class="theme-button-container">
+    @Html.ActionLink("VIEW ALL TOURS", "index", controllerName: "tour", routeValues: null,
+            htmlAttributes: new { @class = "theme-button" })
+</div>
+
+@foreach (var it in Model.Countries)
+{
+    var c = it.Countries.First(x => x.LangID == ViewBag.LangID);
+        <div class="parallax-container" style="background-image:url('@Travel.Helper.Images.GetPath(it.Photo.Path, it.Photo.GalleryID)');min-height: 300px;">
+            <div class="parallax-caption">
+                <a href="@Url.Action("details", "country", new { id = it.CommonName })">
+                    <span class="border" style="background-color:transparent;font-size:46px;color: #f7f7f7;">
+                        @c.Тagline
+                </span>
+            </a>
+        </div>
+    </div>
+    <div style="margin:20px">
+
+    </div>
+}
+
+@*<div>
+        @Html.Partial("_Countries", Model.Countries)
+    </div>*@
+
+<div>
+    @Html.Partial("_PhotoGallery", Model.PhotoGallery)
+</div>
+
+<div class="tiger-img">
+    @*<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Why We’re Different</span>*@
+
+    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Find Travel Perfection With the</h2>
+    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Professionalism of Experts</h2>
+    <div class="theme-button-container-right">
+        @Html.ActionLink("FIND YOUR PERFECT TOUR", "index", controllerName: "tour", routeValues: null,
+            htmlAttributes: new { @class = "theme-button" })
+    </div>
+</div>
 @Html.Partial("_MainVideoBox", Model.VideoBox)
-@Html.Partial("_Subscribe", new Travel.Models.Subscription())
-@Html.Partial("_Contact", new Travel.Models.ContactMail())
+<div class="parallax-container parallax-img1">
+    <div class="parallax-caption">
+        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Why We’re Different</span>
+    </div>
+</div>
+<div class="parallax-container parallax-img2">
+    @Html.Partial("_Subscribe", new Travel.Models.Subscription())
+    @Html.Partial("_Contact", new Travel.Models.ContactMail())
+</div>
 
 @section scripts{
     <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
@@ -25,26 +77,31 @@
 
     <script>
         lightGallery(document.getElementById('lightgallery'));
-    </script>
 
-    <script>
         $(function () {
             $('.owl-carousel').owlCarousel({
-                loop: false,
+                items: 1,
+                merge: true,
+                loop: true,
                 margin: 10,
-                nav: true,
+                video: true,
+                lazyLoad: true,
+                center: true,
                 responsive: {
-                    0: {
-                        items: 1
+                    480: {
+                        items: 2
                     },
                     600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
+                        items: 4
                     }
                 }
             })
         })
+    </script>
+
+    <script>
+        $(function () {
+            //$('.tour-cell').matchHeight(false);
+        });
     </script>
 }

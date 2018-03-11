@@ -3,76 +3,74 @@
 @{
     ViewBag.Title = "Index";
     var LangID = (int)ViewBag.LangID;
+    var lstCountries = ViewBag.CountriesInfo as IEnumerable<Travel.Models.CountryHeader>;
 }
+<link href="http://kendo.cdn.telerik.com/2017.3.913/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="http://kendo.cdn.telerik.com/2017.3.913/styles/kendo.nova.min.css" rel="stylesheet" />
+<link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 
-<hr />
-<br />
-<h2>Index</h2>
+<div class="container tour-filter-container">
+    @Html.DropDownList("Countries", "- filter by countries -")
+    @Html.DropDownList("Categories", "- filter by categories -")
+</div>
+<div id="divTourList">
+    @*@Html.Partial("_Tours", Model)*@
+    @Html.Action("TourList");
+</div>
+<div class="loading">
+    <img src="~/Images/loading.gif" width="150" />
+</div>
 
-
-
-
-@Html.Partial("_Tours", Model)
 
 @section scripts{
+    <script type="text/javascript" src="http://kendo.cdn.telerik.com/2017.3.913/js/kendo.all.min.js"></script>
     <script>
         $(function () {
-            $('.owl-carousel').owlCarousel({
-                loop: false,
-                margin: 10,
-                nav: true,
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 3
-                    },
-                    1000: {
-                        items: 5
-                    }
-                }
-            })
+            tourUI.init();
         })
-</script>
-    }
-@*@{return;}
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.CommonName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Country.CommonName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CommonName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Price)
-        </th>
-        <th></th>
-    </tr>
+        var tourUI = {
+            countryPath: [],
+            defaultPath: "",
+            init: function () {
+                $('#Countries').kendoDropDownList({
+                    change: tourUI.refreshTours
+                });
+                $('#Categories').kendoDropDownList({
+                    change: tourUI.refreshTours
+                });
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryDetail.Where(x=>x.LangID == LangID).First().CategoryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country.Countries.Where(x => x.LangID == LangID).First().CountryName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TourDetail.Where(x => x.LangID == LangID).First().Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Price)
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id=item.TourID })
-        </td>
-    </tr>
+                @foreach(var it in lstCountries)
+                {
+                    var path = Html.Raw( Travel.Helper.Images.GetPath(it.Photo.Path, it.Photo.GalleryID) ).ToString();
+                    @( Html.Raw("tourUI.countryPath[" + it.CountryID + "] = '" + path + "' ; ") )
+                }
+
+            },
+
+            refreshTours: function () {
+                var h = $("#divTourList").height();
+                $(".loading").height(h);
+                $("#divTourList").empty();
+                $(".loading").show();
+                cat = $('#Categories').data('kendoDropDownList');
+                country = $('#Countries').data('kendoDropDownList');
+                $.get('@Url.Action("TourList")', 'categoryId=' + cat.value() + '&countryId=' + country.value(), function (result) {
+                    $("#divTourList").html(result);
+                    $(".loading").hide();
+                }, 'html');
+
+                var path = tourUI.countryPath[country.value()];
+                if (tourUI.defaultPath == "") {
+                    tourUI.defaultPath = $(".parallax-img11").css('background-image');
+                }
+                if (path == null) {
+                    $(".parallax-img11").css('background-image', tourUI.defaultPath);
+                }
+                else {
+                    $(".parallax-img11").css('background-image', 'url("' + path + '")');
+                }
+            }
+        };
+    </script>
 }
-
-</table>*@

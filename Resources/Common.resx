@@ -173,6 +173,14 @@
     <value>Անուն</value>
     <comment>Name</comment>
   </data>
+  <data name="NoTourFound" xml:space="preserve">
+    <value>Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։ Փորձեք օգտագործել այլ հարցում։</value>
+    <comment>No tour found for the selected filtering. Please try to change filtering criterias.</comment>
+  </data>
+  <data name="RelatedTours" xml:space="preserve">
+    <value>ՁԵԶ ԿԱՐՈՂ Է ՀԵՏԱՔՐՔՐԵԼ ՆԱԵՎ</value>
+    <comment>Related Tours</comment>
+  </data>
   <data name="SendMessage" xml:space="preserve">
     <value>ՈՒՂԱՐԿԵԼ</value>
     <comment>SEND MESSAGE</comment>

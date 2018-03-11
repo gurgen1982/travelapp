@@ -187,6 +187,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։ Փորձեք օգտագործել այլ հարցում։.
+        /// </summary>
+        public static string NoTourFound {
+            get {
+                return ResourceManager.GetString("NoTourFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ՁԵԶ ԿԱՐՈՂ Է ՀԵՏԱՔՐՔՐԵԼ ՆԱԵՎ.
+        /// </summary>
+        public static string RelatedTours {
+            get {
+                return ResourceManager.GetString("RelatedTours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ՈՒՂԱՐԿԵԼ.
         /// </summary>
         public static string SendMessage {

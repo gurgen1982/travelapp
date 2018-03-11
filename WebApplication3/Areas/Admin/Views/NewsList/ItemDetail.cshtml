@@ -40,7 +40,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <textarea id="txtDescription" name="Description"></textarea>
+                <textarea id="txtDescription" name="Description">
+                    @Html.Raw(Model.Description)
+                </textarea>
             </div>
         </div>
 
@@ -62,7 +64,6 @@
     <script>
         $(function () {
             $("#txtDescription").kendoEditor({
-                value: '@Html.Raw( Model.Description)',
             });
             var editor = $("#txtDescription").data('kendoEditor');
             $("form").on('submit', function () {

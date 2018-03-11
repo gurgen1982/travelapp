@@ -20,6 +20,13 @@ namespace Travel
           );
 
             routes.MapRoute(
+              name: "Country_Route",
+              url: "{lang}/Visit/{id}",
+              defaults: new { controller = "Country", action = "Details", id = UrlParameter.Optional }
+          );
+
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{lang}/{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, lang="" }//hy

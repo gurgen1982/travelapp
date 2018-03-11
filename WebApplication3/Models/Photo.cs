@@ -11,7 +11,7 @@ namespace Travel.Models
         public int GalleryID { get; set; }
         [Required]
         public string Path { get; set; }
-        [StringLength(maximumLength:100, MinimumLength = 0)]
+        [StringLength(maximumLength: 100, MinimumLength = 0)]
         public string Title { get; set; }
         public virtual PhotoGalleryHeader PhotoGallery { get; set; }
         public int Width { get; set; }

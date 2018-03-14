@@ -1,5 +1,6 @@
 ﻿@model Travel.Models.TourHeader
 @using Travel.Helper
+@using Resources
 
 @{
     var LangID = (int)ViewBag.LangID;
@@ -30,7 +31,7 @@
                         $@Html.DisplayFor(model => model.Price)
                     </h3>
                     <div class="theme-button-container">
-                        <a class = "theme-button" id = "requestTour">REQUEST NOW</a>
+                        <a class = "theme-button" id = "requestTour">@Common.RequestNow</a>
                     </div>
                 </div>
             </div>
@@ -40,7 +41,7 @@
                 </p>
             </div>
             <div class="row theme-button-container">
-                <a class="theme-button" id="requestTourBottom">REQUEST NOW</a>
+                <a class="theme-button" id="requestTourBottom">@Common.RequestNow</a>
             </div>
         </div>
         <div class="col-md-3">
@@ -66,14 +67,11 @@
         </div>
     </div>
     <div class="row">
-        <span class="theme-backcolor theme-info-title">
-            @Resources.Common.RelatedTours
-        </span>
+        <fieldset>
+            <legend class="theme-backcolor theme-info-title">@Body.RelatedTours</legend>
+            @Html.Action("RelatedTours", new { Tour = Model })
+        </fieldset>
     </div>
-    <div class="row">
-        @Html.Action("RelatedTours", new { Tour = Model })
-    </div>
-
 </div>
 <div id="divRequest" style="display:none">
     @Html.Action("index", controllerName: "Request", routeValues: new { id = Model.TourID })

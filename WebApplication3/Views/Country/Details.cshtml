@@ -1,10 +1,17 @@
 ﻿@model Travel.Models.CountryHeader
 
 @{
-    ViewBag.Title = "Details";
     var detail = Model.Countries.First(x => x.LangID == ViewBag.LangID);
     ViewBag.Path = Travel.Helper.Images.GetThumbFullPath(Model.Photo);
+
+    ViewBag.Title = detail.CountryName;
 }
+<style>
+    /* force the parallax image be larger! */
+    #menuParallaxBG {
+        min-height: 300px !important;
+    }
+</style>
 <div class="container">
     <div class="country-detail-title">
         @detail.CountryName
@@ -16,9 +23,9 @@
     </div>
 </div>
 <div class="country-tour-list">
-    @Html.Action("TourList", "Tour", new { countryId = Model.CountryID })
+    @Html.Action("TourList", "Tours", new { countryId = Model.CountryID })
 </div>
 <div class="theme-button-container">
-    @Html.ActionLink("VIEW ALL TOURS", "index", controllerName: "tour", routeValues: null,
+    @Html.ActionLink(Resources.Body.ViewAllTours, "index", controllerName: "tours", routeValues: null,
             htmlAttributes: new { @class = "theme-button" })
 </div>

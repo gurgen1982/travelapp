@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using Resources
+    
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Chilli Travel Club</title>
+    <title>@ViewBag.Title - @Common.AppName</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/Content/Layout/index.css" rel="stylesheet" />
@@ -31,22 +33,23 @@
 
         var hyClass = langIsEng ? "" : "lang-highlighted";
         var enClass = langIsEng ? "lang-highlighted" : "";
+
+        var settings = HttpContext.Current.Application["Settings"] as Travel.Models.Settings;
     }
     <div class="bar-top-info">
         <div>
             <ul class="nav navbar-nav info-bar">
-                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span> 099 149400</li>
-                <li><span class="glyphicon glyphicon-envelope theme-color"></span> info@chilli.travel</li>
-                <li><span class="glyphicon glyphicon-map-marker theme-color"></span> Hrachya Kochar 4</li>
+                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span>  @settings.PhoneNumbers </li>
+                <li><span class="glyphicon glyphicon-envelope theme-color"></span> @settings.Email </li>
+                <li><span class="glyphicon glyphicon-map-marker theme-color"></span> @Common.Address </li>
             </ul>
             <ul class="nav navbar-nav search-ul">
                 <li class="search-bar">
                     <form method="get" action="@Url.Action("Index", "Search", null)">
-                        @Html.TextBox("q", null, new { @class = "search-box", @placeholder = "Search" })
+                        @Html.TextBox("q", null, new { @class = "search-box", @placeholder = Common.Search })
                         <input type="submit" style="display:none" />
                     </form>
                 </li>
-                @*<li><a class="btn btn-default search-box-btn"><span class="glyphicon glyphicon-search"></span></a></li>*@
             </ul>
 
         </div>
@@ -69,19 +72,19 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    @Html.ActionLink("HOME", "index", controllerName: "Home")
+                    @Html.ActionLink(Common.MenuHome, "index", controllerName: "Home")
                 </li>
                 <li>
-                    @Html.ActionLink("ABOUT US", "About", controllerName: "Home")
+                    @Html.ActionLink(Common.MenuAboutUs, "About", controllerName: "Home")
                 </li>
                 <li>
-                    @Html.ActionLink("TOURS", "index", controllerName: "Tour")
+                    @Html.ActionLink(Common.MenuTours, "index", controllerName: "Tours")
                 </li>
+                @*<li>
+                    @Html.ActionLink(Common.MenuGallery, "index", controllerName: "Gallery")
+                </li>*@
                 <li>
-                    @Html.ActionLink("GALLERY", "index", controllerName: "Gallery")
-                </li>
-                <li>
-                    @Html.ActionLink("BLOG", "index", controllerName: "News")
+                    @Html.ActionLink(Common.MenuBlog, "index", controllerName: "News")
                 </li>
                 <li>
                     @Ajax.ActionLink("Հայ", "Set",
@@ -109,7 +112,7 @@
 
     </div>
 
-    <div class="parallax-container parallax-img11">
+    <div id="menuParallaxBG" class="parallax-container parallax-img11">
     </div>
     <div class="body-content">
         @RenderBody()

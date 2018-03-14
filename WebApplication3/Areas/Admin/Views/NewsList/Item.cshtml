@@ -17,7 +17,7 @@
             <div class="form-horizontal">
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.NewsID)
-                @Html.HiddenFor(model => model.MainPhotoID)
+                @Html.HiddenFor(model => model.PhotoID)
                 <div class="form-group">
                     @Html.LabelFor(model => model.CommonName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.MainPhotoID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.PhotoID, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         <img id="imgNewsPhotoPreview" src="@ViewBag.MainPhotoPath" class="tour-photo-list" style="height:auto !important"/>
                     </div>
@@ -172,13 +172,13 @@
             var selectedIem = list.dataSource.view()[index];
             var path = "/uploads/" + selectedIem.GalleryID + "/" + selectedIem.Path;
             $("#imgNewsPhotoPreview").attr("src", selectedIem.Path);
-            $("#MainPhotoID").val(selectedIem.PhotoID);
+            $("#PhotoID").val(selectedIem.PhotoID);
         });
         //// end of common
 
         $("#imgNewsPhotoPreview").on("dblclick", function () {
             $("#imgNewsPhotoPreview").attr("src", "");
-            $("#MainPhotoID").val("0");
+            $("#PhotoID").val("0");
         });
     </script>
 }

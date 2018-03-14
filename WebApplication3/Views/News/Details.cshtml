@@ -1,26 +1,20 @@
 ﻿@model Travel.Models.NewsLocalizedDetail
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = Model.Title;
 }
 <div class="container">
 
-    <h2>Details</h2>
-
     <div>
-        <h3>
-            @Html.DisplayFor(model => model.Title)
-        </h3>
-        <hr />
-        <img src="@ViewBag.MainPhotoPath" width="300" />
+        <div style="text-align:center;font-size: 36px;margin-bottom:20px;">
+            @Model.Title
+        </div>
 
-        <p>
+        <p style="line-height:1.5;">
+            <img src="@ViewBag.MainPhotoPath" width="300" style="float:left;margin-right: 20px;margin-bottom: 10px;text-align:justify;" />
             @Html.Raw(Model.Description)
         </p>
     </div>
-    <p>
-        @Html.ActionLink("Back to List", "Index")
-    </p>
 
 </div>
 

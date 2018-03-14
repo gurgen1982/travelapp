@@ -10,7 +10,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
-    public class ToursController : Controller
+    public class ToursControlController : Controller
     {
         private DbEntity db = new DbEntity();
 

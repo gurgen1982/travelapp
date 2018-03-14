@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Travel.ViewModels.TourViewModel>
-
+@using Resources
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Body.Tours;
     var LangID = (int)ViewBag.LangID;
     var lstCountries = ViewBag.CountriesInfo as IEnumerable<Travel.Models.CountryHeader>;
 }
@@ -10,8 +10,8 @@
 <link href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css">
 
 <div class="container tour-filter-container">
-    @Html.DropDownList("Countries", "- filter by countries -")
-    @Html.DropDownList("Categories", "- filter by categories -")
+    @Html.DropDownList("Countries", Body.FilterByCountry )
+    @Html.DropDownList("Categories", Body.FilterByCategory)
 </div>
 <div id="divTourList">
     @*@Html.Partial("_Tours", Model)*@
@@ -34,10 +34,12 @@
             defaultPath: "",
             init: function () {
                 $('#Countries').kendoDropDownList({
-                    change: tourUI.refreshTours
+                    change: tourUI.refreshTours,
+                    width: 300,
                 });
                 $('#Categories').kendoDropDownList({
-                    change: tourUI.refreshTours
+                    change: tourUI.refreshTours,
+                    width: 300,
                 });
 
                 @foreach(var it in lstCountries)

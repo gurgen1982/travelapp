@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Travel.Models.CountryHeader>
+@foreach (var it in Model)
+{
+    var c = it.Countries.First(x => x.LangID == ViewBag.LangID);
+    <div class="parallax-container" style="background-image:url('@Travel.Helper.Images.GetPath(it.Photo.Path, it.Photo.GalleryID)');min-height: 300px;">
+        <div class="parallax-caption">
+            <a href="@Url.Action("details", "country", new { id = it.CommonName })">
+                <span class="border" style="background-color:transparent;font-size:46px;color: #f7f7f7;">
+                    @c.Тagline
+                </span>
+            </a>
+        </div>
+    </div>
+    <div style="margin:20px">
+
+    </div>
+}

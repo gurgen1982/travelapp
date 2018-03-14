@@ -13,7 +13,8 @@ namespace Travel.Models
         [Required]
         [StringLength(maximumLength: 255, MinimumLength = 5)]
         public string CommonName { get; set; }
-        public int MainPhotoID { get; set; }
+        public int PhotoID { get; set; }
+        public Photo  Photo { get; set; }
         public virtual ICollection<NewsLocalizedDetail> NewsDetail { get; set; }
     }
 }

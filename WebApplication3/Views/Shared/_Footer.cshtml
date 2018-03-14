@@ -1,15 +1,17 @@
 ﻿@using Resources
-
+@{ 
+    var settings = HttpContext.Current.Application["Settings"] as Travel.Models.Settings;
+}
 <footer class="footer">
     <div class="row">
         <div class="col-md-5 info">
             <address>
                 @Common.AgencyName<br />
-                <span class="theme-color glyphicon glyphicon-map-marker"></span>&emsp;@Common.Address<br />
-                <span class="theme-color glyphicon glyphicon-phone"></span>&emsp;+374 99 14 94 00<br />
-                <span class="theme-color glyphicon glyphicon-envelope"></span>&emsp;<a href="mailto:info@chilli.travel">Info@chilli.travel</a><br />
+                <span class="theme-color glyphicon glyphicon-map-marker"></span>&emsp; @Common.Address <br />
+                <span class="theme-color glyphicon glyphicon-phone"></span>&emsp; @settings.PhoneNumbers <br />
+                <span class="theme-color glyphicon glyphicon-envelope"></span>&emsp;<a href="mailto:@(settings.Email)">@settings.Email</a><br />
             </address>
-            <p>@Html.ActionLink(Common.AboutUs, "About")</p>
+            <p>@Html.ActionLink(Common.MenuAboutUs, "About", controllerName: "Home")</p>
         </div>
         <div class="col-md-5">
             <p>@Common.FindUsOn</p>
@@ -46,5 +48,5 @@
         </div>
     </div>
 
-    <p>&copy; @DateTime.Now.Year - Chilli Travel Club</p>
+    <p>&copy; @DateTime.Now.Year - @Common.AppName</p>
 </footer>

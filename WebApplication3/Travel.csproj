@@ -143,7 +143,7 @@
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryLocalizedHeadersController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotosController.cs" />
     <Compile Include="Areas\Admin\Controllers\RequestsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ToursController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ToursControlController.cs" />
     <Compile Include="Areas\Admin\Controllers\VideosController.cs" />
     <Compile Include="Areas\Admin\Models\LPhotoGalleryName.cs" />
     <Compile Include="Areas\Admin\Models\PhotoGalleryViewModel.cs" />
@@ -157,7 +157,7 @@
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Controllers\TourController.cs" />
+    <Compile Include="Controllers\ToursController.cs" />
     <Compile Include="Controllers\VideoGalleryController.cs" />
     <Compile Include="DAL\StudentInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -295,6 +295,14 @@
     <Compile Include="Migrations\201803110034301_country_tagline.cs" />
     <Compile Include="Migrations\201803110034301_country_tagline.Designer.cs">
       <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803121657067_settings_2.cs" />
+    <Compile Include="Migrations\201803121657067_settings_2.Designer.cs">
+      <DependentUpon>201803121657067_settings_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201803141916161_news_photo1.cs" />
+    <Compile Include="Migrations\201803141916161_news_photo1.Designer.cs">
+      <DependentUpon>201803141916161_news_photo1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Settings.cs" />
@@ -1242,30 +1250,27 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Home\_PhotoGallery.cshtml" />
     <Content Include="Views\Shared\_Tours.cshtml" />
-    <Content Include="Views\Tour\Info.cshtml" />
-    <Content Include="Views\Tour\Index.cshtml" />
+    <Content Include="Views\Tours\Info.cshtml" />
+    <Content Include="Views\Tours\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Shared\_aboutEng.cshtml" />
-    <Content Include="Views\Shared\_aboutHy.cshtml" />
+    <Content Include="Views\Shared\_about-en-us.cshtml" />
+    <Content Include="Views\Shared\_about-hy-am.cshtml" />
     <Content Include="Views\News\Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
-    <Content Include="Views\Shared\_Layout2.cshtml" />
-    <Content Include="Views\Tour\_ViewStart.cshtml" />
-    <Content Include="Views\Tour\RelatedTours.cshtml" />
+    <Content Include="Views\Shared\zzz_Layout2.cshtml" />
+    <Content Include="Views\Tours\RelatedTours.cshtml" />
     <Content Include="Views\Request\Create.cshtml" />
-    <Content Include="Views\Tour\_NoTourFound.cshtml" />
+    <Content Include="Views\Tours\_NoTourFound.cshtml" />
     <Content Include="Views\Country\Details.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
-    <Content Include="Views\Country\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Countries.cshtml" />
+    <Content Include="Views\Home\_Countries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\Enum\" />
     <Folder Include="Models\Enums\" />
-    <Folder Include="Views\Image\" />
-    <Folder Include="Views\Language\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1377,6 +1382,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201803110034301_country_tagline.resx">
       <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803121657067_settings_2.resx">
+      <DependentUpon>201803121657067_settings_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201803141916161_news_photo1.resx">
+      <DependentUpon>201803141916161_news_photo1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

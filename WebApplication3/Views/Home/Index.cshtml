@@ -1,43 +1,30 @@
 ﻿@model Travel.ViewModels.HomeIndexViewModel
+@using Resources
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "";
 }
 @Styles.Render("~/Content/index")
-
+<style>
+    /* force to hide top parallax image for index page! */
+    #menuParallaxBG{
+        min-height:0 !important;
+    }
+</style>
 
 @Html.Partial("_MainCarousel", Model.MainCarouselList)
 
 <div class="container text-center">
-    <h3 class="heading-title">Best Offers</h3>
-    <p class="heading-subtitle">Check out our top-rated tours</p>
+    <h3 class="heading-title">@Body.BestOffers</h3>
+    <p class="heading-subtitle">@Body.CheckTopTours</p>
 </div>
 
 @Html.Partial("_Tours", Model.Tours)
 <div class="theme-button-container">
-    @Html.ActionLink("VIEW ALL TOURS", "index", controllerName: "tour", routeValues: null,
+    @Html.ActionLink(Body.ViewAllTours, "index", controllerName: "tours", routeValues: null,
             htmlAttributes: new { @class = "theme-button" })
 </div>
 
-@foreach (var it in Model.Countries)
-{
-    var c = it.Countries.First(x => x.LangID == ViewBag.LangID);
-        <div class="parallax-container" style="background-image:url('@Travel.Helper.Images.GetPath(it.Photo.Path, it.Photo.GalleryID)');min-height: 300px;">
-            <div class="parallax-caption">
-                <a href="@Url.Action("details", "country", new { id = it.CommonName })">
-                    <span class="border" style="background-color:transparent;font-size:46px;color: #f7f7f7;">
-                        @c.Тagline
-                </span>
-            </a>
-        </div>
-    </div>
-    <div style="margin:20px">
-
-    </div>
-}
-
-@*<div>
-        @Html.Partial("_Countries", Model.Countries)
-    </div>*@
+@Html.Partial("_Countries", Model.Countries)
 
 <div>
     @Html.Partial("_PhotoGallery", Model.PhotoGallery)
@@ -46,17 +33,17 @@
 <div class="tiger-img">
     @*<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Why We’re Different</span>*@
 
-    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Find Travel Perfection With the</h2>
-    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Professionalism of Experts</h2>
+    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.Perfection1</h2>
+    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.Perfection2</h2>
     <div class="theme-button-container-right">
-        @Html.ActionLink("FIND YOUR PERFECT TOUR", "index", controllerName: "tour", routeValues: null,
+        @Html.ActionLink(Body.FindPerfectTour, "index", controllerName: "tours", routeValues: null,
             htmlAttributes: new { @class = "theme-button" })
     </div>
 </div>
 @Html.Partial("_MainVideoBox", Model.VideoBox)
 <div class="parallax-container parallax-img1">
     <div class="parallax-caption">
-        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Why We’re Different</span>
+        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.WeAreDifferent</span>
     </div>
 </div>
 <div class="parallax-container parallax-img2">

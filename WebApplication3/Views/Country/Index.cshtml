@@ -3,5 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
+<style>
+    /* force the parallax image be larger! */
+    #menuParallaxBG {
+        min-height: 300px !important;
+    }
+</style>
 @Html.Partial("_Countries", Model)

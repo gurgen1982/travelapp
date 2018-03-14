@@ -7,7 +7,7 @@
         {
             <div class="col-sm-6 col-lg-4 tour-cell">
                 <div class="tour">
-                    <a href="@Url.Action("info", "tour", new { id = tour.Tour.TourID })">
+                    <a href="@Url.Action("info", "tours", new { id = tour.Tour.TourID })">
                         <div class="tour-img" style="background-image:url(@Images.GetThumbFullPath(tour.Photo))">
                             <div class="tour-price">
                                 $@tour.Tour.Price

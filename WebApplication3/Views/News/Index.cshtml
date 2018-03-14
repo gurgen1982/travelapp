@@ -1,26 +1,21 @@
 ﻿@model IEnumerable<Travel.ViewModels.NewsViewModel>
-
+@using Resources
+@using Travel.Helper
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Body.Blog;
 }
-<hr />
 <div class="container">
-
-    <h2>Index</h2>
-
-    <table class="table">
+    <div class="row" style="margin-top:20px;margin-bottom:20px;">
         @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <a href="@Url.Action("Details", new { id= item.News.NewsID })">
-                        @Html.DisplayFor(modelItem => item.News.CommonName)
-                        <img src="@item.PhotoPath" width="100" />
-                    </a>
-                </td>
-            </tr>
+            {
+            <div class="col-md-12">
+                <a href="@Url.Action("Details", new { id= item.News.NewsID })" style="text-decoration:none;">
+                    <span style="font-size:20px;vertical-align:top;">
+                        <img src="@item.PhotoPath" width="250" style="padding-right:20px;"/>
+                        @Html.DisplayFor(modelItem => item.NewsDetail.Title)
+                    </span>
+                </a>
+            </div>
         }
-
-    </table>
-
+    </div>
 </div>

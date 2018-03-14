@@ -38,6 +38,7 @@ namespace Travel.App_Start
             filterContext.HttpContext.Response.Cookies.Set(new HttpCookie("language", lang));
 
             System.Threading.Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(SupportedLanguages.First(x => x.Locale.Equals(lang)).LangCulture);
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new System.Globalization.CultureInfo(SupportedLanguages.First(x => x.Locale.Equals(lang)).LangCulture);
 
             base.OnActionExecuting(filterContext);
         }

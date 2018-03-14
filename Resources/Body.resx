@@ -117,55 +117,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Address" xml:space="preserve">
-    <value>Երևան, Հայաստան, Հրաչյա Քոչար 4. Բարեկամություն բիզնես կենտրոն</value>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Մեր մասին</value>
   </data>
-  <data name="AgencyName" xml:space="preserve">
-    <value>Չիլլի Տրեվլ Քլաբ</value>
+  <data name="BestOffers" xml:space="preserve">
+    <value>Լավագույն առաջարկները</value>
   </data>
-  <data name="AppName" xml:space="preserve">
-    <value>Chilli Travel Club</value>
+  <data name="Blog" xml:space="preserve">
+    <value>Բլոգ</value>
   </data>
-  <data name="ContactPage" xml:space="preserve">
-    <value>Կոնտակտ</value>
+  <data name="CheckTopTours" xml:space="preserve">
+    <value>Տեսեք մեր լավագույն տուրերը</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Էլ․ փոստ</value>
+  <data name="FailedSubscriptionMessage" xml:space="preserve">
+    <value>Ներողություն, գործողությունը չհաջողվեց</value>
   </data>
-  <data name="FindMoreVideos" xml:space="preserve">
-    <value>Տեսնել ավելին ․․․</value>
+  <data name="FilterByCategory" xml:space="preserve">
+    <value>- ֆիլտրել ըստ տեսակի -</value>
   </data>
-  <data name="FindUsOn" xml:space="preserve">
-    <value>ԳՏԵՔ ՄԵԶ</value>
+  <data name="FilterByCountry" xml:space="preserve">
+    <value>- ֆիլտրել ըստ երկրի -</value>
   </data>
-  <data name="MenuAboutUs" xml:space="preserve">
-    <value>ՄԵՐ ՄԱՍԻՆ</value>
+  <data name="FindPerfectTour" xml:space="preserve">
+    <value>ԳՏՆԵԼ ԿԱՏԱՐՅԱԼ ՏՈՒՐ</value>
   </data>
-  <data name="MenuBlog" xml:space="preserve">
-    <value>ԲԼՈԳ</value>
+  <data name="GetBestOffers" xml:space="preserve">
+    <value>Առաջինը իմացիր լավագույն առաջարկների մասին</value>
   </data>
-  <data name="MenuGallery" xml:space="preserve">
-    <value>ՏԵՍԱԴԱՐԱՆ</value>
+  <data name="LetsBook" xml:space="preserve">
+    <value>Վստահեք Ձեր հաջորդ հանգիստը մեզ</value>
   </data>
-  <data name="MenuHome" xml:space="preserve">
-    <value>ՍԿԻԶԲ</value>
+  <data name="MessageFailed" xml:space="preserve">
+    <value>Չհաջողվեց ուղարկել հաղորդագրությունը</value>
   </data>
-  <data name="MenuTours" xml:space="preserve">
-    <value>ՏՈՒՐԵՐ</value>
+  <data name="MessageSent" xml:space="preserve">
+    <value>Հաղորդագրությունը հաջողությամբ ուղարկվեց</value>
   </data>
-  <data name="Message" xml:space="preserve">
-    <value>Հաղորդագրություն</value>
+  <data name="NoTourFound" xml:space="preserve">
+    <value>Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։ Փորձեք օգտագործել այլ հարցում։</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Անուն</value>
+  <data name="Perfection1" xml:space="preserve">
+    <value>Մեր պրոֆեսիոնալիզմը կօգնի Ձեզ</value>
   </data>
-  <data name="RequestNow" xml:space="preserve">
-    <value>ԱՄՐԱԳՐԵԼ ՀԻՄԱ</value>
+  <data name="Perfection2" xml:space="preserve">
+    <value>գտնել Ձեր կատարյալ ճամփորդությունը</value>
   </data>
-  <data name="Search" xml:space="preserve">
-    <value>Փնտրել</value>
+  <data name="RelatedTours" xml:space="preserve">
+    <value>ՁԵԶ ԿԱՐՈՂ Է ՀԵՏԱՔՐՔՐԵԼ ՆԱԵՎ</value>
   </data>
-  <data name="VideoGallery" xml:space="preserve">
-    <value>Տեսադարան</value>
+  <data name="SendMessage" xml:space="preserve">
+    <value>ՈՒՂԱՐԿԵԼ</value>
+  </data>
+  <data name="SubScribe" xml:space="preserve">
+    <value>Բաժանորդագրվել</value>
+  </data>
+  <data name="SubscriptionMessage" xml:space="preserve">
+    <value>Շնորհակալություն մեր նորություններին բաժանորդագրվելու համար</value>
+  </data>
+  <data name="Tours" xml:space="preserve">
+    <value>Տուրեր</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>ԲՈԼՈՐԸ․․․</value>
+  </data>
+  <data name="WeAreDifferent" xml:space="preserve">
+    <value>Ինչով ենք մենք յուրահատուկ</value>
   </data>
 </root>

@@ -2,8 +2,7 @@
 @using Resources
 
 <div class="container">
-    @*<h2>@Common.ContactPage</h2>*@
-    <h3>@Common.LetsBook</h3>
+    <h3>@Body.LetsBook</h3>
     
     @using (Ajax.BeginForm("Send", controllerName: "Mails", routeValues: null, ajaxOptions: new AjaxOptions { OnComplete = "index.onComplete", OnBegin="index.onBegin" }, htmlAttributes: new { id="frmSendContactMail"}))
     {
@@ -31,7 +30,7 @@
 
             <div class="form-group">
                 <div class="col-md-12">
-                    <input type="submit" id="btnSumbit" value="@Common.SendMessage" class="btn btn-default" />
+                    <input type="submit" id="btnSumbit" value="@Body.SendMessage" class="btn btn-default" />
                     <span class="text-success glyphicon glyphicon-send sending"></span>
                     <span id="ajaxMessage"></span>
                 </div>
@@ -41,7 +40,7 @@
     }
 </div>
 <script>
-    var successMessage = '@Common.MessageSent';
-    var failedMessage = '@Common.MessageFailed';
+    var successMessage = '@Body.MessageSent';
+    var failedMessage = '@Body.MessageFailed';
 </script>
 @Scripts.Render("~/bundles/homeIndex")

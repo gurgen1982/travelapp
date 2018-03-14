@@ -11,7 +11,7 @@ using Travel.ViewModels;
 
 namespace Travel.Controllers
 {
-    public class TourController : Controller
+    public class ToursController : Controller
     {
         private DbEntity db = new DbEntity();
 

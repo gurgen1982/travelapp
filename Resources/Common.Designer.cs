@@ -61,16 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Մեր Մասին.
-        /// </summary>
-        public static string AboutUs {
-            get {
-                return ResourceManager.GetString("AboutUs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Երևան, Հայաստան, Հերացի 18, 0025.
+        ///   Looks up a localized string similar to Երևան, Հայաստան, Հրաչյա Քոչար 4. Բարեկամություն բիզնես կենտրոն.
         /// </summary>
         public static string Address {
             get {
@@ -79,11 +70,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Տռավլ Էջնսի.
+        ///   Looks up a localized string similar to Չիլլի Տրեվլ Քլաբ.
         /// </summary>
         public static string AgencyName {
             get {
                 return ResourceManager.GetString("AgencyName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chilli Travel Club.
+        /// </summary>
+        public static string AppName {
+            get {
+                return ResourceManager.GetString("AppName", resourceCulture);
             }
         }
         
@@ -106,15 +106,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ներողություն, գործողությունը չհաջողվեց.
-        /// </summary>
-        public static string FailedSubscriptionMessage {
-            get {
-                return ResourceManager.GetString("FailedSubscriptionMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Տեսնել ավելին ․․․.
         /// </summary>
         public static string FindMoreVideos {
@@ -124,7 +115,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Գտեք մեզ.
+        ///   Looks up a localized string similar to ԳՏԵՔ ՄԵԶ.
         /// </summary>
         public static string FindUsOn {
             get {
@@ -133,20 +124,47 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Առաջինը իմացիր լավագույն առաջարկների մասին.
+        ///   Looks up a localized string similar to ՄԵՐ ՄԱՍԻՆ.
         /// </summary>
-        public static string GetBestOffers {
+        public static string MenuAboutUs {
             get {
-                return ResourceManager.GetString("GetBestOffers", resourceCulture);
+                return ResourceManager.GetString("MenuAboutUs", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Վստահեք Ձեր հաջորդ հանգիստը մեզ.
+        ///   Looks up a localized string similar to ԲԼՈԳ.
         /// </summary>
-        public static string LetsBook {
+        public static string MenuBlog {
             get {
-                return ResourceManager.GetString("LetsBook", resourceCulture);
+                return ResourceManager.GetString("MenuBlog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ՏԵՍԱԴԱՐԱՆ.
+        /// </summary>
+        public static string MenuGallery {
+            get {
+                return ResourceManager.GetString("MenuGallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ՍԿԻԶԲ.
+        /// </summary>
+        public static string MenuHome {
+            get {
+                return ResourceManager.GetString("MenuHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ՏՈՒՐԵՐ.
+        /// </summary>
+        public static string MenuTours {
+            get {
+                return ResourceManager.GetString("MenuTours", resourceCulture);
             }
         }
         
@@ -160,24 +178,6 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Չհաջողվեց ուղարկել հաղորդագրությունը.
-        /// </summary>
-        public static string MessageFailed {
-            get {
-                return ResourceManager.GetString("MessageFailed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Հաղորդագրությունը հաջողությամբ ուղարկվեց.
-        /// </summary>
-        public static string MessageSent {
-            get {
-                return ResourceManager.GetString("MessageSent", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Անուն.
         /// </summary>
         public static string Name {
@@ -187,47 +187,20 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։ Փորձեք օգտագործել այլ հարցում։.
+        ///   Looks up a localized string similar to ԱՄՐԱԳՐԵԼ ՀԻՄԱ.
         /// </summary>
-        public static string NoTourFound {
+        public static string RequestNow {
             get {
-                return ResourceManager.GetString("NoTourFound", resourceCulture);
+                return ResourceManager.GetString("RequestNow", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ՁԵԶ ԿԱՐՈՂ Է ՀԵՏԱՔՐՔՐԵԼ ՆԱԵՎ.
+        ///   Looks up a localized string similar to Փնտրել.
         /// </summary>
-        public static string RelatedTours {
+        public static string Search {
             get {
-                return ResourceManager.GetString("RelatedTours", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ՈՒՂԱՐԿԵԼ.
-        /// </summary>
-        public static string SendMessage {
-            get {
-                return ResourceManager.GetString("SendMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Բաժանորդագրվել.
-        /// </summary>
-        public static string SubScribe {
-            get {
-                return ResourceManager.GetString("SubScribe", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Շնորհակալություն մեր նորություններին բաժանորդագրվելու համար.
-        /// </summary>
-        public static string SubscriptionMessage {
-            get {
-                return ResourceManager.GetString("SubscriptionMessage", resourceCulture);
+                return ResourceManager.GetString("Search", resourceCulture);
             }
         }
         

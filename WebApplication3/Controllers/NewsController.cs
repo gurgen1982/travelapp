@@ -24,7 +24,7 @@ namespace Travel.Controllers
             ViewBag.LangID = LangID;
 
 
-            var newsHeaders = (from h in db.NewsHeaders.Where(x => x.MainPhotoID > 0)
+            var newsHeaders = (from h in db.NewsHeaders.Where(x => x.PhotoID > 0)
                                join d in db.NewsDetails on h.NewsID equals d.NewsID
                                where d.LangID == LangID
                                select new { h, d }).ToList();
@@ -36,7 +36,7 @@ namespace Travel.Controllers
                 var newsViewModel = new NewsViewModel();
                 newsViewModel.News= news.h;
                 newsViewModel.NewsDetail= news.d;
-                var photo = db.Photos.Find(news.h.MainPhotoID);
+                var photo = db.Photos.Find(news.h.PhotoID);
                 if (photo != null)
                 {
                     newsViewModel.PhotoPath = Helper.Images.GetThumbFullPath(photo);
@@ -63,10 +63,10 @@ namespace Travel.Controllers
             var newsDetail = newsHeader.NewsDetail.FirstOrDefault(x => x.Language.Locale.Equals(lang));
             if (newsDetail == null)
             {
-                newsDetail = new NewsLocalizedDetail { Title = newsHeader.CommonName, Description="No data for this language!" };
-                //return Redirect("/");
+                //newsDetail = new NewsLocalizedDetail { Title = newsHeader.CommonName, Description="No data for this language!" };
+                return RedirectToAction("index");
             }
-            ViewBag.MainPhotoPath = Helper.Images.GetThumbFullPath(db.Photos.Find(newsDetail.NewsHeader?.MainPhotoID));
+            ViewBag.MainPhotoPath = Helper.Images.GetThumbFullPath(db.Photos.Find(newsDetail.NewsHeader?.PhotoID));
             return View(newsDetail);
         }
         

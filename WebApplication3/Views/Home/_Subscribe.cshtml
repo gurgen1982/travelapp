@@ -3,7 +3,7 @@
 
 <div class="container">
     <div class="container black-box">
-        <h2>@Common.GetBestOffers</h2>
+        <h2>@Body.GetBestOffers</h2>
 
         @using (Ajax.BeginForm("Subscribe", controllerName: "Mails", routeValues: null, ajaxOptions: new AjaxOptions { OnComplete = "index.onSubScribed", OnBegin = "" }, htmlAttributes: new { id = "frmSubscription" }))
         {
@@ -18,7 +18,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <input type="submit" id="btnSubscribeSumbit" value="@Common.SubScribe" class="btn btn-danger" />
+                        <input type="submit" id="btnSubscribeSumbit" value="@Body.SubScribe" class="btn btn-danger" />
                         <span id="ajaxSubScriptionMessage"></span>
                     </div>
                 </div>
@@ -27,6 +27,6 @@
     </div>
 </div>
 <script>
-    var subscriptionMessage = '@Common.SubscriptionMessage';
-    var failedSubscriptionMessage = '@Common.FailedSubscriptionMessage';
+    var subscriptionMessage = '@Body.SubscriptionMessage';
+    var failedSubscriptionMessage = '@Body.FailedSubscriptionMessage';
 </script>

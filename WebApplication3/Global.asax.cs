@@ -26,6 +26,7 @@ namespace Travel
             Application["SupportedLanguages"] = languages;// new string[] { "hy", "en" };
             Application["ImagePath"] = "uploads";
             Application["ImageThumb"] = "thumb_";
+            Application["Settings"] = db.Settings.FirstOrDefault();
         }
 
         protected void Application_Error()

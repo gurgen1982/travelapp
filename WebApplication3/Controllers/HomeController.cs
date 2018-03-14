@@ -58,6 +58,16 @@ namespace Travel.Controllers
 
         public ActionResult About()
         {
+            var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            var langs = HttpContext.Application["SupportedLanguages"] as List<Language>;
+            if(langs.Any(x=>x.LangCulture.ToLower().Equals(culture.Name.ToLower())))
+            {
+                ViewBag.culture = culture.Name.ToLower();
+            }
+            else
+            {
+                ViewBag.culture = langs.FirstOrDefault().LangCulture.ToLower();
+            }
             return View();
         }
     }

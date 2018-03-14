@@ -118,54 +118,51 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Երևան, Հայաստան, Հրաչյա Քոչար 4. Բարեկամություն բիզնես կենտրոն</value>
+    <value>Yerevan, Armenia, Hrachya Kochar 4, Barekamutyun Business Center</value>
   </data>
   <data name="AgencyName" xml:space="preserve">
-    <value>Չիլլի Տրեվլ Քլաբ</value>
-  </data>
-  <data name="AppName" xml:space="preserve">
     <value>Chilli Travel Club</value>
   </data>
   <data name="ContactPage" xml:space="preserve">
-    <value>Կոնտակտ</value>
+    <value>Contact</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Էլ․ փոստ</value>
+    <value>Email</value>
   </data>
   <data name="FindMoreVideos" xml:space="preserve">
-    <value>Տեսնել ավելին ․․․</value>
+    <value>See More ...</value>
   </data>
   <data name="FindUsOn" xml:space="preserve">
-    <value>ԳՏԵՔ ՄԵԶ</value>
+    <value>FIND US</value>
   </data>
   <data name="MenuAboutUs" xml:space="preserve">
-    <value>ՄԵՐ ՄԱՍԻՆ</value>
+    <value>ABOUT US</value>
   </data>
   <data name="MenuBlog" xml:space="preserve">
-    <value>ԲԼՈԳ</value>
+    <value>BLOG</value>
   </data>
   <data name="MenuGallery" xml:space="preserve">
-    <value>ՏԵՍԱԴԱՐԱՆ</value>
+    <value>GALLERY</value>
   </data>
   <data name="MenuHome" xml:space="preserve">
-    <value>ՍԿԻԶԲ</value>
+    <value>HOME</value>
   </data>
   <data name="MenuTours" xml:space="preserve">
-    <value>ՏՈՒՐԵՐ</value>
+    <value>TOURS</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Հաղորդագրություն</value>
+    <value>Message</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>Անուն</value>
+    <value>Name</value>
   </data>
   <data name="RequestNow" xml:space="preserve">
-    <value>ԱՄՐԱԳՐԵԼ ՀԻՄԱ</value>
+    <value>BOOK NOW</value>
   </data>
   <data name="Search" xml:space="preserve">
-    <value>Փնտրել</value>
+    <value>Search</value>
   </data>
   <data name="VideoGallery" xml:space="preserve">
-    <value>Տեսադարան</value>
+    <value>Video Gallery</value>
   </data>
 </root>

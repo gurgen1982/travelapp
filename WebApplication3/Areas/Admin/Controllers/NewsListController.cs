@@ -59,7 +59,7 @@ namespace Travel.Areas.Admin.Controllers
             if (id == null)
             {
                 SetViewBagForItem(null);
-                return View(new TourHeader());
+                return View(new NewsHeader());
             }
             NewsHeader newsHeader = db.NewsHeaders.Find(id);
             if (newsHeader == null)
@@ -76,7 +76,7 @@ namespace Travel.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Item([Bind(Include = "NewsID,CommonName,MainPhotoID")] NewsHeader newsHeader)
+        public ActionResult Item([Bind(Include = "NewsID,CommonName,PhotoID")] NewsHeader newsHeader)
         {
             if (ModelState.IsValid)
             {
@@ -94,6 +94,7 @@ namespace Travel.Areas.Admin.Controllers
                     return RedirectToAction("Index");
                 }
             }
+            SetViewBagForItem(newsHeader);
             return View(newsHeader);
         }
 
@@ -191,14 +192,14 @@ namespace Travel.Areas.Admin.Controllers
         private void SetViewBagForItem(NewsHeader p)
         {
             ViewBag.Languages = db.Languages.ToList();
-            var photo = db.Photos.Find(p.MainPhotoID);
+            var photo = db.Photos.Find(p?.PhotoID);
             ViewBag.MainPhotoPath = Helper.Images.GetThumbFullPath(photo);
 
             ViewBag.Gallery = db.PhotoGalleryHeaders.Where(x => x.InternalUse).ToList();
         }
         private void SetViewBagForDetailItem(NewsLocalizedDetail tourDetail)
         {
-            var photo = db.Photos.Find(tourDetail.NewsHeader.MainPhotoID);
+            var photo = db.Photos.Find(tourDetail.NewsHeader.PhotoID);
             ViewBag.MainPhotoPath = Helper.Images.GetThumbFullPath(photo);
         }
     }

@@ -10,6 +10,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
+    [Authorize]
     public class NewsListController : Controller
     {
         private DbEntity db = new DbEntity();

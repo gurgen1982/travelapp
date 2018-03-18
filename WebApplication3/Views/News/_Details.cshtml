@@ -1,0 +1,24 @@
+﻿@model  Travel.ViewModels.NewsViewModel
+
+@*Travel.Models.NewsLocalizedDetail*@
+
+@*@{
+        ViewBag.Title = Model.Title;
+}
+<div class="container">*@
+
+<div>
+    <div style="text-align:center;font-size: 36px;margin-bottom:20px;">
+        @Model.NewsDetail.Title
+    </div>
+    <div style="color:darkgray; font-size:small;text-align:center;width:100%">@Model.News.PublishDate.ToShortDateString()</div>
+    <p style="line-height:1.5;">
+        <img src="@Model.PhotoPath" width="300" style="float:left;margin-right: 20px;margin-bottom: 10px;text-align:justify;" />
+        @Html.Raw(Model.NewsDetail.Description)
+    </p>
+</div>
+
+@*</div>*@
+
+@*@section scripts{
+    }*@

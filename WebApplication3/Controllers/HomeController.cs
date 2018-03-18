@@ -20,7 +20,7 @@ namespace Travel.Controllers
             var model = new HomeIndexViewModel();
             model.MainCarouselList = db.MainCarousels.Where(x => !x.Disabled && x.LangID == LangID).ToList();
             model.VideoBox = db.VideoGallery.Where(x => x.ShowAsMain).OrderBy(x => x.ShowInOrder).Take(4).ToList();
-            model.PhotoGallery = db.Photos.ToList();
+            model.PhotoGallery = db.Photos.Where(x => !x.PhotoGallery.InternalUse).ToList();
             model.Countries = db.CountryHeaders.Where(x=>x.ShowInHomePage).ToList();
 
             // tours

@@ -1,4 +1,6 @@
-﻿
+﻿.lang-highlighted {
+}
+
 .bar-top-info {
     color: white;
     background-color: black;
@@ -80,7 +82,7 @@
 
 .search-ul {
     float: right;
-    display:none;/*we don't need this search box yet! */
+    display: none; /*we don't need this search box yet! */
 }
 
 .bar-top-info li.search-bar {
@@ -106,7 +108,7 @@
 }
 
 @media (max-width:768px) {
-    .bar-top-info ul.info-bar {
+    .bar-top-info ul.info-bar > li:last-child {
         display: none;
     }
 
@@ -117,6 +119,17 @@
     .search-ul {
         float: none;
     }
+
+    .navbar-default ul.navbar-nav,
+    .navbar-default ul.navbar-nav li a {
+        color: white;
+        background-color: black;
+    }
+
+        .navbar-default ul.navbar-nav li a:hover {
+            color: orangered;
+            text-decoration: none;
+        }
 }
 
 .bar-top-info li.search-bar input:focus,
@@ -165,7 +178,7 @@
     font-weight: 900;
     font-family: Lato, sans-serif;
     font-size: 12px;
-    text-align:center;
+    text-align: center;
 }
 
 .theme-button {
@@ -316,11 +329,13 @@
 }
 
     .parallax-container span.border {
-        background-color: #111;
+        /*background-color: #111;*/
         color: #fff;
         padding: 18px;
         font-size: 25px;
         letter-spacing: 10px;
+        background-color: transparent;
+        /*color: #f7f7f7;*/
     }
 
 .parallax-img1 {
@@ -346,6 +361,15 @@
     text-align: center;
     color: #000;
 }
+
+    .parallax-caption > a,
+    .parallax-caption > a:hover {
+        text-decoration: none;
+        font-family: ChilliFont;
+        background-color: transparent;
+        font-size: 46px;
+        color: #f7f7f7;
+    }
 /* Turn off parallax scrolling for tablets and phones */
 @media only screen and (max-device-width: 1024px) {
     .parallax-img1, .parallax-img2 {
@@ -429,6 +453,10 @@
         background-repeat: no-repeat;
         min-height: 300px;
         min-width: 300px;
+    }
+
+    .gallery-container div {
+        text-align: center;
     }
 
 @media (max-width:600px) {
@@ -697,8 +725,12 @@ li.k-item k-state-selected {
 .country-container {
     /*margin: 20px 0px 20px 0px;*/
     margin: 0;
-    padding-bottom: 20px;
+    margin-bottom: 20px;
 }
+
+    .country-container .border {
+        font-size: 46px !important;
+    }
 
     .country-container .country {
         transition: 0.3s;
@@ -753,9 +785,9 @@ li.k-item k-state-selected {
     font-size: 32px;
     font-weight: 900;
     text-align: center;
-    text-transform:uppercase; 
-    margin-top:-150px;
-    margin-bottom:130px;
+    text-transform: uppercase;
+    margin-top: -150px;
+    margin-bottom: 130px;
 }
 
 .country-detail-desc {
@@ -766,5 +798,5 @@ li.k-item k-state-selected {
 
 .country-tour-list {
     /*margin-bottom: 20px;*/
-    margin-top:20px;
+    margin-top: 20px;
 }

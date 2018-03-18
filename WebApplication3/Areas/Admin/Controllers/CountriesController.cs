@@ -11,6 +11,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
+    [Authorize]
     public class CountriesController : Controller
     {
         private DbEntity db = new DbEntity();
@@ -53,7 +54,11 @@ namespace Travel.Areas.Admin.Controllers
             {
                 db.CountryHeaders.Add(countryHeader);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                foreach (var lang in db.Languages)
+                {
+                    db.CountryDetails.Add(new CountryLocalizedDetail { LangID = lang.LangID, CountryID = countryHeader.CountryID, CountryName = countryHeader.CommonName });
+                }
+                return RedirectToAction("edit", new { id = countryHeader.CountryID });
             }
 
             return View(countryHeader);
@@ -74,9 +79,10 @@ namespace Travel.Areas.Admin.Controllers
             var model = new CountryViewModel
             {
                 CountryHeader = countryHeader,
+                Languages = db.Languages.ToList(),
+                Gallery = db.PhotoGalleryHeaders.Where(x => x.InternalUse).ToList(),
                 IsEditMode = id > 0
             };
-            ViewBag.Gallery = db.PhotoGalleryHeaders.Where(x => x.InternalUse).ToList();
             return View(model);
         }
 

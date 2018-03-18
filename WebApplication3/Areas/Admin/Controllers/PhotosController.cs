@@ -12,6 +12,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PhotosController : Controller
     {
         private string UploadedImagePath { get; set; }

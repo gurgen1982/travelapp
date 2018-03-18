@@ -36,6 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>6</LangVersion>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -58,13 +59,49 @@
       <HintPath>..\packages\ImageResizer.4.2.0\lib\net45\ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -130,14 +167,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\LanguageFilter.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NullRefExceptionHandler.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\CountriesController.cs" />
     <Compile Include="Areas\Admin\Controllers\DefaultController.cs" />
     <Compile Include="Areas\Admin\Controllers\MainCarouselsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManageController.cs" />
     <Compile Include="Areas\Admin\Controllers\NewsListController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\PhotoGalleryLocalizedHeadersController.cs" />
@@ -164,147 +205,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helper\Images.cs" />
-    <Compile Include="Migrations\201801032036461_InitialCreate.cs" />
-    <Compile Include="Migrations\201801032036461_InitialCreate.Designer.cs">
-      <DependentUpon>201801032036461_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801032043470_removeStudent.cs" />
-    <Compile Include="Migrations\201801032043470_removeStudent.Designer.cs">
-      <DependentUpon>201801032043470_removeStudent.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801032131461_AddLanguageData.cs" />
-    <Compile Include="Migrations\201801032131461_AddLanguageData.Designer.cs">
-      <DependentUpon>201801032131461_AddLanguageData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801040841357_ContactMails.cs" />
-    <Compile Include="Migrations\201801040841357_ContactMails.Designer.cs">
-      <DependentUpon>201801040841357_ContactMails.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801040842464_ContactMails1.cs" />
-    <Compile Include="Migrations\201801040842464_ContactMails1.Designer.cs">
-      <DependentUpon>201801040842464_ContactMails1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801041905469_CreateSubscription.cs" />
-    <Compile Include="Migrations\201801041905469_CreateSubscription.Designer.cs">
-      <DependentUpon>201801041905469_CreateSubscription.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801042014484_CreateVideos.cs" />
-    <Compile Include="Migrations\201801042014484_CreateVideos.Designer.cs">
-      <DependentUpon>201801042014484_CreateVideos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801042026061_AddMainColumnVideos.cs" />
-    <Compile Include="Migrations\201801042026061_AddMainColumnVideos.Designer.cs">
-      <DependentUpon>201801042026061_AddMainColumnVideos.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801052226122_AddColumnOrder.cs" />
-    <Compile Include="Migrations\201801052226122_AddColumnOrder.Designer.cs">
-      <DependentUpon>201801052226122_AddColumnOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801062120084_TourTables.cs" />
-    <Compile Include="Migrations\201801062120084_TourTables.Designer.cs">
-      <DependentUpon>201801062120084_TourTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801062230341_AddPhotoData.cs" />
-    <Compile Include="Migrations\201801062230341_AddPhotoData.Designer.cs">
-      <DependentUpon>201801062230341_AddPhotoData.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801062236081_renamePhotoGalleryLocHeader.cs" />
-    <Compile Include="Migrations\201801062236081_renamePhotoGalleryLocHeader.Designer.cs">
-      <DependentUpon>201801062236081_renamePhotoGalleryLocHeader.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801202112565_photo_width.cs" />
-    <Compile Include="Migrations\201801202112565_photo_width.Designer.cs">
-      <DependentUpon>201801202112565_photo_width.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801312109078_tours.cs" />
-    <Compile Include="Migrations\201801312109078_tours.Designer.cs">
-      <DependentUpon>201801312109078_tours.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201801312112073_tours_forKey.cs" />
-    <Compile Include="Migrations\201801312112073_tours_forKey.Designer.cs">
-      <DependentUpon>201801312112073_tours_forKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802011739468_tours_forKey_1.cs" />
-    <Compile Include="Migrations\201802011739468_tours_forKey_1.Designer.cs">
-      <DependentUpon>201802011739468_tours_forKey_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802011749078_tours_1.cs" />
-    <Compile Include="Migrations\201802011749078_tours_1.Designer.cs">
-      <DependentUpon>201802011749078_tours_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802011757096_tours_2.cs" />
-    <Compile Include="Migrations\201802011757096_tours_2.Designer.cs">
-      <DependentUpon>201802011757096_tours_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802012001381_lang_1.cs" />
-    <Compile Include="Migrations\201802012001381_lang_1.Designer.cs">
-      <DependentUpon>201802012001381_lang_1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802031947414_photo1.cs" />
-    <Compile Include="Migrations\201802031947414_photo1.Designer.cs">
-      <DependentUpon>201802031947414_photo1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802040957290_header_rel.cs" />
-    <Compile Include="Migrations\201802040957290_header_rel.Designer.cs">
-      <DependentUpon>201802040957290_header_rel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802040958395_header_rel1.cs" />
-    <Compile Include="Migrations\201802040958395_header_rel1.Designer.cs">
-      <DependentUpon>201802040958395_header_rel1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802161945361_news.cs" />
-    <Compile Include="Migrations\201802161945361_news.Designer.cs">
-      <DependentUpon>201802161945361_news.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802162009271_lang_cult.cs" />
-    <Compile Include="Migrations\201802162009271_lang_cult.Designer.cs">
-      <DependentUpon>201802162009271_lang_cult.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802180021047_news_photo.cs" />
-    <Compile Include="Migrations\201802180021047_news_photo.Designer.cs">
-      <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803090808556_request.cs" />
-    <Compile Include="Migrations\201803090808556_request.Designer.cs">
-      <DependentUpon>201803090808556_request.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803091959255_nightCount.cs" />
-    <Compile Include="Migrations\201803091959255_nightCount.Designer.cs">
-      <DependentUpon>201803091959255_nightCount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803100752420_settings.cs" />
-    <Compile Include="Migrations\201803100752420_settings.Designer.cs">
-      <DependentUpon>201803100752420_settings.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803101007062_bestoffer.cs" />
-    <Compile Include="Migrations\201803101007062_bestoffer.Designer.cs">
-      <DependentUpon>201803101007062_bestoffer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803101141544_country_desc.cs" />
-    <Compile Include="Migrations\201803101141544_country_desc.Designer.cs">
-      <DependentUpon>201803101141544_country_desc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803101206343_country_photo.cs" />
-    <Compile Include="Migrations\201803101206343_country_photo.Designer.cs">
-      <DependentUpon>201803101206343_country_photo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803102253207_show_country.cs" />
-    <Compile Include="Migrations\201803102253207_show_country.Designer.cs">
-      <DependentUpon>201803102253207_show_country.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803110034301_country_tagline.cs" />
-    <Compile Include="Migrations\201803110034301_country_tagline.Designer.cs">
-      <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803121657067_settings_2.cs" />
-    <Compile Include="Migrations\201803121657067_settings_2.Designer.cs">
-      <DependentUpon>201803121657067_settings_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201803141916161_news_photo1.cs" />
-    <Compile Include="Migrations\201803141916161_news_photo1.Designer.cs">
-      <DependentUpon>201803141916161_news_photo1.cs</DependentUpon>
+    <Compile Include="Migrations\201803171358158_language_fontName.cs" />
+    <Compile Include="Migrations\201803171358158_language_fontName.Designer.cs">
+      <DependentUpon>201803171358158_language_fontName.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\DefaultValueSqlServerMigrationSqlGenerator.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\CategoryLocalizedDetail.cs" />
@@ -326,6 +235,7 @@
     <Compile Include="Models\TourPhoto.cs" />
     <Compile Include="Models\Video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\HomeIndexViewModel.cs" />
     <Compile Include="ViewModels\NewsViewModel.cs" />
     <Compile Include="ViewModels\TourViewModel.cs" />
@@ -373,7 +283,14 @@
     <Content Include="Images\2.JPG" />
     <Content Include="Images\3.JPG" />
     <Content Include="Images\coloricons-sprite.png" />
+    <Content Include="Images\hover vk.png" />
+    <Content Include="Images\instagram to copy.jpg" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\parallax1.jpg" />
+    <Content Include="Images\parallax2.jpg" />
     <Content Include="Images\social_sprites.png" />
+    <Content Include="Images\tiger-img.jpg" />
+    <Content Include="Images\vk.png" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -470,6 +387,30 @@
     <Content Include="Areas\Admin\Views\Countries\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Countries\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Countries\EditLocal.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ConfirmEmail.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ForgotPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Register.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ResetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\ResetPasswordConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\SendCode.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\VerifyCode.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\AddPhoneNumber.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\ChangePassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\ManageLogins.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\SetPassword.cshtml" />
+    <Content Include="Areas\Admin\Views\Manage\VerifyPhoneNumber.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Content\Fonts\Billabong.ttf" />
+    <Content Include="Content\Fonts\Arial AM.ttf" />
+    <None Include="Properties\PublishProfiles\Default Settings %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\Default Settings.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home\IndexBehaviour.js" />
@@ -1225,9 +1166,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
+    <None Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1256,7 +1197,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Shared\_about-en-us.cshtml" />
     <Content Include="Views\Shared\_about-hy-am.cshtml" />
-    <Content Include="Views\News\Details.cshtml" />
+    <Content Include="Views\News\_Details.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
     <Content Include="Views\Shared\zzz_Layout2.cshtml" />
     <Content Include="Views\Tours\RelatedTours.cshtml" />
@@ -1264,13 +1205,14 @@
     <Content Include="Views\Tours\_NoTourFound.cshtml" />
     <Content Include="Views\Country\Details.cshtml" />
     <Content Include="Views\Country\Index.cshtml" />
-    <Content Include="Views\Shared\_Countries.cshtml" />
+    <Content Include="Views\Shared\z_Countries.cshtml" />
     <Content Include="Views\Home\_Countries.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\Enum\" />
     <Folder Include="Models\Enums\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1284,117 +1226,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201801032036461_InitialCreate.resx">
-      <DependentUpon>201801032036461_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801032043470_removeStudent.resx">
-      <DependentUpon>201801032043470_removeStudent.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801032131461_AddLanguageData.resx">
-      <DependentUpon>201801032131461_AddLanguageData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801040841357_ContactMails.resx">
-      <DependentUpon>201801040841357_ContactMails.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801040842464_ContactMails1.resx">
-      <DependentUpon>201801040842464_ContactMails1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801041905469_CreateSubscription.resx">
-      <DependentUpon>201801041905469_CreateSubscription.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801042014484_CreateVideos.resx">
-      <DependentUpon>201801042014484_CreateVideos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801042026061_AddMainColumnVideos.resx">
-      <DependentUpon>201801042026061_AddMainColumnVideos.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801052226122_AddColumnOrder.resx">
-      <DependentUpon>201801052226122_AddColumnOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801062120084_TourTables.resx">
-      <DependentUpon>201801062120084_TourTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801062230341_AddPhotoData.resx">
-      <DependentUpon>201801062230341_AddPhotoData.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801062236081_renamePhotoGalleryLocHeader.resx">
-      <DependentUpon>201801062236081_renamePhotoGalleryLocHeader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801202112565_photo_width.resx">
-      <DependentUpon>201801202112565_photo_width.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801312109078_tours.resx">
-      <DependentUpon>201801312109078_tours.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201801312112073_tours_forKey.resx">
-      <DependentUpon>201801312112073_tours_forKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802011739468_tours_forKey_1.resx">
-      <DependentUpon>201802011739468_tours_forKey_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802011749078_tours_1.resx">
-      <DependentUpon>201802011749078_tours_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802011757096_tours_2.resx">
-      <DependentUpon>201802011757096_tours_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802012001381_lang_1.resx">
-      <DependentUpon>201802012001381_lang_1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802031947414_photo1.resx">
-      <DependentUpon>201802031947414_photo1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802040957290_header_rel.resx">
-      <DependentUpon>201802040957290_header_rel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802040958395_header_rel1.resx">
-      <DependentUpon>201802040958395_header_rel1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802161945361_news.resx">
-      <DependentUpon>201802161945361_news.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802162009271_lang_cult.resx">
-      <DependentUpon>201802162009271_lang_cult.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802180021047_news_photo.resx">
-      <DependentUpon>201802180021047_news_photo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803090808556_request.resx">
-      <DependentUpon>201803090808556_request.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803091959255_nightCount.resx">
-      <DependentUpon>201803091959255_nightCount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803100752420_settings.resx">
-      <DependentUpon>201803100752420_settings.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803101007062_bestoffer.resx">
-      <DependentUpon>201803101007062_bestoffer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803101141544_country_desc.resx">
-      <DependentUpon>201803101141544_country_desc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803101206343_country_photo.resx">
-      <DependentUpon>201803101206343_country_photo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803102253207_show_country.resx">
-      <DependentUpon>201803102253207_show_country.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803110034301_country_tagline.resx">
-      <DependentUpon>201803110034301_country_tagline.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803121657067_settings_2.resx">
-      <DependentUpon>201803121657067_settings_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201803141916161_news_photo1.resx">
-      <DependentUpon>201803141916161_news_photo1.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Resources\Resources.csproj">
       <Project>{8bdbf2c6-e720-49e3-af64-641a396fc121}</Project>
       <Name>Resources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201803171358158_language_fontName.resx">
+      <DependentUpon>201803171358158_language_fontName.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

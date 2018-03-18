@@ -10,5 +10,7 @@ namespace Travel.Areas.Admin.Models
     {
         public CountryHeader CountryHeader { get; set; }
         public bool IsEditMode { get; set; }
+        public IEnumerable<Language> Languages { get; set; }
+        public IEnumerable<PhotoGalleryHeader> Gallery{ get; set; }
     }
 }

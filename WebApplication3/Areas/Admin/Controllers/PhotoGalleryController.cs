@@ -11,6 +11,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PhotoGalleryController : Controller
     {
         private DbEntity db = new DbEntity();

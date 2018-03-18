@@ -14,6 +14,7 @@ namespace Travel.Models
         public string CommonName { get; set; }
         public string Locale { get; set; }
         public string LangCulture { get; set; }
+        public string FontName { get; set; }
         public virtual ICollection<NewsLocalizedDetail> NewsDetails { get; set; }
         public virtual ICollection<TourLocalizedDetail> TourDetails { get; set; }
         public virtual ICollection<CountryLocalizedDetail> Countries { get; set; }

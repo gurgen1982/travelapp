@@ -31,10 +31,8 @@
 </div>
 
 <div class="tiger-img">
-    @*<span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">Why We’re Different</span>*@
-
-    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.Perfection1</h2>
-    <h2 class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.Perfection2</h2>
+    <h2 class="border">@Body.Perfection1</h2>
+    <h2 class="border">@Body.Perfection2</h2>
     <div class="theme-button-container-right">
         @Html.ActionLink(Body.FindPerfectTour, "index", controllerName: "tours", routeValues: null,
             htmlAttributes: new { @class = "theme-button" })
@@ -43,7 +41,7 @@
 @Html.Partial("_MainVideoBox", Model.VideoBox)
 <div class="parallax-container parallax-img1">
     <div class="parallax-caption">
-        <span class="border" style="background-color:transparent;font-size:25px;color: #f7f7f7;">@Body.WeAreDifferent</span>
+        <span class="border">@Body.WeAreDifferent</span>
     </div>
 </div>
 <div class="parallax-container parallax-img2">

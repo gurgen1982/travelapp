@@ -1,12 +1,22 @@
 ﻿@using Resources
+@{ 
+    var settings = HttpContext.Current.Application["Settings"] as Travel.Models.Settings;
+    var supportedLang = HttpContext.Current.Application["SupportedLanguages"] as List<Travel.Models.Language>;
 
+    var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
+    var currentLang = supportedLang.FirstOrDefault(x => x.LangCulture.ToLower().Equals(culture.Name.ToLower()));
+    if (currentLang == null)
+    {
+        currentLang = supportedLang.FirstOrDefault();
+    }
+}
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        @(!string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.Title +" - "+ Common.AppName : Common.AppName)
+        @(!string.IsNullOrEmpty(ViewBag.Title) ? ViewBag.Title + " - " + Common.AppName : Common.AppName)
     </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -16,24 +26,21 @@
 
     <link href="~/Externals/owl/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
     <link href="~/Externals/owl/owlcarousel/assets/owl.theme.default.min.css" rel="stylesheet" />
+    <style>
+        @@font-face {
+    font-family: ChilliFont;
+    src: url(/Content/Fonts/@(currentLang.FontName));
+    font-weight: 400;
+}
+    </style>
 </head>
 <body>
 
-    @{
-        var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
-
-        var langIsEng = culture.Name.ToLower().Contains("en-us");
-
-        var hyClass = langIsEng ? "" : "lang-highlighted";
-        var enClass = langIsEng ? "lang-highlighted" : "";
-
-        var settings = HttpContext.Current.Application["Settings"] as Travel.Models.Settings;
-    }
     <div class="bar-top-info">
         <div>
             <ul class="nav navbar-nav info-bar">
-                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span>  @settings.PhoneNumbers </li>
-                <li><span class="glyphicon glyphicon-envelope theme-color"></span> @settings.Email </li>
+                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span>  @settings.PhoneNumbers 
+                    <span style="margin-left:30px;" class="glyphicon glyphicon-envelope theme-color"></span> @settings.Email </li>
                 <li><span class="glyphicon glyphicon-map-marker theme-color"></span> @Common.Address </li>
             </ul>
             @* we don't need search box yet. it is hidden from css...*@
@@ -80,20 +87,16 @@
                 <li>
                     @Html.ActionLink(Common.MenuAboutUs, "About", controllerName: "Home")
                 </li>
-                <li>
-                    @Ajax.ActionLink("Հայ", "Set",
-                        controllerName: "Language",
-                        routeValues: new { lang = "hy" },
-                        ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
-                        htmlAttributes: new { @class = hyClass })
-                </li>
-                <li>
-                    @Ajax.ActionLink("Eng", "Set",
-                        controllerName: "Language",
-                        routeValues: new { lang = "en" },
-                        ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
-                        htmlAttributes: new { @class = enClass })
-                </li>
+                @foreach (var language in supportedLang)
+                {
+                    <li>
+                        @Ajax.ActionLink(language.CommonName, "Set",
+                                 controllerName: "Language",
+                                 routeValues: new { lang = language.Locale },
+                                 ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                                 htmlAttributes: new { @class = currentLang == language ? "lang-highlighted" : "" })
+                    </li>
+                }
             </ul>
         </div>
         @*<div class="navbar-collapse collapse">

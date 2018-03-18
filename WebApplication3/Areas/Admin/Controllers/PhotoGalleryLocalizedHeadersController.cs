@@ -10,6 +10,7 @@ using Travel.Models;
 
 namespace Travel.Areas.Admin.Controllers
 {
+    [Authorize]
     public class PhotoGalleryLocalizedHeadersController : Controller
     {
         private DbEntity db = new DbEntity();

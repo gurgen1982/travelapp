@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Travel.GetCurrencyRates;
 using Travel.Models;
 using Travel.ViewModels;
 
@@ -14,14 +16,15 @@ namespace Travel.Controllers
 
         public ActionResult Index()
         {
+            var rate = 1;// GetRate();
             var lang = RouteData.Values["lang"] as string;
             var LangID = db.Languages.Where(x => x.Locale.Equals(lang))?.First()?.LangID;
             ViewBag.LangID = LangID;
             var model = new HomeIndexViewModel();
             model.MainCarouselList = db.MainCarousels.Where(x => !x.Disabled && x.LangID == LangID).ToList();
-            model.VideoBox = db.VideoGallery.Where(x => x.ShowAsMain).OrderBy(x => x.ShowInOrder).Take(4).ToList();
+            model.VideoBox = db.VideoGallery.Where(x => x.ShowAsMain).OrderBy(x => x.ShowInOrder).ToList();
             model.PhotoGallery = db.Photos.Where(x => !x.PhotoGallery.InternalUse).ToList();
-            model.Countries = db.CountryHeaders.Where(x=>x.ShowInHomePage).ToList();
+            model.Countries = db.CountryHeaders.Where(x => x.ShowInHomePage).ToList();
 
             // tours
             var tours = new List<TourViewModel>();
@@ -48,9 +51,12 @@ namespace Travel.Controllers
                     //tourViewModel.PhotoPath = Helper.Images.GetPath(photo.Path, photo.GalleryID);
                     tourViewModel.Photo = photo;
                 }
+                tourViewModel.Tour.Price = Math.Round(tourViewModel.Tour.Price * rate, 0);
                 tours.Add(tourViewModel);
             }
+            
             model.Tours = tours;
+            
             // end tours
 
             return View(model);
@@ -60,7 +66,7 @@ namespace Travel.Controllers
         {
             var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
             var langs = HttpContext.Application["SupportedLanguages"] as List<Language>;
-            if(langs.Any(x=>x.LangCulture.ToLower().Equals(culture.Name.ToLower())))
+            if (langs.Any(x => x.LangCulture.ToLower().Equals(culture.Name.ToLower())))
             {
                 ViewBag.culture = culture.Name.ToLower();
             }
@@ -69,6 +75,42 @@ namespace Travel.Controllers
                 ViewBag.culture = langs.FirstOrDefault().LangCulture.ToLower();
             }
             return View();
+        }
+
+        //[ChildActionOnly]
+        //[OutputCache(Duration = 360, VaryByParam = "currency")]
+        private ExchangeRate CurrencyRates(string currency)
+        {
+            var curDate = Convert.ToDateTime(HttpContext.Application["CurrencyDate"+ currency]?.ToString());
+            if (curDate.AddDays(1) < DateTime.Now)
+            {
+                var latestRates = (new GateSoapClient())?.ExchangeRatesLatest();
+                var latest = latestRates?.Rates.FirstOrDefault(x => x.ISO.Equals(currency)) ?? new ExchangeRate { Rate = "1" };
+                
+                HttpContext.Cache.Insert("CurrencyRate", latest);
+   HttpContext.Application["CurrencyDate" + currency] = DateTime.Now;
+                return latest;
+            }
+            else
+            {
+             
+                return HttpContext.Cache.Get("CurrencyRate") as ExchangeRate;
+            }
+        }
+
+        public decimal GetRate()
+        {
+            var cur = Request.Cookies["Currency"]?.Value ?? "AMD";
+            var currency = CurrencyRates(cur);
+            //var rateInfo = JsonConvert.DeserializeObject<ExchangeRate>(currency.ToString());
+            try
+            {
+                return Convert.ToDecimal(currency.Rate);
+            }
+            catch
+            {
+                return 1.0M;
+            }
         }
     }
 }

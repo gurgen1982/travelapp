@@ -129,6 +129,15 @@
   <data name="CheckTopTours" xml:space="preserve">
     <value>Check out our top-rated tours</value>
   </data>
+  <data name="CountOfTourist" xml:space="preserve">
+    <value>Count of Tourist</value>
+  </data>
+  <data name="CountOfTouristRange" xml:space="preserve">
+    <value>can be from 1 up to 1000</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="FailedSubscriptionMessage" xml:space="preserve">
     <value>Sbscription action failed.</value>
   </data>
@@ -141,20 +150,56 @@
   <data name="FindPerfectTour" xml:space="preserve">
     <value>FIND YOUR PERFECT TOUR</value>
   </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Your Name</value>
+  </data>
+  <data name="FullNameLength" xml:space="preserve">
+    <value>enter a name (3 up to 100 symbols)</value>
+  </data>
   <data name="GetBestOffers" xml:space="preserve">
     <value>Get the best offers first!</value>
   </data>
   <data name="LetsBook" xml:space="preserve">
     <value>Let us book your next trip!</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
   <data name="MessageFailed" xml:space="preserve">
     <value>Failed to send the message</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>enter a message (0 up to 1000 symbols)</value>
   </data>
   <data name="MessageSent" xml:space="preserve">
     <value>Message successfully sent</value>
   </data>
+  <data name="Min10" xml:space="preserve">
+    <value>minimum 10 symbols</value>
+  </data>
+  <data name="Min3" xml:space="preserve">
+    <value>minimum 3 symbols</value>
+  </data>
+  <data name="MustBeDate" xml:space="preserve">
+    <value>enter a date (Month/Day/Year)</value>
+  </data>
+  <data name="MustBeEmail" xml:space="preserve">
+    <value>enter an email</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>night</value>
+  </data>
+  <data name="Nights" xml:space="preserve">
+    <value>nights</value>
+  </data>
+  <data name="Nights2" xml:space="preserve">
+    <value>nights</value>
+  </data>
   <data name="NoTourFound" xml:space="preserve">
     <value>No tour found for the selected filtering. Please try to change filtering criterias.</value>
+  </data>
+  <data name="OtherContacts" xml:space="preserve">
+    <value>Other Contacts</value>
   </data>
   <data name="Perfection1" xml:space="preserve">
     <value>Find Travel Perfection With the</value>
@@ -165,14 +210,35 @@
   <data name="RelatedTours" xml:space="preserve">
     <value>SEE ALSO</value>
   </data>
+  <data name="RequestSent" xml:space="preserve">
+    <value>Request Sent! Thank You.</value>
+  </data>
+  <data name="RequestTour" xml:space="preserve">
+    <value>Request Tour</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>required</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
   <data name="SendMessage" xml:space="preserve">
     <value>SEND MESSAGE</value>
   </data>
   <data name="SubScribe" xml:space="preserve">
-    <value>SubScribe</value>
+    <value>Subscribe</value>
   </data>
   <data name="SubscriptionMessage" xml:space="preserve">
     <value>Thank you for joining our newsletter.</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="TitleLength" xml:space="preserve">
+    <value>enter a title (3 up to 100 symbols)</value>
+  </data>
+  <data name="TourDate" xml:space="preserve">
+    <value>Visit Date (Month/Day/Year)</value>
   </data>
   <data name="Tours" xml:space="preserve">
     <value>Tours</value>

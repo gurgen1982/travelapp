@@ -1,7 +1,8 @@
 ﻿@using Resources
-@{ 
+@{
     var settings = HttpContext.Current.Application["Settings"] as Travel.Models.Settings;
     var supportedLang = HttpContext.Current.Application["SupportedLanguages"] as List<Travel.Models.Language>;
+    var currencies = HttpContext.Current.Application["Currencies"] as List<Travel.Models.Currency>;
 
     var culture = System.Threading.Thread.CurrentThread.CurrentCulture;
     var currentLang = supportedLang.FirstOrDefault(x => x.LangCulture.ToLower().Equals(culture.Name.ToLower()));
@@ -9,7 +10,10 @@
     {
         currentLang = supportedLang.FirstOrDefault();
     }
+
+    var currentCurrency = HttpContext.Current.Request.Cookies["Currency"]?.Value ?? "AMD";
 }
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +24,7 @@
     </title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <link href="~/Content/Layout/index.css" rel="stylesheet" />
+    @*<link href="~/Content/Layout/index.css" rel="stylesheet" />*@
 
     <link href="https://cdn.rawgit.com/sachinchoolur/lightgallery.js/master/dist/css/lightgallery.css" rel="stylesheet">
 
@@ -33,16 +37,67 @@
     font-weight: 400;
 }
     </style>
+
 </head>
 <body>
 
     <div class="bar-top-info">
+        <div class="navbar-header" style="float:right;">
+            <div class="ddl-bar" style="display:none;">
+                <button class="current-ddl currency-container" onclick="dropDownCurrencyList()">
+                    @currentCurrency
+                </button>
+                <div class="ddl-bar-content" id="currencyContent">
+                    @foreach (var currency in currencies)
+                    {
+                        @Ajax.ActionLink(currency.Name, "SetCurrency",
+                                 controllerName: "Settings",
+                                 routeValues: new { currency = currency.Name },
+                                 ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                                 htmlAttributes: new { @class = (currentCurrency == currency.Name ? "lang-highlighted" : "") })
+                    }
+                </div>
+            </div>
+            <div class="ddl-bar">
+                <button class="current-ddl language-container" onclick="dropDownLanguageList()">
+                    @currentLang.CommonName
+                </button>
+                <div class="ddl-bar-content" id="languageContent">
+                    @foreach (var language in supportedLang)
+                    {
+                        @Ajax.ActionLink(language.CommonName, "SetLanguage",
+                                 controllerName: "Settings",
+                                 routeValues: new { lang = language.Locale },
+                                 ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                                 htmlAttributes: new { @class = currentLang == language ? "lang-highlighted" : "" })
+                    }
+                </div>
+            </div>
+        </div>
         <div>
             <ul class="nav navbar-nav info-bar">
-                <li><span class="glyphicon glyphicon-phone-alt theme-color"></span>  @settings.PhoneNumbers 
-                    <span style="margin-left:30px;" class="glyphicon glyphicon-envelope theme-color"></span> @settings.Email </li>
+                <li>
+                    <span class="theme-color" style="margin-right:30px;">β-version</span>
+                    <span class="glyphicon glyphicon-phone-alt theme-color"></span>  @settings.PhoneNumbers
+                    <span style="margin-left:30px;" class="glyphicon glyphicon-envelope theme-color"></span> @settings.Email
+                </li>
                 <li><span class="glyphicon glyphicon-map-marker theme-color"></span> @Common.Address </li>
             </ul>
+
+
+
+            @*<ul class="nav navbar-nav languages">
+                    @foreach (var language in supportedLang)
+                    {
+                        <li>
+                            @Ajax.ActionLink(language.CommonName, "Set",
+                                     controllerName: "Language",
+                                     routeValues: new { lang = language.Locale },
+                                     ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
+                                     htmlAttributes: new { @class = currentLang == language ? "lang-highlighted" : "" })
+                        </li>
+                    }
+                </ul>*@
             @* we don't need search box yet. it is hidden from css...*@
             <ul class="nav navbar-nav search-ul">
                 <li class="search-bar">
@@ -66,7 +121,7 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">
-                <span class="glyphicon glyphicon-map-marker"></span>Logo
+                <img src="~/Images/horizontal_logo_color.png" height="50" style="margin:0px;padding:0px;" />
             </a>
 
         </div>
@@ -87,16 +142,6 @@
                 <li>
                     @Html.ActionLink(Common.MenuAboutUs, "About", controllerName: "Home")
                 </li>
-                @foreach (var language in supportedLang)
-                {
-                    <li>
-                        @Ajax.ActionLink(language.CommonName, "Set",
-                                 controllerName: "Language",
-                                 routeValues: new { lang = language.Locale },
-                                 ajaxOptions: new AjaxOptions { HttpMethod = "POST", OnComplete = "reloadPage" },
-                                 htmlAttributes: new { @class = currentLang == language ? "lang-highlighted" : "" })
-                    </li>
-                }
             </ul>
         </div>
         @*<div class="navbar-collapse collapse">
@@ -114,16 +159,21 @@
         @RenderBody()
         @Html.Partial("_Footer")
     </div>
+    <div id="snackbar">@Body.RequestSent</div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/layout")
 
-    @*@Styles.Render("~/Content/Index")*@
-
     <script src="~/Externals/owl/owlcarousel/owl.carousel.js"></script>
-    @*<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.matchHeight/0.7.0/jquery.matchHeight-min.js"></script>*@
     @RenderSection("scripts", required: false)
+
+
+    <script>
+
+    </script>
+
+
 </body>
 </html>

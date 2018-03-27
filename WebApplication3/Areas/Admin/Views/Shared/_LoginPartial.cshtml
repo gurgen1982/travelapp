@@ -4,7 +4,7 @@
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
     {
     @Html.AntiForgeryToken()
-        <ul class="nav navbar-nav" style="float:left !important">
+        <ul class="nav navbar-nav navbar-right">
             <li>@Html.ActionLink("Main Carousel", "Index", "MainCarousels", new { area = "Admin" }, new { })</li>
             <li>@Html.ActionLink("Videos", "Index", "Videos", new { area = "Admin" }, new { })</li>
             <li>@Html.ActionLink("Photo Gallery", "Index", "PhotoGallery", new { area = "Admin" }, new { })</li>
@@ -15,13 +15,12 @@
             <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
             @*<li>@Html.ActionLink("Photo Gallery Localized", "Index", "PhotoGalleryLocalizedHeaders", new { area = "Admin" }, new { })</li>
                 <li>@Html.ActionLink("Photos", "Index", "Photos", new { area = "Admin" }, new { })</li>*@
+
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-        </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-    </ul>
     }
 }
 else

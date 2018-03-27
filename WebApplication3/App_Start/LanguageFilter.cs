@@ -26,7 +26,7 @@ namespace Travel.App_Start
             }
             if (string.IsNullOrEmpty(lang) || !SupportedLanguages.Any(x => x.Locale.Equals(lang)))
             {
-                lang = SupportedLanguages[0].Locale;
+                lang = "en";// SupportedLanguages.FirstOrDefault(x=>x.CommonName.Equals("Eng")).Locale;
                 filterContext.HttpContext.Request.RequestContext.RouteData.Values.Remove("lang");
                 filterContext.HttpContext.Request.RequestContext.RouteData.Values.Add("lang", lang);
                 //filterContext.HttpContext.Response.RedirectToRoute(new { lang = SupportedLanguages[0] });

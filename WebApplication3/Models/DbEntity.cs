@@ -32,7 +32,7 @@ namespace Travel.Models
         public DbSet<NewsLocalizedDetail> NewsDetails { get; set; }
         public DbSet<Request> Requests { get; set; }
         public DbSet<Settings> Settings { get; set; }
-
+        public DbSet<Currency> Currencies { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();

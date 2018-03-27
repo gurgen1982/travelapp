@@ -91,7 +91,7 @@ namespace Travel.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( CountryHeader countryHeader)
+        public ActionResult Edit(CountryHeader countryHeader)
         {
             if (ModelState.IsValid)
             {
@@ -102,19 +102,32 @@ namespace Travel.Areas.Admin.Controllers
             return View(countryHeader);
         }
         // GET: Admin/Countries/Edit/5
-        public ActionResult EditLocal(int? id)
+        public ActionResult EditLocal(int? id, int? id2)
         {
-            if (id == null)
+            if (id == null && id2 == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CountryLocalizedDetail countryDetail = db.CountryDetails.Find(id);
-            if (countryDetail == null)
+            // if id is localized id then we don't pass second param
+            if (id != null && id2 == null)
             {
-                return HttpNotFound();
+                CountryLocalizedDetail countryDetail = db.CountryDetails.Find(id);
+                if (countryDetail == null)
+                {
+                    return HttpNotFound();
+                }
+
+                return View(countryDetail);
             }
-          
-            return View(countryDetail);
+            // if both params are passed then first is header id, second is language
+            if (id != null && id2 != null)
+            {
+                CountryLocalizedDetail countryDetail = new CountryLocalizedDetail { CountryID = id.Value, LangID = (short)id2.Value };
+                var lng = db.Languages.FirstOrDefault(x => x.LangID == (short)id2.Value);
+                countryDetail.Language = lng;
+                return View(countryDetail);
+            }
+            return View();
         }
 
         // POST: Admin/Countries/Edit/5
@@ -122,11 +135,19 @@ namespace Travel.Areas.Admin.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditLocal( CountryLocalizedDetail countryDetail)
+        public ActionResult EditLocal(CountryLocalizedDetail countryDetail)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(countryDetail).State = EntityState.Modified;
+                if (Request.Form["IsNew"] != null)
+                {
+                    countryDetail.ID = 0;
+                    db.CountryDetails.Add(countryDetail);
+                }
+                else
+                {
+                    db.Entry(countryDetail).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Edit", new { id = countryDetail.CountryID });
             }

@@ -15,7 +15,7 @@ namespace Travel.Models
         public string Details { get; set; }
         [StringLength(maximumLength: 50)]
         public string SubDetails { get; set; }
-        public decimal Price { get; set; }
+        public int Price { get; set; }
         [Required]
         public string LinkUrl { get; set; }
         [Required]

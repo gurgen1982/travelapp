@@ -1,10 +1,36 @@
 ﻿@model IEnumerable<Travel.Models.MainCarousel>
+@if (Model.Count() > 0)
+{
+    <div id="wowslider-container1">
+        <div class="ws_images">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <a href="@item.LinkUrl" target="_self">
+                            <img src="@item.ImageUrl" alt="@item.Title" title="@(item.Price > 0 ? "$" + item.Price : "")" id=@("wows1_" + item.ID) />
+                        </a>
+                        <a href="@item.LinkUrl">
+                            <div style="font-size:x-large;font-weight:bold;">
+                                @item.Title
+                                <span style="font-size:large;">@item.SubTitle</span><br />
+                                @item.Details
+                                <span style="font-size:large;">@item.SubDetails</span>
+                            </div>
+                        </a>
 
+                    </li>
+                }
+            </ul>
+        </div>
+
+    </div>
+}
 <div id="mainCarousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         @for (int i = 0; i < Model.Count(); i++)
-        {
+            {
             <li data-target="#mainCarousel" data-slide-to="@i" class="@(i == 0 ? "active": "")"></li>
         }
     </ol>
@@ -13,12 +39,12 @@
     <div class="carousel-inner">
         @{ int j = 0;}
         @foreach (var item in Model)
-        {
+            {
             <div class="main-carousel-slide-container item @(j++ ==0 ? "active": "")">
                 <a href="@item.LinkUrl">
                     <img src="@item.ImageUrl" style="width:100%" />
                     <div class="main-carousel-title">
-                        
+
                     </div>
                 </a>
 
@@ -34,11 +60,11 @@
 
     <!-- Left and right controls -->
     @*<a class="left carousel-control" href="#mainCarousel" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#mainCarousel" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right"></span>
-        <span class="sr-only">Next</span>
-    </a>*@
+            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#mainCarousel" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span class="sr-only">Next</span>
+        </a>*@
 </div>

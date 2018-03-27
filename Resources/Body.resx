@@ -129,6 +129,15 @@
   <data name="CheckTopTours" xml:space="preserve">
     <value>Տեսեք մեր լավագույն տուրերը</value>
   </data>
+  <data name="CountOfTourist" xml:space="preserve">
+    <value>Հյուրերի քանակը</value>
+  </data>
+  <data name="CountOfTouristRange" xml:space="preserve">
+    <value>կարող է լինել 1-մինչև 1000</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Էլ․ հասցե</value>
+  </data>
   <data name="FailedSubscriptionMessage" xml:space="preserve">
     <value>Ներողություն, գործողությունը չհաջողվեց</value>
   </data>
@@ -141,20 +150,56 @@
   <data name="FindPerfectTour" xml:space="preserve">
     <value>ԳՏՆԵԼ ԿԱՏԱՐՅԱԼ ՏՈՒՐ</value>
   </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Ձեր Անունը</value>
+  </data>
+  <data name="FullNameLength" xml:space="preserve">
+    <value>մուտքագրեք անուն (3-ից մինչև 100 տառ)</value>
+  </data>
   <data name="GetBestOffers" xml:space="preserve">
     <value>Առաջինը իմացիր լավագույն առաջարկների մասին</value>
   </data>
   <data name="LetsBook" xml:space="preserve">
     <value>Վստահեք Ձեր հաջորդ հանգիստը մեզ</value>
   </data>
+  <data name="Message" xml:space="preserve">
+    <value>Հաղորդագրություն</value>
+  </data>
   <data name="MessageFailed" xml:space="preserve">
     <value>Չհաջողվեց ուղարկել հաղորդագրությունը</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>մուտքագրեք հաղորդագրություն (0-ից մինչև 1000 տառ)</value>
   </data>
   <data name="MessageSent" xml:space="preserve">
     <value>Հաղորդագրությունը հաջողությամբ ուղարկվեց</value>
   </data>
+  <data name="Min10" xml:space="preserve">
+    <value>առնվազն 10 տառ</value>
+  </data>
+  <data name="Min3" xml:space="preserve">
+    <value>առնվազն 3 տառ</value>
+  </data>
+  <data name="MustBeDate" xml:space="preserve">
+    <value>մուտքագրեք ամսաթիվ (ամիս/օր/տարի)</value>
+  </data>
+  <data name="MustBeEmail" xml:space="preserve">
+    <value>մուտքագրեք էլ․ հասցե</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>գիշեր</value>
+  </data>
+  <data name="Nights" xml:space="preserve">
+    <value>գիշեր</value>
+  </data>
+  <data name="Nights2" xml:space="preserve">
+    <value>գիշեր</value>
+  </data>
   <data name="NoTourFound" xml:space="preserve">
-    <value>Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։ Փորձեք օգտագործել այլ հարցում։</value>
+    <value>Տվյալ հարցմանը համապատասխան ոչինչ չի գտնվել։</value>
+  </data>
+  <data name="OtherContacts" xml:space="preserve">
+    <value>Հեռախոս</value>
   </data>
   <data name="Perfection1" xml:space="preserve">
     <value>Մեր պրոֆեսիոնալիզմը կօգնի Ձեզ</value>
@@ -165,6 +210,18 @@
   <data name="RelatedTours" xml:space="preserve">
     <value>ՁԵԶ ԿԱՐՈՂ Է ՀԵՏԱՔՐՔՐԵԼ ՆԱԵՎ</value>
   </data>
+  <data name="RequestSent" xml:space="preserve">
+    <value>Հարցումը ուղարկված է։ Շնորհակալություն</value>
+  </data>
+  <data name="RequestTour" xml:space="preserve">
+    <value>Պատվիրել Տուր</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>պարտադիր է</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Ուղարկել</value>
+  </data>
   <data name="SendMessage" xml:space="preserve">
     <value>ՈՒՂԱՐԿԵԼ</value>
   </data>
@@ -173,6 +230,15 @@
   </data>
   <data name="SubscriptionMessage" xml:space="preserve">
     <value>Շնորհակալություն մեր նորություններին բաժանորդագրվելու համար</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Վերնագիր</value>
+  </data>
+  <data name="TitleLength" xml:space="preserve">
+    <value>մուտքագրեք վերնագիր (3-ից մինչև 100 տառ)</value>
+  </data>
+  <data name="TourDate" xml:space="preserve">
+    <value>Այցելության սկիզբ (ամիս/օր/տարի)</value>
   </data>
   <data name="Tours" xml:space="preserve">
     <value>Տուրեր</value>

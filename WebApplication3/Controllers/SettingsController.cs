@@ -9,11 +9,11 @@ using Travel.Models;
 
 namespace Travel.Controllers
 {
-    public class LanguageController : Controller
+    public class SettingsController : Controller
     {
         // set language
         [HttpPost]
-        public ActionResult Set(string lang)
+        public ActionResult SetLanguage(string lang)
         {
             var prevLang = "";
             var supportedLangs = HttpContext.Application.Get("SupportedLanguages");
@@ -38,6 +38,26 @@ namespace Travel.Controllers
             }
             return Json(url, JsonRequestBehavior.AllowGet);
             //return new HttpStatusCodeResult(HttpStatusCode.OK);
+        }
+
+        // set language
+        [HttpPost]
+        public ActionResult SetCurrency(string currency)
+        {
+            var supportedCurrencies = HttpContext.Application.Get("Currencies");
+            IList<Currency> SupportedCurrencies = null;
+            if (supportedCurrencies != null)
+            {
+                SupportedCurrencies = supportedCurrencies as IList<Currency>;
+            }
+            var curr = SupportedCurrencies.FirstOrDefault(x => x.Name.Equals(currency));
+            if (curr != null)
+            {
+                var langCookie = new HttpCookie("Currency", currency);
+                langCookie.Expires = DateTime.Now.AddYears(5);
+                Response.Cookies.Set(langCookie);
+            }
+            return Json("", JsonRequestBehavior.AllowGet);
         }
     }
 }

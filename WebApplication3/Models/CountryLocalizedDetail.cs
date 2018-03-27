@@ -18,5 +18,6 @@ namespace Travel.Models
         [AllowHtml]
         public string Description { get; set; }
         public virtual Language Language { get; set; }
+        public virtual CountryHeader CountryHeader { get; set; }
     }
 }

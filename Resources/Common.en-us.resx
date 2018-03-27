@@ -118,10 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Yerevan, Armenia, Hrachya Kochar 4, Barekamutyun Business Center</value>
-  </data>
-  <data name="AgencyName" xml:space="preserve">
-    <value>Chilli Travel Club</value>
+    <value>Hr. Kochar 4, Yerevan, Armenia</value>
   </data>
   <data name="ContactPage" xml:space="preserve">
     <value>Contact</value>

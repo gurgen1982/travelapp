@@ -16,7 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
-
+        @Html.HiddenFor(model => model.ImageUrl)
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -68,8 +68,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ImageUrl, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
+                @*@Html.EditorFor(model => model.ImageUrl, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })*@
+
+                <img id="imgNewsPhotoPreview" src="@Model.ImageUrl" class="tour-photo-list" style="height:auto !important" />
             </div>
         </div>
 
@@ -86,7 +88,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.LangID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.LangID, ViewBag.LangID as IEnumerable<SelectListItem>, new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.LangID, ViewBag.LanguageList as IEnumerable<SelectListItem>, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.LangID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -98,7 +100,114 @@
         </div>
     </div>
 }
+<h4>Browse Photo Galleries</h4>
+<hr />
+<div class="row">
+    <div class="col-md-3">
+        <div class="demo-section k-content">
+            <ul id="galleryTree" class="gallery-tree-folder">
+                @foreach (var item in ViewBag.Gallery as IEnumerable<Travel.Models.PhotoGalleryHeader>)
+            {
+                    <li data-expanded="true" data-id="@item.GalleryID">
+                        <span class="k-sprite folder"></span>
+                        @item.GalleryCommonName
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="k-content wide">
+            <div id="photoList"></div>
+            <div id="pager" class="k-pager-wrap"></div>
+        </div>
+    </div>
+</div>
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var galId = 0;
+        $(document).ready(function () {
+            $("#galleryTree").kendoTreeView({
+                select: function (e) {
+                    galId = $(e.node).data("id");
+                    dataSource.read();
+                }
+            });
+        });
+    </script>
+
+    <script>
+        function MyStyle(w, h) {
+            var leftMargin = 0;
+            var topMargin = 0;
+            var st = "";
+            var coef = w / 200;
+            if (w > h) {
+                leftMargin = -((w - h) / 2) / coef;
+                return "margin-left: " + leftMargin + "px; height:200px; width:auto";
+            } else {
+                topMargin = -((h - w) / 2) / coef;
+                return "margin-top: " + topMargin + "px; width:200px; height:auto";
+            }
+        }
+    </script>
+    <script type="text/x-kendo-template" id="template">
+        <div class="tour-photo-list">
+            <img src="#=Path #" class="photo-index-img" style="#= MyStyle(Width, Height)#" />
+            # if( Title != null ) { # <span class="tour-photo-title">#:Title#</span># }#
+        </div>
+    </script>
+
+    <script>
+
+        ///// common
+        var dataSource = new kendo.data.DataSource({
+            transport: {
+                read: {
+                    url: '@Url.Action("GetPhotoList", controllerName: "Photos")',
+                    dataType: "json",
+                    data: function () {
+                        return {
+                            galleryID: galId,
+                        };
+                    }
+                },
+            },
+            pageSize: 20
+        });
+
+        $("#pager").kendoPager({
+            dataSource: dataSource
+        });
+        $("#photoList").kendoListView({
+            dataSource: dataSource,
+            template: kendo.template($("#template").html()),
+            //      autoBind: true,
+            selectable: true,
+        });
+
+        $("#photoList").on("dblclick", ".tour-photo-list", function () {
+            var list = $("#photoList").data('kendoListView');
+            var index = list.select().index();
+            var selectedIem = list.dataSource.view()[index];
+            // var path = "/uploads/" + selectedIem.GalleryID + "/" + selectedIem.Path;
+            $("#imgNewsPhotoPreview").attr("src", selectedIem.Path);
+            $("#ImageUrl").val(selectedIem.PhotoID);
+        });
+        //// end of common
+
+        $("#imgNewsPhotoPreview").on("dblclick", function () {
+            $("#imgNewsPhotoPreview").attr("src", "");
+            $("#ImageUrl").val(0);
+        });
+    </script>
+}

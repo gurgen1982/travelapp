@@ -28,7 +28,7 @@
                 </div>
                 <div class="col-md-3">
                     <h3 class="tour-price theme-color">
-                        $@Html.DisplayFor(model => model.Price)
+                        AMD @Html.DisplayFor(model => model.Price)
                     </h3>
                     <div class="theme-button-container">
                         <a class = "theme-button" id = "requestTour">@Common.RequestNow</a>
@@ -76,8 +76,7 @@
 <div id="divRequest" style="display:none">
     @Html.Action("index", controllerName: "Request", routeValues: new { id = Model.TourID })
 </div>
-
-<div id="snackbar">Request Sent!</div>
+<div id="overlay" onclick="off()"></div>
 
 @section scripts{
     <script src="https://cdn.jsdelivr.net/picturefill/2.3.1/picturefill.min.js"></script>
@@ -93,6 +92,8 @@
 
     <script>
         $(function () {
+            var x = document.getElementById("snackbar");
+            x.innerHTML = '@Body.RequestSent';
             lightGallery(document.getElementById('lightgallery'));
 
             var $TourDate = $("#TourDate");
@@ -111,9 +112,12 @@
 
             $("#divRequest").kendoWindow({
                 width: 350,
-                height: 600,
-                title: "Request a tour",
-                resizable:false,
+                height: 650,
+                title: "@Body.RequestTour",
+                resizable: false,
+                close: function () {
+                    document.getElementById("overlay").style.display = "none";
+                }
             });
 
             $("#requestTour, #requestTourBottom").click(function () {
@@ -124,6 +128,7 @@
                         frm[0].reset();
                     }
                     wnd.open().center();
+                    on();
                 }
             });
         });
@@ -133,14 +138,21 @@
             if (wnd) {
                 wnd.close();
             }
-            // Get the snackbar DIV
             var x = document.getElementById("snackbar")
-
-            // Add the "show" class to DIV
             x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
             setTimeout(function () { x.className = x.className.replace("show", ""); }, 5000);
+        }
+
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function off() {
+            document.getElementById("overlay").style.display = "none";
+            var wnd = $("#divRequest").data("kendoWindow");
+            if (wnd) {
+                wnd.close();
+            }
         }
         //TODO : thumbnail
         //$(function () {

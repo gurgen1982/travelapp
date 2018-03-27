@@ -28,14 +28,15 @@ namespace Travel
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/styles.css",
-                      "~/Content/social.css"));
+                      "~/Content/social.css",
+                      "~/Content/ChilliStyle.css"));
 
-            bundles.Add(new StyleBundle("~/Content/Index").Include("~/Content/Layout/index.css"));
+            //bundles.Add(new StyleBundle("~/Content/Index").Include("~/Content/Layout/index.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/homeIndex").Include("~/Scripts/Home/IndexBehaviour.js"));
             bundles.Add(new ScriptBundle("~/bundles/layout").Include("~/Scripts/Layout/LayoutBehaviour.js"));
 
-            bundles.Add(new StyleBundle("~/Content/index").Include("~/Content/index.css"));
+            //bundles.Add(new StyleBundle("~/Content/index").Include("~/Content/index.css"));
         }
     }
 }

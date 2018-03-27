@@ -54,11 +54,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Body.ru-ru.resx" />
     <EmbeddedResource Include="Body.en-us.resx" />
     <EmbeddedResource Include="Body.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Body.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Common.ru-ru.resx" />
     <EmbeddedResource Include="Common.en-us.resx" />
     <EmbeddedResource Include="Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

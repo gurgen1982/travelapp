@@ -1,4 +1,58 @@
-﻿.lang-highlighted {
+﻿.current-ddl {
+    background-color: #000;
+    color: white;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+    .current-ddl:hover, .current-ddl:focus {
+        color: darkorange;
+    }
+
+.ddl-bar {
+    position: relative;
+    display: inline-block;
+    margin-right: 20px;
+    float: right;
+}
+
+.ddl-bar-content {
+    display: none;
+    position: absolute;
+    background-color: #000;
+    color: white;
+    text-transform: uppercase;
+    min-width: 40px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+    .ddl-bar-content a {
+        color: white;
+        font-weight: bold;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+.ddl-bar a:hover {
+    color: darkorange;
+}
+
+.show-ddl-list {
+    display: block;
+    z-index: 100000;
+}
+
+.lang-highlighted {
+    border-color: orange;
+    border-width: 1px;
+    border-style: solid;
+    text-decoration: underline !important;
 }
 
 .bar-top-info {
@@ -20,14 +74,23 @@
     }
 
 .top-attached {
-    background-color: black !important;
+    background-color: lightgray !important;
     top: 0 !important;
-    height: 50px !important;
+    height: 70px !important;
+    opacity: 0.7;
 }
 
-    .top-attached ul.navbar-nav a:hover {
+    .top-attached:hover {
+        opacity: 1;
+    }
+
+    .top-attached ul.navbar-nav a {
         color: darkorange !important;
     }
+
+        .top-attached ul.navbar-nav a:hover {
+            color: orangered !important;
+        }
 
 .navbar-default {
     top: 50px;
@@ -44,22 +107,39 @@
         padding: 20px;
     }
 
-        .navbar-default ul.navbar-nav li a {
-            color: white;
-            /*font-weight: 500;*/
-            font-style: normal;
-            text-decoration: none;
-            /*font-size: 18px;*/
-            white-space: nowrap;
-            font-weight: 900;
-            font-family: Lato, sans-serif;
-            font-size: 12px;
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form {
+        border-color: #000;
+    }
+
+    .navbar-default .navbar-toggle {
+        border-color: orangered;
+    }
+
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+            background-color: orangered;
         }
 
-            .navbar-default ul.navbar-nav li a:hover {
-                color: black;
-                text-decoration: none;
-            }
+        .navbar-default .navbar-toggle .icon-bar {
+            background-color: white;
+        }
+
+    .navbar-default ul.navbar-nav li a {
+        color: white;
+        /*font-weight: 500;*/
+        font-style: normal;
+        text-decoration: none;
+        /*font-size: 18px;*/
+        white-space: nowrap;
+        font-weight: 900;
+        font-family: Lato, sans-serif;
+        font-size: 12px;
+    }
+
+        .navbar-default ul.navbar-nav li a:hover {
+            color: black;
+            text-decoration: none;
+        }
 
 /*.navbar-default ul.navbar-nav li a:visited {
         color: white;
@@ -101,14 +181,19 @@
         padding-left: 15px;
     }
 
-@media (max-width:940px) {
+@media (max-width:925px) {
     .bar-top-info li.search-bar input {
         width: 230px;
+    }
+
+    .bar-top-info ul.info-bar > li:last-child {
+        display: none;
     }
 }
 
 @media (max-width:768px) {
-    .bar-top-info ul.info-bar > li:last-child {
+
+    .bar-top-info ul.info-bar {
         display: none;
     }
 
@@ -120,16 +205,45 @@
         float: none;
     }
 
-    .navbar-default ul.navbar-nav,
-    .navbar-default ul.navbar-nav li a {
-        color: white;
-        background-color: black;
+    .navbar-default ul.navbar-nav {
+        width: 110%;
+        text-align: center;
     }
 
-        .navbar-default ul.navbar-nav li a:hover {
-            color: orangered;
-            text-decoration: none;
+        .navbar-default ul.navbar-nav,
+        .navbar-default ul.navbar-nav li a {
+            color: white;
+            background-color: black;
         }
+
+            .navbar-default ul.navbar-nav li a:hover {
+                color: orangered;
+                text-decoration: none;
+            }
+
+            .navbar-default ul.navbar-nav li {
+                padding: 10px;
+            }
+}
+
+@media (min-width:501px) {
+    #wowslider-container1 {
+        display: table !important;
+    }
+
+    #mainCarousel {
+        display: none !important;
+    }
+}
+
+@media (max-width:500px) {
+    #wowslider-container1 {
+        display: none !important;
+    }
+
+    #mainCarousel {
+        display: block !important;
+    }
 }
 
 .bar-top-info li.search-bar input:focus,
@@ -208,19 +322,6 @@
 .theme-button-small {
     padding: 7px !important;
 }
-/*.overlay {
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0,0,0,0.5);
-    z-index: 2;
-    cursor: pointer;
-}*/
 
 .heading-title, h3.heading-title {
     text-align: center;
@@ -351,6 +452,7 @@
 .parallax-img2 {
     background-image: url("/Images/parallax2.jpg");
     min-height: 400px;
+    margin-top: 20px;
 }
 
 .parallax-caption {
@@ -537,8 +639,13 @@
     cursor: pointer;
 }
 
+
+.owl-carousel {
+    margin-top: 20px;
+}
+
 .video-slider-item {
-    height: 200px;
+    height: 250px;
 }
 
 .tour-price {
@@ -601,11 +708,32 @@ span.k-state-border-up input {
     color: gray;
 }
 
+#divRequest input.form-control {
+    height: 20px;
+}
+
 #divRequest .form-horizontal {
     text-align: center !important;
     width: 280px !important;
 }
 
+#divRequest .theme-button-container {
+    padding: 0;
+}
+
+#overlay {
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+}
 
 /*****************************snackbar*****************************/
 
@@ -613,11 +741,11 @@ span.k-state-border-up input {
     visibility: hidden;
     min-width: 250px;
     margin-left: -125px;
-    background-color: #333;
+    background-color: orangered;
     color: #fff;
     text-align: center;
     border-radius: 2px;
-    padding: 16px;
+    padding: 20px;
     position: fixed;
     z-index: 1;
     left: 50%;
@@ -626,8 +754,8 @@ span.k-state-border-up input {
 
     #snackbar.show {
         visibility: visible;
-        -webkit-animation: fadein 0.5s, fadeout 0.5s 5s;
-        animation: fadein 0.5s, fadeout 0.5s 5s;
+        -webkit-animation: fadein 1s, fadeout 1s 5s;
+        animation: fadein 1s, fadeout 1s 5s;
     }
 
 @-webkit-keyframes fadein {
@@ -800,3 +928,39 @@ li.k-item k-state-selected {
     /*margin-bottom: 20px;*/
     margin-top: 20px;
 }
+
+.black-box {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: black;
+    color: white;
+    opacity: 0.5;
+}
+
+    .black-box:hover {
+        opacity: 1;
+    }
+
+
+#ajaxMessage {
+    display: none;
+}
+
+.sending {
+    display: none;
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.subscriptions .form-control {
+    max-width: 100%;
+    width: 100%;
+    height: 50px;
+    border-radius: 0;
+}
+
+/*.ws-title {
+    width: 300px !important;
+}*/

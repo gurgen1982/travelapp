@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Address" xml:space="preserve">
-    <value>Երևան, Հայաստան, Հրաչյա Քոչար 4. Բարեկամություն բիզնես կենտրոն</value>
+    <value>Հր. Քոչար 4, Երևան, Հայաստան</value>
   </data>
   <data name="AgencyName" xml:space="preserve">
-    <value>Չիլլի Տրեվլ Քլաբ</value>
+    <value>Chilli Travel Club</value>
   </data>
   <data name="AppName" xml:space="preserve">
     <value>Chilli Travel Club</value>

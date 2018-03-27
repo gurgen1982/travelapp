@@ -61,7 +61,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Երևան, Հայաստան, Հրաչյա Քոչար 4. Բարեկամություն բիզնես կենտրոն.
+        ///   Looks up a localized string similar to Հր. Քոչար 4, Երևան, Հայաստան.
         /// </summary>
         public static string Address {
             get {
@@ -70,7 +70,7 @@ namespace Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Չիլլի Տրեվլ Քլաբ.
+        ///   Looks up a localized string similar to Chilli Travel Club.
         /// </summary>
         public static string AgencyName {
             get {

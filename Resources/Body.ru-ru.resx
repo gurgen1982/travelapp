@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AboutUs" xml:space="preserve">
+    <value>О нас</value>
+  </data>
+  <data name="BestOffers" xml:space="preserve">
+    <value>Топ туры</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Блог</value>
+  </data>
+  <data name="CountOfTourist" xml:space="preserve">
+    <value>Кол-во посетителей</value>
+  </data>
+  <data name="CountOfTouristRange" xml:space="preserve">
+    <value>может быть от 1 до 1000</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Эл.почта</value>
+  </data>
+  <data name="FailedSubscriptionMessage" xml:space="preserve">
+    <value>Извините, произошла ошибка</value>
+  </data>
+  <data name="FilterByCategory" xml:space="preserve">
+    <value>- сортировать по виду -</value>
+  </data>
+  <data name="FilterByCountry" xml:space="preserve">
+    <value>- сортировать по странам -</value>
+  </data>
+  <data name="FindPerfectTour" xml:space="preserve">
+    <value>НАЙДИ СВОЙ ТУР</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Ваше имя</value>
+  </data>
+  <data name="FullNameLength" xml:space="preserve">
+    <value>введите имя (3-100 букв)</value>
+  </data>
+  <data name="GetBestOffers" xml:space="preserve">
+    <value>Узнай о лучших предложениях первым</value>
+  </data>
+  <data name="LetsBook" xml:space="preserve">
+    <value>Забронировать тур</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="MessageFailed" xml:space="preserve">
+    <value>Не удалось отправить сообщение</value>
+  </data>
+  <data name="MessageLength" xml:space="preserve">
+    <value>введите сообщение (0-1000 букв)</value>
+  </data>
+  <data name="MessageSent" xml:space="preserve">
+    <value>Сообщение отправлено</value>
+  </data>
+  <data name="Min10" xml:space="preserve">
+    <value>мин. 10 букв</value>
+  </data>
+  <data name="Min3" xml:space="preserve">
+    <value>мин. 3 буквы</value>
+  </data>
+  <data name="MustBeDate" xml:space="preserve">
+    <value>введите дату (месяц/день/год)</value>
+  </data>
+  <data name="MustBeEmail" xml:space="preserve">
+    <value>введите эл.адрес</value>
+  </data>
+  <data name="Night" xml:space="preserve">
+    <value>ночь</value>
+  </data>
+  <data name="Nights" xml:space="preserve">
+    <value>ночи</value>
+  </data>
+  <data name="Nights2" xml:space="preserve">
+    <value>ночей</value>
+  </data>
+  <data name="NoTourFound" xml:space="preserve">
+    <value>По данному запросу ничего не найдено</value>
+  </data>
+  <data name="OtherContacts" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Perfection1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Perfection2" xml:space="preserve">
+    <value>Отдых - наша профессия.</value>
+  </data>
+  <data name="RelatedTours" xml:space="preserve">
+    <value>ВАМ МОЖЕТ БЫТЬ ИНТЕРЕСНО ТАКЖЕ</value>
+  </data>
+  <data name="RequestSent" xml:space="preserve">
+    <value>Запрос отправлен. Спасибо</value>
+  </data>
+  <data name="RequestTour" xml:space="preserve">
+    <value>Заказать тур</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>обьязательно</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="SendMessage" xml:space="preserve">
+    <value>ОТПРАВИТЬ</value>
+  </data>
+  <data name="SubScribe" xml:space="preserve">
+    <value>Подписаться</value>
+  </data>
+  <data name="SubscriptionMessage" xml:space="preserve">
+    <value>Спасибо за то, что подписались на наши новости</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="TitleLength" xml:space="preserve">
+    <value>введите название (3-100 символов)</value>
+  </data>
+  <data name="TourDate" xml:space="preserve">
+    <value>Начало посещения (мес/день/год)</value>
+  </data>
+  <data name="Tours" xml:space="preserve">
+    <value>Туры</value>
+  </data>
+  <data name="ViewAllTours" xml:space="preserve">
+    <value>СМОТРЕТЬ ВСЕ ТУРЫ</value>
+  </data>
+  <data name="WeAreDifferent" xml:space="preserve">
+    <value>Чем мы особенны</value>
+  </data>
+</root>

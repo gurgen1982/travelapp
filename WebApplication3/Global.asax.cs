@@ -27,6 +27,7 @@ namespace Travel
             Application["ImagePath"] = "uploads";
             Application["ImageThumb"] = "thumb_";
             Application["Settings"] = db.Settings.FirstOrDefault();
+            Application["Currencies"] = db.Currencies.ToList();
         }
 
         protected void Application_Error()

@@ -18,57 +18,74 @@
 
         @using (Html.BeginForm())
         {
-        @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-        <div class="form-horizontal" ng-app="chilliApp" ng-controller="chilliCtrl">
-            <h4>Country Header</h4>
-            <hr />
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.CountryHeader.CountryID, new { @name = "CountryID" })
-            @Html.HiddenFor(model => model.CountryHeader.PhotoID, new { @name = "PhotoID" })
+            <div class="form-horizontal" ng-app="chilliApp" ng-controller="chilliCtrl">
+                <h4>Country Header</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.CountryHeader.CountryID, new { @name = "CountryID" })
+                @Html.HiddenFor(model => model.CountryHeader.PhotoID, new { @name = "PhotoID" })
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CountryHeader.CommonName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.CountryHeader.CommonName, new
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.CommonName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.CountryHeader.CommonName, new
                    {
                        htmlAttributes = new
                        {
                            @class = "form-control",
                            @name = "CommonName" @*, @ng_disabled = "isEditMode"*@ }
                    })
-                    @Html.ValidationMessageFor(model => model.CountryHeader.CommonName, "", new { @class = "text-danger" })
+                        @Html.ValidationMessageFor(model => model.CountryHeader.CommonName, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.CountryHeader.ShowInHomePage, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.CheckBoxFor(model => model.CountryHeader.ShowInHomePage, new { htmlAttributes = new { @class = "form-control", @name = "ShowInHomePage" } })
-                    @Html.ValidationMessageFor(model => model.CountryHeader.ShowInHomePage, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.ShowInHomePage, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.CheckBoxFor(model => model.CountryHeader.ShowInHomePage, new { htmlAttributes = new { @class = "form-control", @name = "ShowInHomePage" } })
+                        @Html.ValidationMessageFor(model => model.CountryHeader.ShowInHomePage, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.CountryHeader.PhotoID, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @*@Html.EditorFor(model => model.CountryHeader.PhotoID, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.CountryHeader.PhotoID, "", new { @class = "text-danger" })*@
-                    <img id="imgNewsPhotoPreview" src="@Travel.Helper.Images.GetThumbFullPath(Model.CountryHeader.Photo)" class="tour-photo-list" style="height:auto !important" />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CountryHeader.PhotoID, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @*@Html.EditorFor(model => model.CountryHeader.PhotoID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CountryHeader.PhotoID, "", new { @class = "text-danger" })*@
+                        <img id="imgNewsPhotoPreview" src="@Travel.Helper.Images.GetThumbFullPath(Model.CountryHeader.Photo)" class="tour-photo-list" style="height:auto !important" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Save" class="btn btn-default" />
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Save" class="btn btn-default" />
+                    </div>
                 </div>
             </div>
-        </div>
         }
     </div>
     <div class="col-md-4">
-        @foreach (var item in Model.CountryHeader.Countries)
+        @if (Model.IsEditMode)
         {
-            @Html.ActionLink(item.Language.Name, "EditLocal", new { id = item.ID }, new { @class = "btn btn-default" })
+            <ul class="nav navbar-nav">
+                @foreach (var item in Model.CountryHeader.Countries)
+                {
+                    <li class="btn-success">
+                        @Html.ActionLink(item.Language.Name, "EditLocal", new { id = item.ID })
+                    </li>
+                }
+
+                @foreach (var item in Model.Languages)
+                {
+                    if (Model.CountryHeader.Countries == null || !Model.CountryHeader.Countries.Any(x => x.LangID.Equals(item.LangID)))
+                    {
+                        <li class="btn-default">
+                            @Html.ActionLink(item.Name, "EditLocal", new { id = Model.CountryHeader.CountryID, id2 = item.LangID })
+                        </li>
+                    }
+                }
+            </ul>
         }
     </div>
 </div>

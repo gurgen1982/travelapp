@@ -36,42 +36,42 @@ namespace Travel.Areas.Admin.Controllers
             return View(mainCarousel);
         }
 
-        // GET: Admin/MainCarousels/Create
-        public ActionResult Create()
-        {
-            SetViewBag();
-            return View();
-        }
+        //// GET: Admin/MainCarousels/Create
+        //public ActionResult Create()
+        //{
+        //    SetViewBag();
+        //    return View();
+        //}
 
-        // POST: Admin/MainCarousels/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,SubTitle,Details,SubDetails,Price,LinkUrl,ImageUrl,Disabled,LangID")] MainCarousel mainCarousel)
-        {
-            if (ModelState.IsValid)
-            {
-                db.MainCarousels.Add(mainCarousel);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            SetViewBag();
-            return View(mainCarousel);
-        }
+        //// POST: Admin/MainCarousels/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,Title,SubTitle,Details,SubDetails,Price,LinkUrl,ImageUrl,Disabled,LangID")] MainCarousel mainCarousel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.MainCarousels.Add(mainCarousel);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    SetViewBag();
+        //    return View(mainCarousel);
+        //}
 
         // GET: Admin/MainCarousels/Edit/5
         public ActionResult Edit(int? id)
         {
             SetViewBag();
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            //if (id == null)
+            //{
+            //    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            //}
             MainCarousel mainCarousel = db.MainCarousels.Find(id);
             if (mainCarousel == null)
             {
-                return HttpNotFound();
+                mainCarousel = new MainCarousel();
             }
             return View(mainCarousel);
         }
@@ -85,9 +85,36 @@ namespace Travel.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(mainCarousel).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                var photoId = 0;
+                try
+                {
+                    photoId = Convert.ToInt32(mainCarousel.ImageUrl);
+                }
+                catch { }
+                try
+                {
+                    if (photoId > 0)
+                    {
+                        mainCarousel.ImageUrl = Helper.Images.GetPath(db.Photos.Find(photoId));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, ex.Message);
+                }
+                if (ModelState.IsValid)
+                {
+                    if (mainCarousel.ID != 0)
+                    {
+                        db.Entry(mainCarousel).State = EntityState.Modified;
+                    }
+                    else
+                    {
+                        db.MainCarousels.Add(mainCarousel);
+                    }
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             }
             SetViewBag();
             return View(mainCarousel);
@@ -129,7 +156,8 @@ namespace Travel.Areas.Admin.Controllers
         }
         private void SetViewBag()
         {
-            ViewBag.LangID = new SelectList(db.Languages, "LangID", "Name");
+            ViewBag.LanguageList = new SelectList(db.Languages, "LangID", "Name");
+            ViewBag.Gallery = db.PhotoGalleryHeaders.Where(x => x.InternalUse).ToList();
         }
     }
 }

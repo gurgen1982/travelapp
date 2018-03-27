@@ -13,5 +13,6 @@ namespace Travel.ViewModels
         public IEnumerable<Photo> PhotoGallery { get; set; }
         public IEnumerable<TourViewModel> Tours { get; set; }
         public IEnumerable<CountryHeader> Countries { get; set; }
+
     }
 }

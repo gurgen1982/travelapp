@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Travel.Models
         [Key]
         public int ID { get; set; }
         [Required]
-        [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessageResourceName = "MustBeEmail", ErrorMessageResourceType =typeof(Body))]
         public string Email { get; set; }
     }
 }

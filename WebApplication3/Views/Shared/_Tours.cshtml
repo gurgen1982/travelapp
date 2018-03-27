@@ -1,6 +1,8 @@
 ﻿@model IEnumerable<Travel.ViewModels.TourViewModel>
 @using Travel.Helper
-
+@{ 
+    var currency = HttpContext.Current.Request.Cookies["Currency"]?.Value ?? "AMD";
+}
 <div class="container">
     <div class="row tour-container">
         @foreach (var tour in Model)
@@ -10,13 +12,13 @@
                     <a href="@Url.Action("info", "tours", new { id = tour.Tour.TourID })">
                         <div class="tour-img" style="background-image:url(@Images.GetThumbFullPath(tour.Photo))">
                             <div class="tour-price">
-                                $@tour.Tour.Price
+                                @currency @(tour.Tour.Price)
                             </div>
                         </div>
                         <div class="tour-text">
                             <h4><b>@tour.TourDetail.Title</b></h4>
                             <p>
-                                @tour.TourDetail.SubTitle <span class="tour-text-dot"> • </span> @tour.Tour.NightCount night
+                                @tour.TourDetail.SubTitle <span class="tour-text-dot"> • </span> @tour.Tour.NightCount  @(tour.Tour.NightCount == 1 ? Resources.Body.Night : (tour.Tour.NightCount < 5 ? Resources.Body.Nights : Resources.Body.Nights2))
                             </p>
                             <p class="tour-place">
                                 <span class="glyphicon glyphicon-map-marker"></span>@tour.Tour.Country.Countries.FirstOrDefault(x => x.LangID == tour.TourDetail.LangID).CountryName

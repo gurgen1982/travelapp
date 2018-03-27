@@ -23,6 +23,10 @@ namespace Travel.Helper
         {
             return "/" + HttpContext.Current.Application["ImagePath"].ToString() + "/" + galId + "/" + GetThumbPath(filePath);
         }
+        public static string GetPath(Models.Photo photo)
+        {
+            return GetPath(photo.Path, photo.GalleryID);
+        }
         public static string GetPath(string filePath, int galId)
         {
             return "/" + HttpContext.Current.Application["ImagePath"].ToString() + "/" + galId + "/" + filePath;
